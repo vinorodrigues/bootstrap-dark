@@ -1,0 +1,18 @@
+
+$color-schemes: no-preference, light, dark;
+
+@each $mode in $color-schemes {
+  @include prefers-color-scheme($mode) {
+    @each $value in $displays {
+      .d-#{$mode}-#{$value} { display: $value !important; }
+    }
+  }
+}
+
+:root {
+  @if $color-scheme-alt == dark {
+    color-scheme: light dark;
+  } @else {
+    color-scheme: dark light;
+  }
+}

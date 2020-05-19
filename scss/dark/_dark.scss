@@ -1,0 +1,9 @@
+
+img {
+	opacity: .75;
+	transition: opacity .5s ease-in-out;
+
+	&:hover {
+		opacity: 1;
+	}
+}
