@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- The page supports both dark and light color schemes, and the page author prefers dark. -->
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Bootstrap CSS -->
+  <script>
+    if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
+      document.documentElement.style.display = "none";
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        "<link id=\"css\" rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css\" onload=\"document.documentElement.style.display = ''\">"
+      );
+    }
+  </script>
+  <link id="css-dark" rel="stylesheet" href="./dist/bootstrap-night.css" media="(prefers-color-scheme: dark)">
+  <link id="css-light" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
+
+  <!-- Prism.js for syntax highlighting -->
+  <script>
+    if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        "<link id=\"prism\" rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css\">"
+      );
+    }
+  </script>
+  <link id="prism-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css" media="(prefers-color-scheme: dark)">
+  <link id="prism-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
+
+  <title>bootstrap-night</title>
+
+  <style>
+    .d-clipboard {
+      position: relative;
+      float: right;
+    }
+    .btn-clipboard {
+      position: absolute;
+      top: .25rem;
+      right: .25rem;
+      opacity: .25;
+    }
+    .btn-clipboard:hover,
+    .btn-clipboard:active {
+      opacity: 1;
+    }
+    .token.comment {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="./">bootstrap-dark</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tests
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
+                <a class="dropdown-item" href="test-nightfall.html">bootstrap-nightfall</a>
+                <a class="dropdown-item" href="test-dark.html">bootstrap-dark</a>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/vinorodrigues/bootstrap-dark">GitHub</a></li>
+          </ul>
+          <form class="form-inline">
+            <div class="custom-control custom-switch" title="Toggle Dark Mode" data-toggle="tooltip" data-placement="left">
+              <input type="checkbox" class="custom-control-input" id="css-toggle-btn">
+              <label class="custom-control-label" for="css-toggle-btn"></label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mt-5 mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Dark Mode with two CSS theme files</h1>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-sm">
+          <h2>Basic Setup
+            <small class="text-muted">With no user toggle support</small>
+          </h2>
+          <ul>
+            <li>Two fully themed Bootstrap CSS are required</li>
+            <li>Filtered by stylesheet media filters</li>
+            <li>Based on advice by <a href="https://web.dev/authors/thomassteiner">Thomas Steiner</a> in  <a href="https://web.dev/prefers-color-scheme/">Hello darkness, my old friend.</a></li>
+            <li>JavaScript fallback if the browser does not support dark-mode</li>
+            <li>Does not require jQuery</li>
+          </ul>
+
+          <p>Replace the bootstrap stylesheet with the following code:</p>
+
+<div class="code"><pre><code class="language-html language-js">  &lt;!-- Bootstrap CSS --&gt;
+  &lt;!-- Inform modern browsers that this page supports both dark and light color schemes,
+    and the page author prefers light. --&gt;
+  &lt;meta name="color-scheme" content="light dark"&gt;
+  &lt;script&gt;
+    // If `prefers-color-scheme` is not supported, fall back to light mode.
+    // i.e. In this case, inject the `light` CSS before the others, with
+    // no media filter so that it will be downloaded with highest priority.
+    if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
+      document.documentElement.style.display = "none";
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        "&lt;link id=\"css\" rel=\"stylesheet\" href=\"bootstrap.css\" onload=\"document.documentElement.style.display = ''\"&gt;"
+      );
+    }
+  &lt;/script&gt;
+  &lt;!-- Load the alternate CSS first ... --&gt;
+  &lt;link id="css-dark" rel="stylesheet" href="bootstrap-night.css" media="(prefers-color-scheme: dark)"&gt;
+  &lt;!-- ... and then the primary CSS last for a fallback on very old browsers that don't support media filtering --&gt;
+  &lt;link id="css-light" rel="stylesheet" href="bootstrap.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)"&gt;
+</code></pre></div>
+
+        <p class="text-right"><small class="text-muted">
+          Syntax highlighting uses <a href="https://prismjs.com/" target="_blank">Prism.js</a>.
+          Copy to clipboard uses <a href="https://clipboardjs.com/" target="_blank">Clipboard.js</a>.
+        </small></p>
+        <p>This is all you need to enable dark mode with Bootstrap.</p>
+        </div>
+      </div><div class="row mt-5">
+        <div class="col-sm">
+          <h2>Additional Setup
+            <small class="text-muted">Giving user control</small>
+          </h2>
+          <p>The basic principle is honouring the browser preference (which we assume the user set with intent), but also provide a switch in the UI.
+            Once this switch has been clicked on, swap the color mode and remove browser based color scheme selection.</p>
+          <p>The following code will require jQuery:</p>
+
+<div class="code"><pre><code class="language-html language-js">  &lt;script&gt;
+    $(document).ready(function(){
+
+      // Update the toggle button based on current color scheme
+      function updateDarkToggleButton() {
+        $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        $("#css-toggle-btn").prop( "checked", $dark );
+      }
+      // Update on first load.
+      updateDarkToggleButton();
+      // and every time it changes
+      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkToggleButton );
+
+      // Color Scheme toggle botton
+
+      // function to initialise the css
+      function init_color_scheme_css($id, $mode) {
+        if ($("#"+$id)) $("#"+$id).remove();  // remove exitsing id
+        $("#"+$id+"-"+$mode).attr( {
+          "data-href-light": $("#"+$id+"-light").attr("href"),  // store the light CSS url
+          "data-href-dark": $("#"+$id+"-dark").attr("href"), // store the dark CSS url
+          "data-color-scheme": $mode,  // store the mode, so that we don't re-initalise
+          "media": "all",  // drop the media filter
+          "id": $id  // rename the id (drop the `-{mode}` bit)
+        } );
+        $other = ($mode == 'dark') ? 'light' : 'dark';
+        $("#"+$id+"-"+$other).remove();
+      }
+
+      // function to toggle the CSS
+      function toggle_color_scheme_css($id, $mode) {
+        // grab the new mode css href
+        $href = $("#"+$id).data("href-"+$mode);  // use `.data()` here, leverage the cache
+        // set the CSS to the mode preference.
+        $("#"+$id).attr( {
+          "href": $href,
+          "data-color-scheme": $mode,
+        });
+      }
+
+      // toggle button click code
+      $("#css-toggle-btn").bind("click", function() {
+        // get current mode
+        // don't use `.data("color-scheme")`, it doesn't refresh
+        $mode = $("#css").attr("data-color-scheme");
+        // test if this is a first time click event, if so initialise the code
+        if (typeof $mode === 'undefined') {
+          // not defined yet - set pref. & ask the browser if alt. is active
+          $mode = 'light';
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) $mode = 'dark';
+          init_color_scheme_css("css", $mode);
+          // `init_color_scheme_css()` any other CSS
+        }
+        // by here we have the current mode, so swap it
+        $new_mode = ($mode == 'dark') ? 'light' : 'dark';
+        toggle_color_scheme_css("css", $new_mode);
+        // `toggle_color_scheme_css()` any other CSS
+      });
+
+    });
+  &lt;/script&gt;
+</code></pre></div>
+
+          <p>Read the <a href="readme.html">README.md</a> for more on this proof of concept.</p>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center">
+    <small class="text-muted">&copy; 2020 Vino Rodrigues</small>
+  </footer>
+
+  <!-- Optional JavaScript --> <!-- ** needed for toggle -->
+  <!-- jQuery first, then Popper.js + Bootstrap JS bundle -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+  <!-- Clipboard.js for copy code -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+  <!-- Hotkeys.js for [D] hotkey -->
+  <script src="https://cdn.jsdelivr.net/gh/jeresig/jquery.hotkeys@0/jquery.hotkeys.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      // only when jQuery is ready
+
+      // init the tooltip
+      // ----------------------------------------
+      $('[data-toggle="tooltip"]').tooltip()
+        .on('mouseleave', function () {
+          $(this).tooltip('hide')
+        });
+
+      // Insert copy to clipboard button before .highlight
+      // borrowed from Bootstrap docs, uses Clipboard.js
+      // ----------------------------------------
+      $('div.code').each(function () {
+        var btnHtml = '<div class="d-clipboard"><button type="button" class="btn btn-outline-info btn-sm btn-clipboard" title="Copy to clipboard">Copy</button></div>'
+        $(this).before(btnHtml)
+        $('.btn-clipboard')
+          .tooltip()
+          .on('mouseleave', function () {
+            $(this).tooltip('hide')
+          });
+      });
+      var clipboard = new ClipboardJS('.btn-clipboard', {
+        target: function (trigger) {
+          return trigger.parentNode.nextElementSibling
+        }
+      });
+      clipboard.on('success', function (e) {
+        $(e.trigger)
+          .attr('title', 'Copied!')
+          .tooltip('_fixTitle')
+          .tooltip('show')
+          .attr('title', 'Copy to clipboard')
+          .tooltip('_fixTitle')
+        e.clearSelection()
+      });
+      clipboard.on('error', function (e) {
+        var modifierKey = /mac/i.test(navigator.userAgent) ? '\u2318' : 'Ctrl-'
+        var fallbackMsg = 'Press ' + modifierKey + 'C to copy'
+        $(e.trigger)
+          .attr('title', fallbackMsg)
+          .tooltip('_fixTitle')
+          .tooltip('show')
+          .attr('title', 'Copy to clipboard')
+          .tooltip('_fixTitle')
+      });
+
+      // Update the toggle button based on current color scheme
+      // ----------------------------------------
+      function updateDarkToggleButton() {
+        $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        $("#css-toggle-btn").prop( "checked", $dark );
+      }
+      // Update on first load.
+      updateDarkToggleButton();
+      // and every time it changes
+      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkToggleButton );
+
+      // Color Scheme toggle botton
+      // ----------------------------------------
+      // function to initialise the css
+      function init_color_scheme_css($id, $mode) {
+        if ($("#"+$id)) $("#"+$id).remove();  // remove exitsing id
+        $("#"+$id+"-"+$mode).attr( {
+          "data-href-light": $("#"+$id+"-light").attr("href"),  // store the light CSS url
+          "data-href-dark": $("#"+$id+"-dark").attr("href"), // store the dark CSS url
+          "data-color-scheme": $mode,  // store the mode, so that we don't re-initalise
+          "media": "all",  // drop the media filter
+          "id": $id  // rename the id (drop the `-{mode}` bit)
+        } );
+        $other = ($mode == 'dark') ? 'light' : 'dark';
+        $("#"+$id+"-"+$other).remove();
+      }
+      function toggle_color_scheme_css($id, $mode) {
+        // grab the new mode css href
+        $href = $("#"+$id).data("href-"+$mode);
+        // set the CSS to the mode preference.
+        $("#"+$id).attr( {
+          "href": $href,
+          "data-color-scheme": $mode,
+        });
+      }
+      // toggle button click code
+      $("#css-toggle-btn").bind("click", function() {
+        // get current mode
+        // don't use `.data("color-scheme")`, it doesn't refresh
+        $mode = $("#css").attr("data-color-scheme");
+        // test if this is a first time click event, if so initialise the code
+        if (typeof $mode === 'undefined') {
+          // not defined yet - set pref. & ask the browser if alt. is active
+          $mode = 'light';
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) $mode = 'dark';
+          init_color_scheme_css("css", $mode);
+          init_color_scheme_css("prism", $mode);
+        }
+        // by here we have the current mode, so swap it
+        $mode = ($mode == 'dark') ? 'light' : 'dark';
+        toggle_color_scheme_css("css", $mode);
+        toggle_color_scheme_css("prism", $mode);
+      });
+
+      // Press [D] hot-key to toggle
+      $(document).bind('keypress', 'd', function(){
+        $('#css-toggle-btn').click();
+      })
+    });
+  </script>
+</body>
+</html>

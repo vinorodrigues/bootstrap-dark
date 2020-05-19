@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="./dist/bootstrap-dark.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/brands.min.css">
+
+  <title>vinorodrigues/bootstrap-dark</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="./">bootstrap-dark</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tests
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
+                <a class="dropdown-item" href="test-nightfall.html">bootstrap-nightfall</a>
+                <a class="dropdown-item" href="test-dark.html">bootstrap-dark</a>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/vinorodrigues/bootstrap-dark">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container mt-5 mb-5">
+      <div class="row"><div class="col">
+
+        <h2>ReadMe First</h2>
+        <ul>
+          <li>Go ahead, read the <a href="readme.html">README.md</a> first</li>
+        </ul>
+        <hr>
+
+      </div><div class="col">
+
+        <h2>About your browser</h2>
+        <span id="the-dark-side">Oops, JavaScript and/or jQuery not working.</span>
+        <hr>
+
+      </div></div><div class="row"><div class="col">
+
+        <h2>Test the variants</h2>
+        <ul>
+          <li><tt><a href="test-night.html">Test Night</a>&nbsp;&nbsp;&nbsp;&nbsp;</tt> - Toggle between two CSS files (<i class="fa fa-toggle-on" aria-hidden="true"></i>)</li>
+          <li><tt><a href="test-nightfall.html">Test Nightfall</a></tt> - Toggle dark mode on & off (<i class="fa fa-toggle-on" aria-hidden="true"></i>)</li>
+          <li><tt><a href="test-dark.html">Test Dark</a> &nbsp;&nbsp;&nbsp;&nbsp;</tt> - Automated by browser only</li>
+        </ul>
+        <hr>
+
+      </div><div class="col">
+
+        <h2>Test the theme</h2>
+        <p class="text-muted">Try a few popular kitchen-sink pages with the Night theme.</p>
+        <ul>
+          <li><tt><a href="test-1.html">Test 1</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/thomaspark/bootswatch" class="text-info"><i class="fab fa-github"></i> thomaspark/bootswatch</a> (<i class="fa fa-toggle-on" aria-hidden="true"></i>)</li>
+          <li><tt><a href="test-2.html">Test 2</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/HackerThemes/theme-kit" class="text-info"><i class="fab fa-github"></i> HackerThemes/theme-kit</a></li>
+          <li><tt><a href="test-3.html">Test 3</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/juzraai/bootstrap4-test-page" class="text-info"><i class="fab fa-github"></i> juzraai/bootstrap4-test-page</a></li>
+          <li><tt><a href="test-4.html">Test 4</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/csbarker/bootstrap-4-kitchen-sink" class="text-info"><i class="fab fa-github"></i> csbarker/bootstrap-4-kitchen-sink</a></li>
+          <li><tt><a href="test-5.html">Test 5</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://codepen.io/ycohio/pen/pXRLrO" class="text-info"><i class="fab fa-codepen"></i> ycohio/pen/pXRLrO</a></li>
+          <li><tt><a href="test-6.html">Test 6</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://codepen.io/JacobLett/pen/KaMoEm" class="text-info"><i class="fab fa-codepen"></i> JacobLett/pen/KaMoEm</a></li>
+        </ul>
+        <hr>
+
+      </div></div>
+    </div>
+  </main>
+
+  <footer class="text-center">
+    <small class="text-muted">&copy; 2020 Vino Rodrigues</small>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // only works if jQuery loaded
+
+      // ----------------------------------------
+      function injectBrowserSupports() {
+        // Show information on `prefers-color-scheme` media query
+        var supports = [];
+        if (!window.matchMedia) {
+          supports.push( "does not support the <code>matchMedia</code> function" );
+        } else {
+          supports.push( "supports the <code>matchMedia</code> function" );
+          if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
+            supports.push( "and prefers a <i class=\"fa fa-poop\"></i> <b>no-preference</b> color scheme" );
+          if (window.matchMedia("(prefers-color-scheme: light)").matches)
+            supports.push( "and prefers a <i class=\"fa fa-sun\"></i> <b>light</b> color scheme" );
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+            supports.push( "and prefers a <i class=\"fa fa-moon\"></i> <b>dark</b> color scheme" );
+          if (supports.length <= 1) {
+            supports.push( "but does not set the <code>prefers-color-scheme</code> media query" );
+            supports.push( "so will <b><i><u>not</u></i></b> support dark-mode" );
+          } else {
+            supports.push( "so will support dark-mode" );
+          }
+        }
+        if (supports.length > 0) {
+          var htmltext = "<ul>";
+          supports.forEach(function(entry) { htmltext += "<li>" + entry + "</li>"; });
+          htmltext += "</ul>";
+          // console.log( htmltext );
+          $("#the-dark-side").html( htmltext );
+        }
+      }
+
+      injectBrowserSupports();  // Update on first load.
+      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( injectBrowserSupports );  // and every time it changes
+    });
+  </script>
+
+</body>
+</html>
