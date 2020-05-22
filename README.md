@@ -1,17 +1,140 @@
-# The Definitive* Guide to Dark Mode in Bootstrap 4
+# The Definitive&sup1; Guide to Dark Mode and Bootstrap 4
 A proof of concept / Longform whitepaper
+
+Jump to:
+
+* [About me](#about-me--the-history-that-led-here)
+* [The Philosophy of Dark Mode](#the-general-philosophysup1-of-dark-mode)
+* [The Philosophy of this Proof of Concept](#the-philosophy-of-this-proof-of-concept)
+* [The `-alt` SCSS includes](#the--alt-scss-includes)
+
 
 ## About me & The History that led here
 
-Firstly, I’d like to state that I’m not a professional developer – I was from about 1988 to about ‘05, but that’s not what I do now.  I’m an Electrical Engineer who manages datacentres and their staff, and design UPS, HVAC and power systems … that’s my day job.  But I still love code.   I code as a hobby and everything I’ve coded since 2005 I’ve opensource… somewhere.  I’m also not a “graphics” or “artistic” person – I’ve no education in design, UI or UX – but I understand it’s basic concepts.  I’m also not a long form writer… I’m dyslexic and have a relatively low [Verbal-linguistic Intelligence][1] – so these ramblings may be hard to digest.  My apologies.
+Firstly, I'd like to state that I'm not a professional developer – I was, from about '88 to '05, but that's not what I do now.  I'm an Electrical Engineer and Businessman who manages datacenters and their staff, and design UPS, HVAC and power systems ... that's my day job.  But I still love code.   I code as a hobby and everything I've coded since 2005 I've opensource... somewhere.  I'm also not a "graphics" or "artistic" person – I've no education in design, UI or UX – but I understand it's basic concepts.  I'm also not a long form writer... I'm dyslexic and have a relatively low [Verbal-linguistic Intelligence][1] – so these ramblings may be hard to digest.  My apologies.
 
-None of the content here is original; It’s based on logical combination of ideas from many great technology content producers, and I’ve tried to reference these when I can.  There is also a lot of personal opinions and my own ideas of code philosophy positions – these I will mark with an asterisk (*).
+None of the content here is original; It's based on logical combination of ideas from many great technology content producers, and I've tried to reference these when I can.  There is also a lot of personal opinions and my own ideas of code philosophy and design positions – these I will mark with an asterisk (&sup1;).  After managing developers for many years, I can safely&sup1; say that if you put 30 developers in a room and ask them to code something, you'd get 30 different ways to get to the same result.  (Tom Scott has a brilliant&sup1; conversation about this in his video about the [FizzBuzz test](https://www.youtube.com/watch?v=QPZ0pIK_wsc).)
 
-I can’t remember when I first came across the concept of “dark mode”; must have been sometime in late 2018 when I’d installed Safari Technology Preview and read some reference to the [`prefers-color-scheme`][2] *(still in draft with the W3C)*.  At the time I was attempting to write a (now abandoned) [WordPress theme][3] based on Bootstrap 4 after having written a [Bootstrap 2 based theme][4] a few years earlier, and a more recently [printing plugin][5] for Bootstrap 3.  I remember thinking that I would love to not only release a highly configurable WordPress theme, but one that supported this wonderful [css-dark-mode][6].  I can vaguely recall looking at the code and deciding “Yea, not doable. *” and started doing some research on the topic.  But at the time there wasn’t much.  I did however come across [issue 27514][7] in the Bootstrap GitHub repository, and also saw @mdo close it off.  My thoughts were that if the creator of Bootstrap was not keen on this then it would never happen * - so I promptly gave up on WP-Bootstrap-4 and moved on to other hobbies.
+That said; my opinions and code path here is just one way to achieve what I though needed to be proved, namely that:
 
-Time passed – I fell out of love with Bootstrap and took on a new mistress*, Foundation 6.  Spent a lot of time with it, but it is… different… lighter, easier to use because it is simpler, merged awesomely with “your own scss”; but it also doesn’t work so well with out-of-the-box inclusion into existing sites – especially if you want to theme it up a bit, and it’s not as flexible.  Bootstrap has Thomas Park’s [Bootswatch][8] (Why the hell is he not a contributor? *), that he’s [been maintaining][9] for over 6 years now.  But Foundation has nothing - yes Justin Mahar has started one called [Foundswatch][10] in 2018, but he archived that and relinquished the domain name.  The funny thing about Justin’s work is that I didn’t know of it until after I had created my own variant of [Foundswatch][11], but I digress.  The important takeaway of that side-story is that whilst I was working on it, I explored deeply the topic of Dark Mode again.  I realised that [Bootswatch Flatly][12] and [Bootswatch Darkly][13] are only different in color.  I also came across Thomas Steiner’s awesome article [prefers-color-scheme: Hello darkness, my old friend][14] and realised that I could offer a dark-mode option to Foundswatch users. And so, for Foundswatch, I created a [foundation-dark][15] theme that was usable as a two-color scheme CSS (albeit with 2 CSS files) for Foundation 6 and wrote a how to in the [help page][16].
+* Bootstrap, in its current version (4.5.0), can achieve dark mode support
+* by exploring if it can be modified to support native OS (or Browser) dark mode preferences, as made available in '***prefers-color-scheme***' media query spec.,
+* assume Jamstack (so no server side ... stuff),
+* without modifying the core code,
+* but written in a way that can be pulled into the core (if the authors so want to),
+* and finally, make it so that other can use it if the authors have another path to this.
 
-Sadly, I was not satisfied – I wanted a 1 CSS files solution – and promptly started to modify my own fork of Foundation for Site.  OMG!  It was very near impossible!  (More on why later.). Then one recent day I get a notification on my RSS reader that Bootstrap 4.5.0 was out … “hello my old love” I thought and did the pulling and reading and the revisiting watched issues …
+I can't remember when I first came across the concept of "dark mode"; must have been sometime in late 2018 when I'd installed Safari Technology Preview and read some reference to the [`prefers-color-scheme`][2] *(still in draft with the W3C)*.  At the time I was attempting to write a (now abandoned) [WordPress theme][3] based on Bootstrap 4 after having written a [Bootstrap 2 based theme][4] a few years earlier, and a more recently [printing plugin][5] for Bootstrap 3.  I remember thinking that I would love to not only release a highly configurable WordPress theme, but one that supported this wonderful [css-dark-mode][6].  I can vaguely recall looking at the code and deciding "Yea, not doable&sup1;!" and started doing some research on the topic.  But at the time there wasn't much.  I did however come across [issue #27514][7] in the Bootstrap GitHub repository, and also saw @mdo close it off.  My thoughts were that if the creator of Bootstrap was not keen on this then it would never happen&sup1; - so I reluctantly gave up on WP-Bootstrap-4 and moved on to other hobbies.
+
+Time passed – I fell out of love with Bootstrap and took on a new mistress&sup1; , Foundation 6.  Spent a lot of time with it, but it is... different... lighter, easier to use because it is simpler, merged awesomely with "your own scss"; but it also doesn't work so well with out-of-the-box inclusion into existing sites – especially if you want to theme it up a bit, and it's not as flexible.  Bootstrap has Thomas Park's [Bootswatch][8] (Why the hell is he not a contributor?&sup1;), that he's [been maintaining][9] for over 6 years now.  But Foundation has nothing - yes Justin Mahar has started one called [Foundswatch][10] in 2018, but he archived that and relinquished the domain name.  The funny thing about Justin's work is that I didn't know of it until after I had created my own variant of [Foundswatch][11], but I digress.  The important takeaway of that side-story is that whilst I was working on it, I explored deeply the topic of Dark Mode again.  I realized that [Bootswatch Flatly][12] and [Bootswatch Darkly][13] are only different in color.  I also came across Thomas Steiner's (@tomayac) awesome article [prefers-color-scheme: Hello darkness, my old friend][14] and realised that I could offer a dark-mode option to Foundswatch users. And so, for Foundswatch, I created a [foundation-dark][15] theme that was usable as a two-color scheme CSS (albeit with 2 CSS files) for Foundation 6 and wrote a how to in the [help page][16].
+
+Sadly, I was not satisfied – I wanted a one CSS files solution – and promptly started to modify my own fork of Foundation for Sites.  OMG!  It was very near impossible!  (More on why later, but needless to say I gave up on that). Then one recent day I get a notification on my RSS reader that Bootstrap 4.5.0 was out ... "hello my old love" I thought and did the pulling and reading and the revisiting of issues pertaining to "*dark mode*".  My old friend [#27514][7] was now active, and then there was a bunch of them including:
+
+* one with an actual effort, albeit only for [dark mode for the docs](https://github.com/twbs/bootstrap/pull/28449)
+* [Precompiled dark version #28424](https://github.com/twbs/bootstrap/issues/28424)
+* [Docs dark mode #28449](https://github.com/twbs/bootstrap/pull/28449) – (seems to be working, albeit only for dark mode on the docs.)
+* [Bootstrap Dark Mode #28540](https://github.com/twbs/bootstrap/issues/28540)
+* [Feature Request: Dark Mode #28754](https://github.com/twbs/bootstrap/issues/28754)
+* and some work by @Carl-Hugo, in his project [ForEvolve/bootstrap-dark][17]. He has a working Bootstrap 4 dark theme, but that's stand-alone theme and did not meet my needs, i.e. support for user preferred dark-mode.
+* I even found a blog entry on @mdo's blog [CSS dark mode](https://markdotto.com/2018/11/05/css-dark-mode/)
+
+But nowhere did I see an attempt at creating a true dark mode.  I did notice my old friend [#27514][7] was marked for V6.  V6!!! I can't wait that long&sup1;!
+
+So, I set out to prove that one can achieve true dark-mode support.
+
+
+## The (General) Philosophy&sup1; of Dark Mode
+
+Before I set out to discuss how I went about coding this I thought it prudent to explore why dark mode is even a thing.  I could not find a definitive guide on ***why*** dark mode.  The history seems assumed – The UX Collective article [The past, present, and future of Dark Mode][19] that covers the origins from CRT screens – but goes on to reference experiments and studies done with light-on-dark vs. dark-on-light and how a bunch of them showed that darker UI was "more productive".  Wired's Will Bedingfield wrote in [How dark mode took over our screens][20] how companies like Apple, Microsoft, Google and Twitter are all in on the dark mode train.  Chris Taylor wrote in Mashable [Why 2019 was the year of Dark Mode][21] how the push for dark mode has become more prominent in recent times (late 2019, early 2020).  There are also umpteenth articles on the benefits of dark mode, like Reeno Koemets in [The Benefits of Dark Mode: Why should you turn off the lights?][22], and even some against it, like Adamya Sharma's [Love dark mode? Here's why you may still want to avoid it][23], but the general consensus is that if you're not offering your websites and web-apps in dark mode that you're literally standing out – in a negative way.
+
+So, it thus confounds me, as to why the Bootstrap Authors are not looking at this with more haste and urgency.
+
+
+## The Philosophy of this Proof of Concept
+
+I mentioned before @Carl-Hugo's [boostrap-dark][17] theme already produces a dark variant of Bootstrap and, combined with the approach Thomas Steiner (@tomayac) [suggests][14], one can certainly achieve dark mode today – though I've not seen those two bodies of work linked.
+
+But the 2-CSS approach – though very legitimate and very usable – has a flaw if not used correctly.  Support for older browsers – specifically the fact that, in older browsers like IE11, they will load both CSS and neither will render.  You'll need additional JavaScript code to inject a non-media filtered CSS ... not a bad thing, but it makes drop-in replacement of existing sites using Bootstrap needing some level of code modification – some easy, some harder (think WordPress themes).
+
+On the plus side this approach is about the only one that gives you true flexibility.  You can for example use 3rd party styling (like Bootswatch Flatly and Darkly) to generate the same effect.  This is way more flexible.
+
+In my opinion what's ideal is a single CSS Bootstrap variant&sup1; that does dark mode for browsers that support it, but also works in all supported browsers.
+
+There is a bunch of conversation from the core authors around support for dark mode based on CSS variables and that their only concern was IE11 and that by the time they get to dark mode then they'd drop support for IE11.  All fine and dandy, but it's not only IE11 that does not support dark mode, as in the [prefers-color-scheme media query][23], and [CSS variables][24].  There is also a bunch of older mobile devices still in use that cannot be upgraded, for example older iPad that cannot upgrade further than iOS 12.4 and Safari 12.1.  One cannot forget that only 58% of used browsers (based on the sum of top 10 browsers supporting it, from [Browser & Platform Market Share April 2020][25]) support dark mode today – so it makes sense that the Authors want to wait on this.
+
+Back to thinking about @Carl-Hugo's work been adapted to work with dark mode – if one applies the coding practice that one should never write the same piece of code twice, there is a whole bunch CSS that gets repeated ... comparing the two CSS files to each other there is a bunch of duplication except in elements of color.
+
+Generally speaking, if you look at CSS there are 3 core concepts:
+
+* Geography - or layout.  Things like spacing, sizes, `padding`, `margin`, `height`, `width`, and even concepts like column counts.
+* Type Faces - Font families, styles, weights, decoration etc.
+* and, Color – `color`, `background`, and the complication of elements that have both geography and color, like `border` and `shadow`.
+
+Assuming we want to keep the Geography and the Type Faces unchanged, then all we really need is a deltas/differences package that can be used to offer a solution based on the concept of supplying the original CSS whole, and then toggle into dark with only the deltas.
+
+So, I set out into the code to strip out only the color elements – but run into three problems.
+
+1. How would I compile it?  (Remember that I did not want to modify the core code.)  The answer was to create a `_variables-dark.scss`, with only the color items in it.
+2. and, Initially I just took all the variables and added a `-dark` suffix ... until I got to `.table-dark` ... ummm ... `.table-dark-dark` ... nope.
+3. ... also, was `-dark` appropriate?  What if, in third party theming, the primary color was dark, and that the prefers-color-scheme optioned to light. Ah... that brings me to another philosophy point.
+
+The [specification][2] allows for three options: `no-preference`, `light` & `dark`.  Three options – but the choice is binary: either `light` or `dark` – so what's the other one (`no-preference`) all about then?  Well this one hands the preference over to the website author, allowing them to adopt their own preference.  Naturally this would be brand based or some other definition, whatever, the point is that the website author will have a default position of their own, also binary `light` or `dark`. This also applies to browsers that don't support color-scheme preference.
+
+| user wants &rarr;<br>vs.<br>website has &darr; | not supported | no-preference | light |dark |
+|:-:|:-:|:-:|:-:|:-:|
+| __light__ | light | light | light | dark |
+| __dark__ | dark | dark | light | dark |
+
+If you simplify the logic above table you get a binary option, for the website author.
+1. Default render a light page, with a dark delta override, but only if the user browser preferences a dark color-scheme
+2. Default render a dark page, with a light delta override, but only if the user browser preferences a light color-scheme
+
+Key takeaway is that the alternative color (or the deltas) could be light, and the main / default / fallback color balck.
+
+This proof of concept would attempt to prove that light default (because Bootstrap 4's default is light) and dark deltas was possible.  No attempt was made to offer a dark main + light deltas as the proof would be evident in the POC and this was/is not an attempt to offer a usable resource (more a learning one).
+
+The question of compiling was easy enough to resolve; while I was extracting all the color variables, I needed to test the color combination – but all the Bootstrap code wasn't written for `-alt` variables, so I had to map them back.  Another file `_variables-map-back.scss` thus maps back the `-alt` to non-alt.  e.g. `$body-bg-alt: #000 !default;` and then `$body-bg: $body-bg-alt;`.   Unintentionally I'd created a whole dark theme.  I called it `bootstrap-night.scss`.  (More on that later.)
+
+The next phase was to look at how to use this new `-alt` variables inside the core code... answer: I could not.
+
+
+## The `-alt` SCSS includes
+
+Contributor @ntkme weighed in on [Issue #27514][26] and offered 4 ideas:
+
+1.  Option 1: Wrap all Bootstrap code, twice over: one as normal, unfiltered, and then a second time with a `@media (prefers-color-scheme: dark) {}` filter.
+2.  Option 2: Drop `.*-dark` classes everywhere.
+3.  Option 3: Support a build with different colors that's optimized for dark mode in two independent stylesheets
+4.  Option 4: Fully switch to CSS variables
+
+I pondered these – and (in my mind) responded&sup1;:
+
+1.  Option 1: Great idea! Except ... all of Bootstrap?  Seems wasteful since the only things changing is the colors.
+2.  Option 2: Oh No, oh no no no.  And how would the HTML look like???  Oh my… JS to enumerate all classes and add ‘-dark' to the class names.
+3.  Option 3: Brilliant idea! Use @Carl-Hugo's theme, and then instead of loading light as unfiltered and dark as a prefers-dark use @tomayac‘s two CSS with JS fallback.  Works just fine (except the considerations already mentioned).  Just needed a working example.
+4.  Option 4: The work required to do this would be no more and no less than what I'd already done in creating the `-alt` set ... except I was concerned with browser support (as already mentioned).
+
+But @ntkme seeded an idea and this is where I excel at – taking other's seeds and growing them (thought-wise that is).
+
+And so, I set out to build 4 variants of “dark mode” support, namely:
+
+1.  **`bootstrap-night.scss`** - this one (as already mentioned) was created accidently in testing the color combination – but I also wanted to build a working prototype – this is after all a proof of concept.  So, I'd prove this works.  It also shows @tomayac's work beeing applied to Bootstrap.
+2.  **`bootstrap-nightfall.scss`** - this one was seeded from @ntkme 's Option 3 … but instead of doubling up on the CSS, the alternative add-on would only contain the deltas/differences.
+3.  **`bootstrap-nightshade.scss`** - this one was seeded from @ntkme 's Option 2 … but with one major difference.  Instead of adding `-dark` to each CSS element just create one over-arching `dark` class on the `<body>` tag.  Then the CSS would have `body.dark xxx {}` selectors, again only for the deltas.  Plus, I needed to prove the CSS would work by writing some JS to toggle the `dark` class in and out as the user changes preference with a listener.
+4.  **`bootstrap-dark.scss`** - the grail stylesheet – this one was seeded from @ntkme 's Option 1; traditional Bootstrap with a `@media (prefers-color-scheme: dark) {}` that would present only the deltas on one self-contained, easily ported, no additional JS solution. The perfect solution, albeit without the flexibility of the Bootstrap-Night example.
+
+(Mind you I named these after the fact.)  Anyway .. No. 1 was already built, but No's. 2, 3 & 4 had something in common: The deltas.  I needed to build the deltas without modifying the core code.  Painstakingly I copied each scss include and edited all the non-color elements out and then also pointed all the color elements to their `-alt` variables.  3 days later it was done.  Thankfully I did not encounter the snag I did when I attempted to dark-mode-alize Foundation – where I found several instances where color was coded directly into the includes and even the mixins.  This made it that I would have to in essence duplicate the majority of Foundation 6 SCSS and then edit out hard coded colors and replace with SCSS variables – sure doable, but next version updates to the core would require a redo and I was just not up for that.  Mind you – I did come across one mixin that needed to be redone, `_forms.scss`, where the `color`, `background-color`, `border-color` and `box-shadow` where all coded in using non-alt SCSS variables, so needed to create a ` form-control-focus-alt` mixin that then used the -alt vars.  Not a biggie.
+
+The end result was that I now had a set of SCSS includes that when compiled offered me a deltas package that I could use in all three remaining variants.
+
+
+
+
+
+
+
+---
+&copy; 2020
 
 
 [1]: https://en.wikipedia.org/wiki/Theory_of_multiple_intelligences#Verbal-linguistic
@@ -30,3 +153,17 @@ Sadly, I was not satisfied – I wanted a 1 CSS files solution – and promptly 
 [14]: https://web.dev/prefers-color-scheme/
 [15]: https://foundswatch.com/themes/dark/
 [16]: https://foundswatch.com/help/#dark-mode
+[17]: https://github.com/ForEvolve/bootstrap-dark
+[18]: https://en.wikipedia.org/wiki/Light-on-dark_color_scheme
+[19]: https://uxdesign.cc/the-past-present-and-future-of-dark-mode-9254f2956ec7
+[20]: https://www.wired.co.uk/article/google-chrome-dark-mode-design
+[21]: https://mashable.com/article/dark-mode-apps-instagram-google-chrome-apple-ios13/
+[22]: https://blog.weekdone.com/why-you-should-switch-on-dark-mode/
+[23]: https://www.androidauthority.com/dark-mode-1046425/
+[23]: https://caniuse.com/#feat=prefers-color-scheme
+[24]: https://caniuse.com/#feat=css-variables
+[25]: https://www.w3counter.com/globalstats.php?year=2020&month=4
+[26]: https://github.com/twbs/bootstrap/issues/27514#issuecomment-508972071
+[27]: https://bootswatch.com
+[28]: https://web.dev/color-scheme/
+

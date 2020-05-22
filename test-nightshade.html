@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- The page supports both dark and light color schemes, and the page author prefers dark. -->
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./dist/bootstrap-nightshade.css">
+
+  <!-- Prism.js for syntax highlighting -->
+  <link rel="stylesheet/less" type="text/css" href="./css/prism-combo.less">
+
+  <title>bootstrap-nightshade</title>
+
+  <style>
+    .d-clipboard {
+      position: relative;
+      float: right;
+    }
+    .btn-clipboard {
+      position: absolute;
+      top: .25rem;
+      right: .25rem;
+      opacity: .25;
+    }
+    .btn-clipboard:hover,
+    .btn-clipboard:active {
+      opacity: 1;
+    }
+    .token.comment {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-primary">
+      <div class="container">
+        <a class="navbar-brand">bootstrap-dark</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="./">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tests
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
+                <a class="dropdown-item" href="test-nightfall.html">bootstrap-nightfall</a>
+                <a class="dropdown-item active" href="test-nightshade.html">bootstrap-nightshade</a>
+                <a class="dropdown-item" href="test-dark.html">bootstrap-dark</a>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/vinorodrigues/bootstrap-dark">GitHub</a></li>
+          </ul>
+          <form class="form-inline">
+            <div class="custom-control custom-switch" title="Toggle Dark Mode" data-toggle="tooltip" data-placement="left">
+              <input type="checkbox" class="custom-control-input" id="css-toggle-btn">
+              <label class="custom-control-label" for="css-toggle-btn"></label>
+            </div>
+            <div class="custom-control custom-switch" title="Remember my preference" data-toggle="tooltip" data-placement="left">
+              <input type="checkbox" class="custom-control-input" id="css-save-btn">
+              <label class="custom-control-label" for="css-save-btn"></label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mt-5 mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Dark Mode in a single CSS theme file</h1>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-sm">
+          <h2>Setup</h2>
+          <ul>
+            <li>A single, fully themed, 2 color mode, Bootstrap CSS</li>
+            <li>Driven by <code>.dark</code> & <code>.light</code> body classes</li>
+            <li>Requires JavaScript & jQuery</li>
+            <li>Not dependant on <code>prefers-color-scheme</code>, but honours it initially</li>
+          </ul>
+
+          <p>Replace the bootstrap stylesheet with the following code:</p>
+
+<div class="code"><pre><code class="language-html language-js">  &lt;!-- Bootstrap CSS --&gt;
+  &lt;link rel="stylesheet" href="bootstrap-nightshade.css"&gt;
+</code></pre></div>
+
+        <p class="text-right"><small class="text-muted">
+          Syntax highlighting uses <a href="https://prismjs.com/" target="_blank">Prism.js</a>.
+          Copy to clipboard uses <a href="https://clipboardjs.com/" target="_blank">Clipboard.js</a>.
+        </small></p>
+
+        <p>You will also need the following code to toggle a `<code>dark</code>` class in the body with this code:</p>
+
+<div class="code"><pre><code class="language-html language-js">  &lt;script&gt;
+    $(document).ready(function(){
+
+      // This code uses `localStorage` to save "user prefers color" persistently
+      // This key used is `user-prefers-color`, and should be one of:
+      //  0 = only used at first trigger, to indicate firts time selection
+      //  1 = user wants light mode
+      //  2 = user wants dark mode
+      // the key can also be deleted to indicate user has no preference.
+
+      // function to toggle the css
+      function toggle_color_scheme_css($mode) {
+        // ammend the body classes
+        if ($mode == 'dark') {
+          $("body").removeClass('light').addClass("dark");
+        } else {
+          $("body").removeClass("dark").addClass('light');
+        }
+        // if on user prefers color then update stored value
+        $upc = window.localStorage.getItem('user-prefers-color');
+        if ($upc !== null) {
+          if ($upc == 0) $("#css-save-btn").prop( "checked", true );  // first time click
+          window.localStorage.setItem('user-prefers-color', ($mode == 'dark') ? 2 : 1);
+        }
+      }
+
+      // function / listener action to toggle the button
+      function update_color_scheme_css() {
+        $upc = window.localStorage.getItem('user-prefers-color');
+        if (($upc === null) || ($upc == 0)) {
+          $mode = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? 'dark' : 'light';
+        } else {
+          $mode = ($upc == 2) ? 'dark' : 'light';
+        }
+        $("#css-toggle-btn").prop( "checked", ('dark' == $mode) );
+        toggle_color_scheme_css($mode);
+      }
+
+      // initial mode discovery & update button
+      update_color_scheme_css();
+      if (window.localStorage.getItem('user-prefers-color') !== null)
+        $("#css-save-btn").prop( "checked", true );
+
+      // Update every time it changes
+      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( update_color_scheme_css );
+
+      // toggle button click code
+      $("#css-toggle-btn").bind("click", function() {
+        // disable further automatic toggles
+        if (window.localStorage.getItem('user-prefers-color') === null)
+          window.localStorage.setItem('user-prefers-color', 0);
+        // get current mode, i.e. does body have the `.dark`` classname
+        $mode = $("body").hasClass("dark") ? 'light' : 'dark';
+        toggle_color_scheme_css($mode);
+      });
+
+      // toggle button click code
+      $("#css-save-btn").bind("click", function() {
+        $chk = $("#css-save-btn").prop("checked");
+        if ($chk) {
+          // user wants persistance, save current state
+          $upc = $("body").hasClass("dark") ? 2 : 1;
+          window.localStorage.setItem("user-prefers-color", $upc);
+        } else {
+          // user doesn't want pesistace, delete saved key
+          window.localStorage.removeItem("user-prefers-color");
+        }
+      });
+
+    });
+  &lt;/script&gt;
+</code></pre></div>
+
+          <p>This code features a persistance engine that uses JS' `window.localStorage` to "remember" the users option.</p>
+          <p>The issue with the above approach is the “content flash” that happens when the user has persisted a “dark” mode.
+            On a reload, code will transition to dark as designed but there will be a sub-second flash as the light page loads first and then gets transitioned out.
+            This is similar to <a href="https://en.wikipedia.org/wiki/Flash_of_unstyled_content" target="_blank" title="Flash Of Unstyled Content" data-toggle="tooltip">FOUC</a> and is well know to developers - with few elegant fixes.</p>
+          <p>Read the <a href="readme.html">README.md</a> for more on this proof of concept.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center">
+    <small class="text-muted">&copy; 2020 Vino Rodrigues</small>
+  </footer>
+
+  <!-- Optional JavaScript --> <!-- ** needed for toggle -->
+  <!-- jQuery first, then Popper.js + Bootstrap JS bundle -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+  <!-- Clipboard.js for copy code -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+  <!-- Less.js -->
+  <script>
+    less = {
+      env: "production",
+      logLevel: 0,
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+
+  <!-- Hotkeys.js for [D] hotkey -->
+  <script src="https://cdn.jsdelivr.net/gh/jeresig/jquery.hotkeys@0/jquery.hotkeys.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      // only when jQuery is ready
+
+      // init the tooltip
+      // ----------------------------------------
+      $('[data-toggle="tooltip"]').tooltip()
+        .on('mouseleave', function () {
+          $(this).tooltip('hide')
+        });;
+
+      // Insert copy to clipboard button before .highlight
+      // borrowed from Bootstrap docs, uses Clipboard.js
+      // ----------------------------------------
+      $('div.code').each(function () {
+        var btnHtml = '<div class="d-clipboard"><button type="button" class="btn btn-outline-info btn-sm btn-clipboard" title="Copy to clipboard">Copy</button></div>'
+        $(this).before(btnHtml)
+        $('.btn-clipboard')
+          .tooltip()
+          .on('mouseleave', function () {
+            $(this).tooltip('hide')
+          });
+      });
+      var clipboard = new ClipboardJS('.btn-clipboard', {
+        target: function (trigger) {
+          return trigger.parentNode.nextElementSibling
+        }
+      });
+      clipboard.on('success', function (e) {
+        $(e.trigger)
+          .attr('title', 'Copied!')
+          .tooltip('_fixTitle')
+          .tooltip('show')
+          .attr('title', 'Copy to clipboard')
+          .tooltip('_fixTitle')
+        e.clearSelection()
+      });
+      clipboard.on('error', function (e) {
+        var modifierKey = /mac/i.test(navigator.userAgent) ? '\u2318' : 'Ctrl-'
+        var fallbackMsg = 'Press ' + modifierKey + 'C to copy'
+        $(e.trigger)
+          .attr('title', fallbackMsg)
+          .tooltip('_fixTitle')
+          .tooltip('show')
+          .attr('title', 'Copy to clipboard')
+          .tooltip('_fixTitle')
+      });
+
+      // ========================================
+
+      // This code uses `localStorage` to save "user prefers color" persistently
+      // This key used is `user-prefers-color`, and should be one of:
+      //  0 = only used at first trigger, to indicate firts time selection
+      //  1 = user wants light mode
+      //  2 = user wants dark mode
+      // the key can also be deleted to indicate user has no preference.
+
+      // function to toggle the css
+      function toggle_color_scheme_css($mode) {
+        // ammend the body classes
+        if ($mode == 'dark') {
+          $("body").removeClass('light').addClass("dark");
+        } else {
+          $("body").removeClass("dark").addClass('light');
+        }
+        // if on user prefers color then update stored value
+        $upc = window.localStorage.getItem('user-prefers-color');
+        if ($upc !== null) {
+          if ($upc == 0) $("#css-save-btn").prop( "checked", true );  // first time click
+          window.localStorage.setItem('user-prefers-color', ($mode == 'dark') ? 2 : 1);
+        }
+      }
+
+      // function / listener action to toggle the button
+      function update_color_scheme_css() {
+        $upc = window.localStorage.getItem('user-prefers-color');
+        if (($upc === null) || ($upc == 0)) {
+          $mode = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? 'dark' : 'light';
+        } else {
+          $mode = ($upc == 2) ? 'dark' : 'light';
+        }
+        $("#css-toggle-btn").prop( "checked", ('dark' == $mode) );
+        toggle_color_scheme_css($mode);
+      }
+
+      // initial mode discovery & update button
+      update_color_scheme_css();
+      if (window.localStorage.getItem('user-prefers-color') !== null)
+        $("#css-save-btn").prop( "checked", true );
+
+      // Update every time it changes
+      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( update_color_scheme_css );
+
+      // toggle button click code
+      $("#css-toggle-btn").bind("click", function() {
+        // disable further automatic toggles
+        if (window.localStorage.getItem('user-prefers-color') === null)
+          window.localStorage.setItem('user-prefers-color', 0);
+        // get current mode, i.e. does body have the `.dark`` classname
+        $mode = $("body").hasClass("dark") ? 'light' : 'dark';
+        toggle_color_scheme_css($mode);
+      });
+
+      // toggle button click code
+      $("#css-save-btn").bind("click", function() {
+        $chk = $("#css-save-btn").prop("checked");
+        if ($chk) {
+          // user wants persistance, save current state
+          $upc = $("body").hasClass("dark") ? 2 : 1;
+          window.localStorage.setItem("user-prefers-color", $upc);
+        } else {
+          // user doesn't want pesistace, delete saved key
+          window.localStorage.removeItem("user-prefers-color");
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>

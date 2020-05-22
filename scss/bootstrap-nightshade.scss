@@ -15,7 +15,7 @@
 @import "../node_modules/bootstrap/scss/mixins";
 @import "./dark/mixins";
 
-@import "../node_modules/bootstrap/scss/root";
+// @import "../node_modules/bootstrap/scss/root";  // leave this out, doesn't work with this methodology
 @import "../node_modules/bootstrap/scss/reboot";
 @import "../node_modules/bootstrap/scss/type";
 @import "../node_modules/bootstrap/scss/images";
@@ -51,8 +51,11 @@
 @import "../node_modules/bootstrap/scss/print";
 
 body.dark {
-  @import "./dark/root";
+  // @import "./dark/root";  // leave this out, doesn't work with this methodology
   @import "./dark/reboot";
+  // need this because `body.dark body {}` (in reboot) doesn't really do anything
+  color: $body-color-alt;
+  background-color: $body-bg-alt;
   @import "./dark/type";
   @import "./dark/images";
   @import "./dark/code";

@@ -16,12 +16,13 @@
   <header>
     <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-primary">
       <div class="container">
-        <a class="navbar-brand" href="./">bootstrap-dark</a>
+        <a class="navbar-brand">bootstrap-dark</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"><a class="nav-link" href="./">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,6 +31,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
                 <a class="dropdown-item" href="test-nightfall.html">bootstrap-nightfall</a>
+                <a class="dropdown-item" href="test-nightshade.html">bootstrap-nightshade</a>
                 <a class="dropdown-item" href="test-dark.html">bootstrap-dark</a>
               </div>
             </li>
@@ -59,11 +61,28 @@
       </div></div><div class="row"><div class="col">
 
         <h2>Test the variants</h2>
-        <ul>
-          <li><tt><a href="test-night.html">Test Night</a>&nbsp;&nbsp;&nbsp;&nbsp;</tt> - Toggle between two CSS files (<i class="fa fa-toggle-on" aria-hidden="true"></i>)</li>
-          <li><tt><a href="test-nightfall.html">Test Nightfall</a></tt> - Toggle dark mode on & off (<i class="fa fa-toggle-on" aria-hidden="true"></i>)</li>
-          <li><tt><a href="test-dark.html">Test Dark</a> &nbsp;&nbsp;&nbsp;&nbsp;</tt> - Automated by browser only</li>
-        </ul>
+        <table class="table">
+          <tr><td><a href="test-night.html">Bootstrap-Night</a></td>
+            <td>Toggle between two CSS files<br>
+              <i class="fa fa-moon text-success" aria-hidden="true" title="Browser Dark Mode Support" data-toggle="tooltip"></i>
+              <i class="fa fa-toggle-on text-success" aria-hidden="true" title="User Toggle Switch" data-toggle="tooltip"></i>
+              <i class="fa fa-user-slash text-warning" aria-hidden="true" title="No persistance layer" data-toggle="tooltip"></i></td></tr>
+          <tr><td><a href="test-nightfall.html">Bootstrap-Nightfall</a></td>
+            <td>Toggle dark mode on & off<br>
+              <i class="fa fa-moon text-success" aria-hidden="true" title="Browser Dark Mode Support" data-toggle="tooltip"></i>
+              <i class="fa fa-toggle-on text-success" aria-hidden="true" title="User Toggle Switch" data-toggle="tooltip"></i>
+              <i class="fa fa-user-slash text-warning" aria-hidden="true" title="No persistance layer" data-toggle="tooltip"></i></td></tr>
+          <tr><td><a href="test-nightshade.html">Bootstrap-Nightshade</a></td>
+            <td>Dark mode toggle & store<br>
+              <i class="fa fa-moon text-warning" aria-hidden="true" title="Only Initial Browser Dark Mode Support" data-toggle="tooltip"></i>
+              <i class="fa fa-toggle-on text-success" aria-hidden="true" title="User Toggle Switch" data-toggle="tooltip"></i>
+              <i class="fa fa-database" aria-hidden="true" title="Stores User Selection" data-toggle="tooltip"></i>
+              <i class="fa fa-sun text-danger" aria-hidden="true" title="Has FOUC-like (Flash of Unstyled Content) issues" data-toggle="tooltip"></i></td></tr>
+          <tr><td><a href="test-dark.html">Bootstrap-Dark</a></td>
+            <td>Automated by browser only<br>
+              <i class="fa fa-moon text-success" aria-hidden="true" title="Browser Dark Mode Support" data-toggle="tooltip"></i></td></tr>
+        </table>
+
         <hr>
 
       </div><div class="col">
@@ -71,12 +90,12 @@
         <h2>Test the theme</h2>
         <p class="text-muted">Try a few popular kitchen-sink pages with the Night theme.</p>
         <ul>
-          <li><tt><a href="test-1.html">Test 1</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/thomaspark/bootswatch" class="text-info"><i class="fab fa-github"></i> thomaspark/bootswatch</a> (<i class="fa fa-toggle-on" aria-hidden="true"></i>)</li>
-          <li><tt><a href="test-2.html">Test 2</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/HackerThemes/theme-kit" class="text-info"><i class="fab fa-github"></i> HackerThemes/theme-kit</a></li>
-          <li><tt><a href="test-3.html">Test 3</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/juzraai/bootstrap4-test-page" class="text-info"><i class="fab fa-github"></i> juzraai/bootstrap4-test-page</a></li>
-          <li><tt><a href="test-4.html">Test 4</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/csbarker/bootstrap-4-kitchen-sink" class="text-info"><i class="fab fa-github"></i> csbarker/bootstrap-4-kitchen-sink</a></li>
-          <li><tt><a href="test-5.html">Test 5</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://codepen.io/ycohio/pen/pXRLrO" class="text-info"><i class="fab fa-codepen"></i> ycohio/pen/pXRLrO</a></li>
-          <li><tt><a href="test-6.html">Test 6</a></tt> - <i class="text-muted">from</i> <a target="_blank" href="https://codepen.io/JacobLett/pen/KaMoEm" class="text-info"><i class="fab fa-codepen"></i> JacobLett/pen/KaMoEm</a></li>
+          <li><a href="test-1.html">Test 1</a> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/thomaspark/bootswatch" class="text-info"><i class="fab fa-github"></i> thomaspark/bootswatch</a> (<i class="fa fa-toggle-on" aria-hidden="true"></i>)</li>
+          <li><a href="test-2.html">Test 2</a> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/HackerThemes/theme-kit" class="text-info"><i class="fab fa-github"></i> HackerThemes/theme-kit</a></li>
+          <li><a href="test-3.html">Test 3</a> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/juzraai/bootstrap4-test-page" class="text-info"><i class="fab fa-github"></i> juzraai/bootstrap4-test-page</a></li>
+          <li><a href="test-4.html">Test 4</a> - <i class="text-muted">from</i> <a target="_blank" href="https://github.com/csbarker/bootstrap-4-kitchen-sink" class="text-info"><i class="fab fa-github"></i> csbarker/bootstrap-4-kitchen-sink</a></li>
+          <li><a href="test-5.html">Test 5</a> - <i class="text-muted">from</i> <a target="_blank" href="https://codepen.io/ycohio/pen/pXRLrO" class="text-info"><i class="fab fa-codepen"></i> ycohio/pen/pXRLrO</a></li>
+          <li><a href="test-6.html">Test 6</a> - <i class="text-muted">from</i> <a target="_blank" href="https://codepen.io/JacobLett/pen/KaMoEm" class="text-info"><i class="fab fa-codepen"></i> JacobLett/pen/KaMoEm</a></li>
         </ul>
         <hr>
 
@@ -95,8 +114,10 @@
     $(document).ready(function() {
       // only works if jQuery loaded
 
+      $('[data-toggle="tooltip"]').tooltip();
+
       // ----------------------------------------
-      function injectBrowserSupports() {
+      function injectBrowserSupportsInfo() {
         // Show information on `prefers-color-scheme` media query
         var supports = [];
         if (!window.matchMedia) {
@@ -125,8 +146,8 @@
         }
       }
 
-      injectBrowserSupports();  // Update on first load.
-      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( injectBrowserSupports );  // and every time it changes
+      injectBrowserSupportsInfo();  // Update on first load.
+      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( injectBrowserSupportsInfo );  // and every time it changes
     });
   </script>
 

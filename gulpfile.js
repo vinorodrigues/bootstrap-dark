@@ -7,7 +7,7 @@ const prfx = require( 'gulp-autoprefixer' );
 const tidy = require( 'gulp-prettier' );
 const mini = require( 'gulp-clean-css' );
 const renm = require( 'gulp-rename' );
-const imgs = require( 'gulp-imagemin' );
+/* const imgs = require( 'gulp-imagemin' ); */
 const _log = require( 'fancy-log' );
 const __if = require( 'gulp-if' );
 const sync = require( 'browser-sync' ).create();
@@ -17,15 +17,15 @@ var paths = {
 		'./scss/**/*.scss',
 		'./scss/**/!_*.scss'
 		],
-	// sassSrc: './scss/bootstrap-nightfall.scss',  // TODO, remove this, used in debug
 	sassWatch: './scss/**/*.scss',
-	htmlWatch: '**/*.html',
+	htmlWatch: '**/*.+(html|md)',
 	sassIncludes: [ /* 'node_modules/bootstrap/scss' */ ],
 	cssOut: './dist',
   htDocs: './',
-  imgSrc: './img/src/*.+(png|jpg|gif|svg)',
-  imgOut: './img/',
+  /* imgSrc: './img/src/*.+(png|jpg|gif|svg)',
+  imgOut: './img/', */
 };
+
 
 function sassTask(name, min = false) {
 	gulp.task( name, function(done) {
@@ -58,7 +58,7 @@ sassTask( 'sass:min', true );
 gulp.task( 'sass', gulp.parallel( 'sass:css' , 'sass:min' ) );
 
 
-gulp.task('images', function(done) {
+/* gulp.task('images', function(done) {
   return gulp.src( paths.imgSrc )
     .on( 'error', console.error.bind( console ))
     .pipe( imgs( [
@@ -94,7 +94,7 @@ gulp.task('images', function(done) {
         })
       ]) )
     .pipe( gulp.dest( paths.imgOut ) );
-});
+}); */
 
 
 gulp.task('server', function(done) {
@@ -117,4 +117,4 @@ gulp.task( 'watch', function(done) {
 } );
 
 
-gulp.task( 'default', gulp.series( 'sass', 'images' ) );
+gulp.task( 'default', gulp.series( 'sass' /* , 'images' */ ) );

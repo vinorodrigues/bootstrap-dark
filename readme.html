@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="./dist/bootstrap-dark.css">
 
   <!-- Prism.js for syntax highlighting -->
+  <script>
+    if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        "<link id=\"prism\" rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css\">"
+      );
+    }
+  </script>
   <link id="prism-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css" media="(prefers-color-scheme: dark)">
   <link id="prism-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
 
@@ -18,21 +26,28 @@
     #content p {
       text-align: justify;
     }
+    #content h1, #content h2 {
+      border-bottom: 1px solid rgba(127,172,127,.5);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .anchorjs-link, .anchorjs-link:hover { text-decoration: none; }
   </style>
 
-  <title>bootstrap-dark | readme.md</title>
+  <title>bootstrap-dark | README.md</title>
 </head>
 <body>
   <header>
     <nav class="navbar navbar-dark navbar-expand-lg navbar-light bg-primary">
       <div class="container">
-        <a class="navbar-brand" href="./">bootstrap-dark</a>
+        <a class="navbar-brand">bootstrap-dark</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
+            <li class="nav-item"><a class="nav-link" href="./">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="./readme.html">README.md</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Tests
@@ -40,6 +55,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
                 <a class="dropdown-item" href="test-nightfall.html">bootstrap-nightfall</a>
+                <a class="dropdown-item" href="test-nightshade.html">bootstrap-nightshade</a>
                 <a class="dropdown-item" href="test-dark.html">bootstrap-dark</a>
               </div>
             </li>
@@ -78,19 +94,30 @@
   <!-- Showdown.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
+  <!-- Anchor.js -->
+  <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+
   <script>
     $(document).ready(function(){
       // only when jQuery is ready
 
+      // -----------------------------------------
+      const $anchors = new AnchorJS();
+      $anchors.options = {
+        placement: 'left',
+      };
+
       // ------ Load the markdown ----------------
-      var $markdown = new showdown.Converter({
-        "ghCompatibleHeaderId": true,
-        "tables": true,
-        "ghCodeBlocks": true,
-        "ghMentions": true,
-        // "ghMentionsLink": true,
-        "simpleLineBreaks": true
+      const $markdown = new showdown.Converter({
+        tables: true,
+        strikethrough: true,
+        ghCompatibleHeaderId: true,
+        tablesHeaderId: true,
+        ghCodeBlocks: true,
+        ghMentions: true,
+        simpleLineBreaks: true,
       });
+
       $.ajax( {
         url: './README.md',
         type: 'get',
@@ -98,6 +125,7 @@
           $html = $markdown.makeHtml(content);
           $("#content").html( $html );
           Prism.highlightAll();
+          $anchors.add();
         },
         error: function(request, status, error) {
           $("#content").html( "Error: "+request.responseText );
