@@ -28,7 +28,7 @@ That said; my opinions and code path here is just one way to achieve what I thou
 *  but written in a way that can be pulled into the core (if the authors so want to),
 *  and finally, make it so that others can use it if the Authors have another path to this.
 
-I can't remember when I first came across the concept of "dark mode"; must have been sometime in late 2018 when I'd installed Safari Technology Preview and read some reference to the [`prefers-color-scheme`][2] *(still in draft with the W3C)*.  At the time I was attempting to write a (now abandoned) [WordPress theme][3] based on Bootstrap 4 after having written a [Bootstrap 2 based theme][4] a few years earlier, and a more recently a [printing plugin][5] for Bootstrap 3.  I remember thinking that I would love to not only release a highly configurable WordPress theme, but one that supported this wonderful [css-dark-mode][6].  I can vaguely recall looking at the code and deciding "Yea, not doable&sup1;!" and started doing some research on the topic.  But at the time there wasn't much.  I did however come across [issue #27514][7] in the Bootstrap GitHub repository, and also saw [@mdo][100]) close it off.  My thoughts were that if the creator of Bootstrap was not keen on this then it would never happen&sup1; - so I reluctantly gave up on WP-Bootstrap-4 and moved on to other hobbies.
+I can't remember when I first came across the concept of "dark mode"; must have been sometime in late 2018 when I'd installed Safari Technology Preview and read some reference to the [`prefers-color-scheme`][2] *(still in draft with the W3C)*.  At the time I was attempting to write a (now abandoned) [WordPress theme][3] based on Bootstrap 4 after having written a [Bootstrap 2 based WP theme][4] a few years earlier, and a a bit later a [printing plugin][5] for Bootstrap 3.  I remember thinking that I would love to not only release a highly configurable WordPress theme, but one that supported this wonderful [css-dark-mode][6].  I can vaguely recall looking at the code and deciding "Yea, not doable&sup1;!" and started doing some research on the topic.  But at the time there wasn't much.  I did however come across [issue #27514][7] in the Bootstrap GitHub repository, and also saw [@mdo][100]) close it off.  My thoughts were that if the creator of Bootstrap was not keen on this then it would never happen&sup1; - so I reluctantly gave up on WP-Bootstrap-4 and moved on to other hobbies.
 
 Time passed – I fell out of love with Bootstrap and took on a new mistress&sup1;, Foundation 6.  Spent a lot of time with it, but it is... different... lighter, easier to use because it is simpler, merged awesomely with "your own scss"; but it also doesn't work so well with out-of-the-box inclusion into existing sites – especially if you want to theme it up a bit, and it's not as flexible.  Bootstrap has Thomas Park's ([@thomaspark][101]) [Bootswatch][8] (Why the hell is he not a contributor?&sup1;), that he's [been maintaining][9] for over 6 years now.  But Foundation has nothing - yes Justin Mahar had started one called [Foundswatch][10] in 2018, but he archived that and relinquished the domain name.  The funny thing about Justin's work is that I didn't know of it until after I had created my own variant of [Foundswatch][11], but I digress.  The important takeaway of that side-story is that whilst I was working on it, I explored deeply the topic of Dark Mode again.  I realized that [Bootswatch Flatly][12] and [Bootswatch Darkly][13] are only different in color.  I also came across Thomas Steiner's ([@tomayac][102]) awesome article [prefers-color-scheme: Hello darkness, my old friend][14] and realised that I could offer a dark-mode option to Foundswatch users. And so, for Foundswatch, I created a [foundation-dark][15] theme that was usable as a two-color scheme CSS (albeit with 2 CSS files) for Foundation 6 and wrote a how to in the [help page][16].
 
@@ -84,10 +84,13 @@ So, I set out into the code to strip out only the color elements – but run int
 
 The [specification][2] allows for three options: `no-preference`, `light` & `dark`.  Three options – but the choice is binary: either `light` or `dark` – so what's the other one (`no-preference`) all about then?  Well this one hands the preference over to the website author, allowing them to adopt their own preference.  Naturally this would be brand based or some other definition, whatever, the point is that the website author will have a default position of their own, also binary `light` or `dark`. This also applies to browsers that don't support color-scheme preference.
 
+
 | user wants &rarr;<br>vs.<br>website has &darr; | not supported | no-preference | light |dark |
-|:-:|:-:|:-:|:-:|:-:|
+|:--:|:--:|:--:|:--:|:--:|
 | __light__ | light | light | light | dark |
 | __dark__ | dark | dark | light | dark |
+
+&nbsp;
 
 If you simplify the logic above table you get a binary option, for the website author.
 1. Default render a light page, with a dark delta override, but only if the user browser preferences a dark color-scheme
@@ -129,62 +132,71 @@ And so, I set out to build 4 variants of “dark mode” support, namely:
 
 (Mind you; I named these after the fact.)  Anyway ... No. 1 was already built, but No's. 2, 3 & 4 had something in common: The deltas.  I needed to build the deltas without modifying the core code.  Painstakingly I copied each scss include and edited all the non-color elements out and then also pointed all the color elements to their `-alt` variables.  3 days later it was done.  Thankfully I did not encounter the snag I did when I attempted to dark-mode-alize Foundation – where I found several instances where color was coded directly into the includes and even the mixins.  This made it that I would have to in essence duplicate the majority of Foundation 6 SCSS and then edit out hard coded colors and replace with SCSS variables – sure doable, but next version updates to the core would require a redo and I was just not up for that.  The other irritation of F6 was the SCSS var like `$white` were littered everywhere – so in making dark variants for Foundswatch the var $white are contain black CSS colors and visa-a-versa.  Sure, workable but confusing as hell.
 
-I did however come across one mixin that needed to be redone, `_forms.scss`, where the `color`, `background-color`, `border-color` and `box-shadow` where all coded in using non-alt SCSS variables, so needed to create a ` form-control-focus-alt` mixin that then used the `-alt` vars, and then find where `form-control-focus` was called and change that too.  Not a biggie.
+I did however come across one mixin that needed to be re-done, `_forms.scss`, where the `color`, `background-color`, `border-color` and `box-shadow` where all coded in using non-alt SCSS variables, so needed to create a ` form-control-focus-alt` mixin that then used the `-alt` vars, and then find where `form-control-focus` was called and change that too.  I also needed to re-do the `_functions.scss` file with `color-yiq-alt`, `color-alt`, `theme-color-alt`, `gray-alt` & `theme-color-level-alt` function using the `-alt` vars. Not a biggie.
 
 The end result was that I now had a set of SCSS includes that when compiled offered me a deltas package that I could use in all three remaining variants.  That and the map-back functionality I mentioned meant 4 very different ways of producing the same color combinations.
 
 
 ## The Variants
 
-
 ### Bootstrap-Night
 
-`bootstrap-night` is a stand-alone CSS that is essentially just a themed version of Bootstrap.  One can use it as stand-alone theme, similar to all the themes on [Bootswatch][27], but since it is in essence exactly the same as default Bootstrap (in terms of styling sans color) it can be used as an alternative light/dark combination with the original default theme.
+[`bootstrap-night`][91] is a stand-alone CSS that is essentially just a themed version of Bootstrap.  One can use it as stand-alone theme, similar to all the themes on [Bootswatch][27], but since it is in essence exactly the same as default Bootstrap (in terms of styling sans color) it can be used as an alternative light/dark combination with the original default theme.
 
 The essence of this code is simple:  Use two fully themed copies of Bootstrap, one light and one dark.  Each `<link rel="stylesheet"` would have different media type attributes, leveraging the `prefers-color-scheme` filter.
 
 To do this use the following code:
 
 ```html
-  <!-- Bootstrap CSS -->
-  <!-- Inform modern browsers that this page supports both dark and light color schemes,
-    and the page author prefers light. -->
-  <meta name="color-scheme" content="light dark">
-  <script>
-    // If `prefers-color-scheme` is not supported, but @media query is, fall back to light mode.
-    // i.e. In this case, inject the `light` CSS before the others, with
-    // no media filter so that it will be downloaded with highest priority.
-    if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
-      document.documentElement.style.display = "none";
-      document.head.insertAdjacentHTML(
-        "beforeend",
-        "<link rel=\"stylesheet\" href=\"bootstrap.css\" onload=\"document.documentElement.style.display = ''\">"
-      );
-    }
-  </script>
-  <!-- Load the alternate CSS first ... -->
-  <link rel="stylesheet" href="bootstrap-night.css" media="(prefers-color-scheme: dark)">
-  <!-- ... and then the primary CSS last for a fallback on very old browsers that don't support media filtering -->
-  <link rel="stylesheet" href="bootstrap.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
+<!-- Bootstrap CSS -->
+<!-- Inform modern browsers that this page supports both dark and light color schemes,
+  and the page author prefers light. -->
+<meta name="color-scheme" content="light dark">
+<script>
+  // If `prefers-color-scheme` is not supported, but @media query is, fall back to light mode.
+  // i.e. In this case, inject the `light` CSS before the others, with
+  // no media filter so that it will be downloaded with highest priority.
+  if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
+    document.documentElement.style.display = "none";
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      "<link rel=\"stylesheet\" href=\"bootstrap.css\" onload=\"document.documentElement.style.display = ''\">"
+    );
+  }
+</script>
+<!-- Load the alternate CSS first ... -->
+<link rel="stylesheet" href="bootstrap-night.css" media="(prefers-color-scheme: dark)">
+<!-- ... and then the primary CSS last for a fallback on very old browsers that don't support media filtering -->
+<link rel="stylesheet" href="bootstrap.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
 ```
 
-The first `<meta name="color-scheme"` assists the browser in rendering the page background with the desired color scheme immediately. Thomas Steiner ([@tomayac][102]) discusses this in his article [Improved dark mode default styling with the color-scheme CSS property and the corresponding meta tag][28].
+The first `<meta name="color-scheme" ...>` assists the browser in rendering the page background with the desired color scheme immediately. Thomas Steiner ([@tomayac][102]) discusses this in his article [Improved dark mode default styling with the color-scheme CSS property and the corresponding meta tag][28].
 
 The `<script>` bit adds a bit of JavaScript that will inject the default (light) CSS into the html header with no media filter before the other two stylesheet declarations.  This will force the browser to load the default CSS at the highest priority.  Read Thomas Steiner’s ([@tomayac][102]) [Hello Darkness][14] article on that.
 
 
+### Bootstrap-Nightfall
+
+
+
+### Bootstrap-Nightshade
+
+
+
 ### Bootstrap-Dark
 
-`bootstrap-dark`, is in my opinion the grail CSS&sup1;, the one I would use.  It can be used as a drop-in replacement for the original CSS.  No additional code, no additional add-ons, and works on all the supported browsers.
+[`bootstrap-dark`][94], is in my opinion the grail CSS&sup1;, the one I would use.  It can be used as a drop-in replacement for the original CSS.  No additional code, no additional add-ons, and works on all the supported browsers.
 
-Internally the CSS is composed of all of the original Bootstrap and then a single `(prefers-color-scheme: dark)` media query.  Within that query would be all the color CSS elements, just in the alternate colors (deltas).  Simply replace the Bootstrap CSS stylesheet:
+Internally the CSS is composed of all of the original Bootstrap and then a single `(prefers-color-scheme: dark)` media query.  Within that query would be all the color CSS elements, just in the alternate colors (deltas).
+
+To use it, simply replace the Bootstrap CSS stylesheet:
 
 ```html
-  <!-- Inform the browser that this page supports both dark and light color schemes,
-    and the page author prefers light. -->
-  <meta name="color-scheme" content="light dark">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="bootstrap-dark.css">
+<!-- Inform the browser that this page supports both dark and light color schemes,
+  and the page author prefers light. -->
+<meta name="color-scheme" content="light dark">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="bootstrap-dark.css">
 ```
 
 
@@ -224,6 +236,12 @@ Internally the CSS is composed of all of the original Bootstrap and then a singl
 [26]: https://github.com/twbs/bootstrap/issues/27514#issuecomment-508972071
 [27]: https://bootswatch.com
 [28]: https://web.dev/color-scheme/
+
+[90]: https://github.com/vinorodrigues/bootstrap-dark
+[91]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-night.scss
+[92]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-nightfall.scss
+[93]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-nightshade.scss
+[94]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-dark.scss
 
 [100]: https://github.com/mdo
 [101]: https://github.com/thomaspark

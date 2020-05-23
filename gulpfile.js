@@ -18,7 +18,7 @@ var paths = {
 		'./scss/**/!_*.scss'
 		],
 	sassWatch: './scss/**/*.scss',
-	htmlWatch: '**/*.+(html|htm|md|js|css|less)',
+	htmlWatch: '**/*.+(html|htm|md|js|less)',
 	sassIncludes: [ /* 'node_modules/bootstrap/scss' */ ],
 	cssOut: './dist',
   htDocs: './',

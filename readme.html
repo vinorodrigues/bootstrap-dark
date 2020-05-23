@@ -126,6 +126,7 @@
           $("#content").html( $html );
           Prism.highlightAll();
           $anchors.add();
+          $("table").addClass('table table-hover table-striped');
         },
         error: function(request, status, error) {
           $("#content").html( "Error: "+request.responseText );

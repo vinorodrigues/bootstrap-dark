@@ -8,6 +8,10 @@
  * elements optioned in by a `prefers-color-scheme: dark` media query
  */
 :root {
+  color-scheme: light dark;
+}
+
+:root {
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
