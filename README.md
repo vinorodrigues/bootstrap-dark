@@ -158,14 +158,14 @@ To do this use the following code:
       document.documentElement.style.display = "none";
       document.head.insertAdjacentHTML(
         "beforeend",
-        "<link id=\"css\" rel=\"stylesheet\" href=\"bootstrap.css\" onload=\"document.documentElement.style.display = ''\">"
+        "<link rel=\"stylesheet\" href=\"bootstrap.css\" onload=\"document.documentElement.style.display = ''\">"
       );
     }
   </script>
   <!-- Load the alternate CSS first ... -->
-  <link id="css-dark" rel="stylesheet" href="bootstrap-night.css" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="bootstrap-night.css" media="(prefers-color-scheme: dark)">
   <!-- ... and then the primary CSS last for a fallback on very old browsers that don't support media filtering -->
-  <link id="css-light" rel="stylesheet" href="bootstrap.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
+  <link rel="stylesheet" href="bootstrap.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
 ```
 
 The first `<meta name="color-scheme"` assists the browser in rendering the page background with the desired color scheme immediately. Thomas Steiner ([@tomayac][102]) discusses this in his article [Improved dark mode default styling with the color-scheme CSS property and the corresponding meta tag][28].
@@ -192,7 +192,7 @@ Internally the CSS is composed of all of the original Bootstrap and then a singl
 
 
 ---
-<small style="display:block;text-align:center;">&copy; 2020</small>
+<p align="center" style="text-align:center;display:block;"><small>&copy; 2020</small></p>
 
 
 [1]: https://en.wikipedia.org/wiki/Theory_of_multiple_intelligences#Verbal-linguistic

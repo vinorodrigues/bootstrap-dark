@@ -11763,7 +11763,7 @@ body.dark hr {
 
 body.dark mark,
 body.dark .mark {
-  background-color: rgba(244, 166, 42, 0.8);
+  background-color: rgba(243, 156, 18, 0.3);
 }
 
 body.dark .img-thumbnail {

@@ -145,7 +145,7 @@ $hr-border-color-alt:             rgba($white-alt, .1) !default;
 
 $kbd-box-shadow-alt:              inset 0 -.1rem 0 rgba($black, .25) !default;
 
-$mark-bg-alt:                     rgba(lighten($yellow-alt, 5%), .8) !default;  // test this!
+$mark-bg-alt:                     rgba($yellow-alt, .3) !default;
 
 
 // Tables

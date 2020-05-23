@@ -93,20 +93,16 @@
 
           <p>Replace the bootstrap stylesheet with the following code:</p>
 
-<div class="code"><pre><code class="language-html language-js">  &lt;!-- Bootstrap CSS --&gt;
-  &lt;!-- Inform modern browsers that this page supports both dark and light color schemes,
-    and the page author prefers light. --&gt;
-  &lt;meta name="color-scheme" content="light dark"&gt;
-  &lt;!-- Load the primary CSS first ... --&gt;
-  &lt;link id="css-light" rel="stylesheet" href="bootstrap.css"&gt;
-  &lt;!-- ... and then the alternate CSS first as a snap-on for dark color scheme preference --&gt;
-  &lt;link id="css-dark"  rel="stylesheet" href="bootstrap-nightfall.css" media="(prefers-color-scheme: dark)"&gt;
+<div class="code"><pre><code class="language-html language-js">&lt;!-- Bootstrap CSS --&gt;
+&lt;!-- Inform modern browsers that this page supports both dark and light color schemes,
+  and the page author prefers light. --&gt;
+&lt;meta name="color-scheme" content="light dark"&gt;
+&lt;!-- Load the primary CSS first ... --&gt;
+&lt;link id="css-light" rel="stylesheet" href="bootstrap.css"&gt;
+&lt;!-- ... and then the alternate CSS first as a snap-on for dark color scheme preference --&gt;
+&lt;link id="css-dark"  rel="stylesheet" href="bootstrap-nightfall.css" media="(prefers-color-scheme: dark)"&gt;
 </code></pre></div>
 
-        <p class="text-right"><small class="text-muted">
-          Syntax highlighting uses <a href="https://prismjs.com/" target="_blank">Prism.js</a>.
-          Copy to clipboard uses <a href="https://clipboardjs.com/" target="_blank">Clipboard.js</a>.
-        </small></p>
         <p>This is all you need to enable dark mode with Bootstrap.</p>
         </div>
       </div><div class="row mt-5">
@@ -119,58 +115,58 @@
             Once this switch has been clicked on, iether enable or disable the snap-on CSS based on the color scheme selection.</p>
           <p>The following code will require jQuery:</p>
 
-<div class="code"><pre><code class="language-html language-js">  &lt;script&gt;
-    $(document).ready(function(){
+<div class="code"><pre><code class="language-html language-js">&lt;script&gt;
+  $(document).ready(function(){
 
-      // Update the toggle button based on current color scheme
+    // Update the toggle button based on current color scheme
 
-      function updateDarkToggleButton() {
-        $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        $("#css-toggle-btn").prop( "checked", $dark );
+    function updateDarkToggleButton() {
+      $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      $("#css-toggle-btn").prop( "checked", $dark );
+    }
+
+    // Update on first load.
+    updateDarkToggleButton();
+    // and every time it changes
+    if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkToggleButton );
+
+    // Color Scheme toggle botton
+
+    // function to toggle the css
+    function toggle_color_scheme_css($id, $mode) {
+      $dark = ($mode == 'dark') ? true : false;
+      $("#"+$id+"-dark").attr( "disabled", !$dark );
+      $("body").attr( "data-color-scheme", ($dark ? "dark" : "light" ) );
+    }
+
+    // function to initialise the css
+    function init_color_scheme_css($id, $mode) {
+      $dark = ($mode == 'dark') ? true : false;
+      toggle_color_scheme_css($id, $mode);
+      setTimeout(function(){  // let the browser catch up
+        $("#"+$id+"-dark").removeAttr("media");
+      }, 100);
+    }
+
+    // toggle button click code
+    $("#css-toggle-btn").bind("click", function() {
+      // get current mode
+      // don't use `.data("color-scheme")`, it doesn't refresh
+      $mode = $("body").attr("data-color-scheme");
+      // test if this is a first time click event, if so initialise the code
+      if (typeof $mode === 'undefined') {
+        // not defined yet - set pref. & ask the browser if alt. is active
+        $mode = 'light';
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) $mode = 'dark';
+        init_color_scheme_css("css", $mode);
       }
-
-      // Update on first load.
-      updateDarkToggleButton();
-      // and every time it changes
-      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkToggleButton );
-
-      // Color Scheme toggle botton
-
-      // function to toggle the css
-      function toggle_color_scheme_css($id, $mode) {
-        $dark = ($mode == 'dark') ? true : false;
-        $("#"+$id+"-dark").attr( "disabled", !$dark );
-        $("body").attr( "data-color-scheme", ($dark ? "dark" : "light" ) );
-      }
-
-      // function to initialise the css
-      function init_color_scheme_css($id, $mode) {
-        $dark = ($mode == 'dark') ? true : false;
-        toggle_color_scheme_css($id, $mode);
-        setTimeout(function(){  // let the browser catch up
-          $("#"+$id+"-dark").removeAttr("media");
-        }, 100);
-      }
-
-      // toggle button click code
-      $("#css-toggle-btn").bind("click", function() {
-        // get current mode
-        // don't use `.data("color-scheme")`, it doesn't refresh
-        $mode = $("body").attr("data-color-scheme");
-        // test if this is a first time click event, if so initialise the code
-        if (typeof $mode === 'undefined') {
-          // not defined yet - set pref. & ask the browser if alt. is active
-          $mode = 'light';
-          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) $mode = 'dark';
-          init_color_scheme_css("css", $mode);
-        }
-        // by here we have the current mode, so swap it
-        $mode = ($mode == 'dark') ? 'light' : 'dark';
-        toggle_color_scheme_css("css", $mode);
-      });
-
+      // by here we have the current mode, so swap it
+      $mode = ($mode == 'dark') ? 'light' : 'dark';
+      toggle_color_scheme_css("css", $mode);
     });
-  &lt;/script&gt;
+
+  });
+&lt;/script&gt;
 </code></pre></div>
 
           <p><b>Remember</b> that the above code does not include a persistence layer to remember a user toggled preference.</p>
@@ -181,8 +177,8 @@
     </div>
   </main>
 
-  <footer class="text-center">
-    <small class="text-muted copyright">&copy; 2020</small>
+  <footer id="copyright" class="text-center">
+    <small class="text-muted">&copy; 2020</small>
   </footer>
 
   <!-- Optional JavaScript --> <!-- ** needed for toggle -->
@@ -215,7 +211,7 @@
 
       // init the tooltip
       // ----------------------------------------
-      $('[data-toggle="tooltip"]').tooltip()
+      $('[data-toggle="tooltip"]').tooltip({html: true})
         .on('mouseleave', function () {
           $(this).tooltip('hide')
         });;
@@ -314,6 +310,15 @@
       $(document).bind('keypress', 'd', function(){
         $('#css-toggle-btn').click();
       })
+      $("#css-toggle-btn").parent().attr({"data-original-title": $("#css-toggle-btn").parent().attr("data-original-title") + "<small><br>or press [D] hot-key</small>"});
+
+      // ----- Copyright ------------------------
+      $.ajax( {
+        url: './copyright.htm', type: 'get',
+        success: function(content) {
+          $("#copyright").html( content );
+        }
+      } );
     });
   </script>
 </body>

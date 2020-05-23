@@ -44,7 +44,7 @@
 
   <main>
     <div class="container mt-5 mb-5">
-      <div class="row"><div class="col">
+      <div class="row"><div class="col-md-6">
 
         <h2>ReadMe First</h2>
         <ul>
@@ -52,13 +52,13 @@
         </ul>
         <hr>
 
-      </div><div class="col">
+      </div><div class="col-md-6">
 
         <h2>About your browser</h2>
         <span id="the-dark-side">Oops, JavaScript and/or jQuery not working.</span>
         <hr>
 
-      </div></div><div class="row"><div class="col">
+      </div></div><div class="row"><div class="col-md-6">
 
         <h2>Test the variants</h2>
         <table class="table">
@@ -86,7 +86,7 @@
 
         <hr>
 
-      </div><div class="col">
+      </div><div class="col-md-6">
 
         <h2>Test the theme</h2>
         <p class="text-muted">Try a few popular kitchen-sink pages with the Night theme.</p>
@@ -104,8 +104,8 @@
     </div>
   </main>
 
-  <footer class="text-center">
-    <small class="text-muted copyright">&copy; 2020</small>
+  <footer id="copyright" class="text-center">
+    <small class="text-muted">&copy; 2020</small>
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -149,6 +149,14 @@
 
       injectBrowserSupportsInfo();  // Update on first load.
       if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( injectBrowserSupportsInfo );  // and every time it changes
+
+      // ----- Copyright ------------------------
+      $.ajax( {
+        url: './copyright.htm', type: 'get',
+        success: function(content) {
+          $("#copyright").html( content );
+        }
+      } );
     });
   </script>
 

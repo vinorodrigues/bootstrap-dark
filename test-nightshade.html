@@ -94,91 +94,86 @@
 
           <p>Replace the bootstrap stylesheet with the following code:</p>
 
-<div class="code"><pre><code class="language-html language-js">  &lt;!-- Bootstrap CSS --&gt;
-  &lt;link rel="stylesheet" href="bootstrap-nightshade.css"&gt;
+<div class="code"><pre><code class="language-html language-js">&lt;!-- Bootstrap CSS --&gt;
+&lt;link rel="stylesheet" href="bootstrap-nightshade.css"&gt;
 </code></pre></div>
-
-        <p class="text-right"><small class="text-muted">
-          Syntax highlighting uses <a href="https://prismjs.com/" target="_blank">Prism.js</a>.
-          Copy to clipboard uses <a href="https://clipboardjs.com/" target="_blank">Clipboard.js</a>.
-        </small></p>
 
         <p>You will also need the following code to toggle a `<code>dark</code>` class in the body with this code:</p>
 
-<div class="code"><pre><code class="language-html language-js">  &lt;script&gt;
-    $(document).ready(function(){
+<div class="code"><pre><code class="language-html language-js">&lt;script&gt;
+  $(document).ready(function(){
 
-      // This code uses `localStorage` to save "user prefers color" persistently
-      // This key used is `user-prefers-color`, and should be one of:
-      //  0 = only used at first trigger, to indicate firts time selection
-      //  1 = user wants light mode
-      //  2 = user wants dark mode
-      // the key can also be deleted to indicate user has no preference.
+    // This code uses `localStorage` to save "user prefers color" persistently
+    // This key used is `user-prefers-color`, and should be one of:
+    //  0 = only used at first trigger, to indicate firts time selection
+    //  1 = user wants light mode
+    //  2 = user wants dark mode
+    // the key can also be deleted to indicate user has no preference.
 
-      // function to toggle the css
-      function toggle_color_scheme_css($mode) {
-        // ammend the body classes
-        if ($mode == 'dark') {
-          $("body").removeClass('light').addClass("dark");
-        } else {
-          $("body").removeClass("dark").addClass('light');
-        }
-        // if on user prefers color then update stored value
-        $upc = window.localStorage.getItem('user-prefers-color');
-        if ($upc !== null) {
-          if ($upc == 0) $("#css-save-btn").prop( "checked", true );  // first time click
-          window.localStorage.setItem('user-prefers-color', ($mode == 'dark') ? 2 : 1);
-        }
+    // function to toggle the css
+    function toggle_color_scheme_css($mode) {
+      // ammend the body classes
+      if ($mode == 'dark') {
+        $("body").removeClass('light').addClass("dark");
+      } else {
+        $("body").removeClass("dark").addClass('light');
       }
-
-      // function / listener action to toggle the button
-      function update_color_scheme_css() {
-        $upc = window.localStorage.getItem('user-prefers-color');
-        if (($upc === null) || ($upc == 0)) {
-          $mode = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? 'dark' : 'light';
-        } else {
-          $mode = ($upc == 2) ? 'dark' : 'light';
-        }
-        $("#css-toggle-btn").prop( "checked", ('dark' == $mode) );
-        toggle_color_scheme_css($mode);
+      // if on user prefers color then update stored value
+      $upc = window.localStorage.getItem('user-prefers-color');
+      if ($upc !== null) {
+        if ($upc == 0) $("#css-save-btn").prop( "checked", true );  // first time click
+        window.localStorage.setItem('user-prefers-color', ($mode == 'dark') ? 2 : 1);
       }
+    }
 
-      // initial mode discovery & update button
-      update_color_scheme_css();
-      if (window.localStorage.getItem('user-prefers-color') !== null)
-        $("#css-save-btn").prop( "checked", true );
+    // function / listener action to toggle the button
+    function update_color_scheme_css() {
+      $upc = window.localStorage.getItem('user-prefers-color');
+      if (($upc === null) || ($upc == 0)) {
+        $mode = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? 'dark' : 'light';
+      } else {
+        $mode = ($upc == 2) ? 'dark' : 'light';
+      }
+      $("#css-toggle-btn").prop( "checked", ('dark' == $mode) );
+      toggle_color_scheme_css($mode);
+    }
 
-      // Update every time it changes
-      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( update_color_scheme_css );
+    // initial mode discovery & update button
+    update_color_scheme_css();
+    if (window.localStorage.getItem('user-prefers-color') !== null)
+      $("#css-save-btn").prop( "checked", true );
 
-      // toggle button click code
-      $("#css-toggle-btn").bind("click", function() {
-        // disable further automatic toggles
-        if (window.localStorage.getItem('user-prefers-color') === null)
-          window.localStorage.setItem('user-prefers-color', 0);
-        // get current mode, i.e. does body have the `.dark`` classname
-        $mode = $("body").hasClass("dark") ? 'light' : 'dark';
-        toggle_color_scheme_css($mode);
-      });
+    // Update every time it changes
+    if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( update_color_scheme_css );
 
-      // toggle button click code
-      $("#css-save-btn").bind("click", function() {
-        $chk = $("#css-save-btn").prop("checked");
-        if ($chk) {
-          // user wants persistance, save current state
-          $upc = $("body").hasClass("dark") ? 2 : 1;
-          window.localStorage.setItem("user-prefers-color", $upc);
-        } else {
-          // user doesn't want pesistace, delete saved key
-          window.localStorage.removeItem("user-prefers-color");
-        }
-      });
-
+    // toggle button click code
+    $("#css-toggle-btn").bind("click", function() {
+      // disable further automatic toggles
+      if (window.localStorage.getItem('user-prefers-color') === null)
+        window.localStorage.setItem('user-prefers-color', 0);
+      // get current mode, i.e. does body have the `.dark`` classname
+      $mode = $("body").hasClass("dark") ? 'light' : 'dark';
+      toggle_color_scheme_css($mode);
     });
-  &lt;/script&gt;
+
+    // toggle button click code
+    $("#css-save-btn").bind("click", function() {
+      $chk = $("#css-save-btn").prop("checked");
+      if ($chk) {
+        // user wants persistance, save current state
+        $upc = $("body").hasClass("dark") ? 2 : 1;
+        window.localStorage.setItem("user-prefers-color", $upc);
+      } else {
+        // user doesn't want pesistace, delete saved key
+        window.localStorage.removeItem("user-prefers-color");
+      }
+    });
+
+  });
+&lt;/script&gt;
 </code></pre></div>
 
-          <p>This code features a persistance engine that uses JS' `window.localStorage` to "remember" the users option.</p>
+          <p>This code features a persistance engine that uses JS' `<code>window.localStorage</code>` to "remember" the users option.</p>
           <p>The issue with the above approach is the “content flash” that happens when the user has persisted a “dark” mode.
             On a reload, code will transition to dark as designed but there will be a sub-second flash as the light page loads first and then gets transitioned out.
             This is similar to <a href="https://en.wikipedia.org/wiki/Flash_of_unstyled_content" target="_blank" title="Flash Of Unstyled Content" data-toggle="tooltip">FOUC</a> and is well know to developers - with few elegant fixes.</p>
@@ -188,8 +183,8 @@
     </div>
   </main>
 
-  <footer class="text-center">
-    <small class="text-muted copyright">&copy; 2020</small>
+  <footer id="copyright" class="text-center">
+    <small class="text-muted">&copy; 2020</small>
   </footer>
 
   <!-- Optional JavaScript --> <!-- ** needed for toggle -->
@@ -332,6 +327,13 @@
         }
       });
 
+      // ----- Copyright ------------------------
+      $.ajax( {
+        url: './copyright.htm', type: 'get',
+        success: function(content) {
+          $("#copyright").html( content );
+        }
+      } );
     });
   </script>
 </body>

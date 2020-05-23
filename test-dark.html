@@ -92,52 +92,55 @@
 
           <p>Replace the bootstrap stylesheet with the following code:</p>
 
-<div class="code"><pre><code class="language-html language-js">  &lt;!-- Inform the browser that this page supports both dark and light color schemes,
-    and the page author prefers light. --&gt;
-  &lt;meta name="color-scheme" content="light dark"&gt;
-  &lt;!-- Bootstrap CSS --&gt;
-  &lt;link rel="stylesheet" href="bootstrap-dark.css"&gt;
+<div class="code"><pre><code class="language-html language-js">&lt;!-- Inform the browser that this page supports both dark
+  and light color schemes, and the page author prefers light. --&gt;
+&lt;meta name="color-scheme" content="light dark"&gt;
+&lt;!-- Bootstrap CSS --&gt;
+&lt;link rel="stylesheet" href="bootstrap-dark.css"&gt;
 </code></pre></div>
 
-        <p class="text-right"><small class="text-muted">
-          Syntax highlighting uses <a href="https://prismjs.com/" target="_blank">Prism.js</a>.
-          Copy to clipboard uses <a href="https://clipboardjs.com/" target="_blank">Clipboard.js</a>.
-        </small></p>
         <p>This is all you need to enable dark mode with Bootstrap.</p>
+        <p>If you need to notify other components that the color-scheme has changed you can use this <a class="link collapsed" data-toggle="collapse" data-target=".more-code" href="#more" aria-expanded="false"
+            aria-controls="more" >example additional code</a>.</p>
+
         </div>
-      </div><div class="row mt-5">
+      </div><div class="row mt-5 collapse more-code" id="more">
         <div class="col-sm">
           <h2>Advanced Features</h2>
           <p>You may also want to be notified when the browser changes the color scheme.  For example you may want to toggle a `<code>dark</code>` class in the body with this code:</p>
 
-<div class="code"><pre><code class="language-html language-js">  &lt;script&gt;
-    $(document).ready(function(){
-      // dark mode update and listner
-      function updateDarkColorScheme() {
-        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          $("body").removeClass('light').addClass("dark").attr( "data-color-scheme", "dark" );
-        } else {
-          $("body").addClass('light').removeClass("dark").attr( "data-color-scheme", "light" );
-        }
+<div class="code"><pre><code class="language-html language-js">&lt;script&gt;
+  $(document).ready(function(){
+    // dark mode update and listner
+    function updateDarkColorScheme() {
+      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        $("body").removeClass('light').addClass("dark").attr( "data-color-scheme", "dark" );
+      } else {
+        $("body").addClass('light').removeClass("dark").attr( "data-color-scheme", "light" );
       }
-      // Update on first load.
-      updateDarkColorScheme();
-      // and every time it changes
-      if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkColorScheme );
-    });
-  &lt;/script&gt;
+    }
+    // Update on first load.
+    updateDarkColorScheme();
+    // and every time it changes
+    if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkColorScheme );
+  });
+&lt;/script&gt;
 </code></pre></div>
 
           <p>You <b class="text-danger">really don't need</b> the additional code.
             This is only usefull if you have other dependancies that have not been coded to support dark mode.</p>
+
+        </div>
+      </div><div class="row">
+        <div class="col-sm">
           <p>Read the <a href="readme.html">README.md</a> for more on this proof of concept.</p>
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="text-center">
-    <small class="text-muted copyright">&copy; 2020</small>
+  <footer id="copyright" class="text-center">
+    <small class="text-muted">&copy; 2020</small>
   </footer>
 
   <!-- Optional JavaScript --> <!-- ** needed for toggle -->
@@ -214,6 +217,13 @@
       // and every time it changes
       if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkColorScheme );
 
+      // ----- Copyright ------------------------
+      $.ajax( {
+        url: './copyright.htm', type: 'get',
+        success: function(content) {
+          $("#copyright").html( content );
+        }
+      } );
     });
   </script>
 </body>

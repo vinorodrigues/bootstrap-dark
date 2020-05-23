@@ -82,8 +82,8 @@
     </div>
   </main>
 
-  <footer class="text-center">
-    <small class="text-muted copyright invisible">&copy; 2020</small>
+  <footer id="copyright" class="text-center" style="opacity:.5">
+    <small class="text-muted">&copy; 2020</small>
   </footer>
 
   <!-- Optional JavaScript --> <!-- ** needed for toggle -->
@@ -131,6 +131,14 @@
           $("#content").html( "Error: "+request.responseText );
         }
       });
+
+      // ----- Copyright ------------------------
+      $.ajax( {
+        url: './copyright.htm', type: 'get',
+        success: function(content) {
+          $("#copyright").html( content );
+        }
+      } );
     });
   </script>
 
