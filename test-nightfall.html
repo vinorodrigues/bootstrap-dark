@@ -98,14 +98,17 @@
   and the page author prefers light. --&gt;
 &lt;meta name="color-scheme" content="light dark"&gt;
 &lt;!-- Load the primary CSS first ... --&gt;
-&lt;link id="css-light" rel="stylesheet" href="bootstrap.css"&gt;
+&lt;link <span class="collapse more-code" id="code-css-light">id="css-light" </span>rel="stylesheet" href="bootstrap.css"&gt;
 &lt;!-- ... and then the alternate CSS first as a snap-on for dark color scheme preference --&gt;
-&lt;link id="css-dark"  rel="stylesheet" href="bootstrap-nightfall.css" media="(prefers-color-scheme: dark)"&gt;
+&lt;link <span class="collapse more-code" id="code-css-dark">id="css-dark" </span>rel="stylesheet" href="bootstrap-nightfall.css" media="(prefers-color-scheme: dark)"&gt;
 </code></pre></div>
 
         <p>This is all you need to enable dark mode with Bootstrap.</p>
+        <p>You also have the flexibility to give the user control with a toggle switch,
+          but that requires <a class="link collapsed" data-toggle="collapse" data-target=".more-code" href="#more" aria-expanded="false"
+            aria-controls="more code-css-light code-css-dark" >some additional code</a>.</p>
         </div>
-      </div><div class="row mt-5">
+      </div><div class="row mt-5 collapse more-code">
         <div class="col-sm">
           <h2>Additional Setup
             <small class="text-muted">Giving user control</small>
@@ -170,8 +173,10 @@
 </code></pre></div>
 
           <p><b>Remember</b> that the above code does not include a persistence layer to remember a user toggled preference.</p>
+        </div>
+      </div><div class="row">
+        <div class="col-sm">
           <p>Read the <a href="readme.html">README.md</a> for more on this proof of concept.</p>
-
         </div>
       </div>
     </div>
@@ -188,6 +193,7 @@
 
   <!-- Prism.js for syntax highlighting -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/keep-markup/prism-keep-markup.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
   <!-- Clipboard.js for copy code -->
