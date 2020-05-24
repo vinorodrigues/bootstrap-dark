@@ -79,7 +79,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h1>Dark Mode in a single CSS theme file</h1>
+          <h1>Dark Mode in a single CSS theme file, and <code>html.dark</code> selector</h1>
         </div>
       </div>
       <div class="row mt-5">
@@ -87,7 +87,7 @@
           <h2>Setup</h2>
           <ul>
             <li>A single, fully themed, 2 color mode, Bootstrap CSS</li>
-            <li>Driven by <code>.dark</code> & <code>.light</code> body classes</li>
+            <li>Driven by <code>.dark</code> & <code>.light</code> <code>&lt;html&gt;</code> tag classes</li>
             <li>Requires JavaScript & jQuery</li>
             <li>Not dependant on <code>prefers-color-scheme</code>, but honours it initially</li>
           </ul>
@@ -98,7 +98,7 @@
 &lt;link rel="stylesheet" href="bootstrap-nightshade.css"&gt;
 </code></pre></div>
 
-        <p>You will also need the following code to toggle a `<code>dark</code>` class in the body with this code:</p>
+        <p>You will also need the following code to toggle a `<code>dark</code>` class in the <code>&lt;html&gt;</code> tag with this code:</p>
 
 <div class="code"><pre><code class="language-html language-js">&lt;script&gt;
   $(document).ready(function(){
@@ -112,11 +112,11 @@
 
     // function to toggle the css
     function toggle_color_scheme_css($mode) {
-      // ammend the body classes
+      // amend the body classes
       if ($mode == 'dark') {
-        $("body").removeClass('light').addClass("dark");
+        $("html").removeClass('light').addClass("dark");
       } else {
-        $("body").removeClass("dark").addClass('light');
+        $("html").removeClass("dark").addClass('light');
       }
       // if on user prefers color then update stored value
       $upc = window.localStorage.getItem('user-prefers-color');
@@ -143,7 +143,7 @@
     if (window.localStorage.getItem('user-prefers-color') !== null)
       $("#css-save-btn").prop( "checked", true );
 
-    // Update every time it changes
+    // update every time it changes
     if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( update_color_scheme_css );
 
     // toggle button click code
@@ -152,7 +152,7 @@
       if (window.localStorage.getItem('user-prefers-color') === null)
         window.localStorage.setItem('user-prefers-color', 0);
       // get current mode, i.e. does body have the `.dark`` classname
-      $mode = $("body").hasClass("dark") ? 'light' : 'dark';
+      $mode = $("html").hasClass("dark") ? 'light' : 'dark';
       toggle_color_scheme_css($mode);
     });
 
@@ -161,7 +161,7 @@
       $chk = $("#css-save-btn").prop("checked");
       if ($chk) {
         // user wants persistance, save current state
-        $upc = $("body").hasClass("dark") ? 2 : 1;
+        $upc = $("html").hasClass("dark") ? 2 : 1;
         window.localStorage.setItem("user-prefers-color", $upc);
       } else {
         // user doesn't want pesistace, delete saved key
@@ -270,11 +270,11 @@
 
       // function to toggle the css
       function toggle_color_scheme_css($mode) {
-        // ammend the body classes
+        // amend the body classes
         if ($mode == 'dark') {
-          $("body").removeClass('light').addClass("dark");
+          $("html").removeClass('light').addClass("dark");
         } else {
-          $("body").removeClass("dark").addClass('light');
+          $("html").removeClass("dark").addClass('light');
         }
         // if on user prefers color then update stored value
         $upc = window.localStorage.getItem('user-prefers-color');
@@ -301,7 +301,7 @@
       if (window.localStorage.getItem('user-prefers-color') !== null)
         $("#css-save-btn").prop( "checked", true );
 
-      // Update every time it changes
+      // update every time it changes
       if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( update_color_scheme_css );
 
       // toggle button click code
@@ -310,7 +310,7 @@
         if (window.localStorage.getItem('user-prefers-color') === null)
           window.localStorage.setItem('user-prefers-color', 0);
         // get current mode, i.e. does body have the `.dark`` classname
-        $mode = $("body").hasClass("dark") ? 'light' : 'dark';
+        $mode = $("html").hasClass("dark") ? 'light' : 'dark';
         toggle_color_scheme_css($mode);
       });
 
@@ -319,7 +319,7 @@
         $chk = $("#css-save-btn").prop("checked");
         if ($chk) {
           // user wants persistance, save current state
-          $upc = $("body").hasClass("dark") ? 2 : 1;
+          $upc = $("html").hasClass("dark") ? 2 : 1;
           window.localStorage.setItem("user-prefers-color", $upc);
         } else {
           // user doesn't want pesistace, delete saved key

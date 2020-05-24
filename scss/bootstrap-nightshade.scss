@@ -50,7 +50,7 @@
 @import "../node_modules/bootstrap/scss/utilities";
 @import "../node_modules/bootstrap/scss/print";
 
-body.dark {
+html.dark {
   // @import "./dark/root";  // leave this out, doesn't work with this methodology
   @import "./dark/reboot";
   // need this because `body.dark body {}` (in reboot) doesn't really do anything

@@ -113,7 +113,7 @@
           <h2>Additional Setup
             <small class="text-muted">Giving user control</small>
           </h2>
-          <p>The basic principle is honouring the browser preference (which we assume the user set with intent), detecting this state and setting a `<code>dark</code>` class in the body.
+          <p>The basic principle is honouring the browser preference (which we assume the user set with intent), detecting this state and setting a `<code>dark</code>` data variable in the body.
             We also update the toggle switch in the UI.
             Once this switch has been clicked on, iether enable or disable the snap-on CSS based on the color scheme selection.</p>
           <p>The following code will require jQuery:</p>
@@ -124,8 +124,10 @@
     // Update the toggle button based on current color scheme
 
     function updateDarkToggleButton() {
-      $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
-      $("#css-toggle-btn").prop( "checked", $dark );
+      if (typeof $("body").attr("data-color-scheme") === 'undefined') {
+        $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        $("#css-toggle-btn").prop( "checked", $dark );
+      }
     }
 
     // Update on first load.
@@ -261,17 +263,19 @@
 
       // Update the toggle button based on current color scheme
       // ----------------------------------------
-      function updateDarkBody($dark) {
+      function updateDarkHtml($dark) {
         if ($dark) {
-          $("body").removeClass('light').addClass("dark");
+          $("html").removeClass('light').addClass("dark");
         } else {
-          $("body").addClass('light').removeClass("dark");
+          $("html").addClass('light').removeClass("dark");
         }
       }
       function updateDarkToggleButton() {
-        $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        $("#css-toggle-btn").prop( "checked", $dark );
-        updateDarkBody($dark);
+        if (typeof $("body").attr("data-color-scheme") === 'undefined') {
+          $dark = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          $("#css-toggle-btn").prop( "checked", $dark );
+          updateDarkHtml($dark);
+        }
       }
       // Update on first load.
       updateDarkToggleButton();
@@ -285,7 +289,7 @@
         $dark = ($mode == 'dark') ? true : false;
         $("#"+$id+"-dark").attr( "disabled", !$dark );
         $("body").attr( "data-color-scheme", ($dark ? "dark" : "light" ) );
-        updateDarkBody($dark);
+        updateDarkHtml($dark);
       }
       // function to initialise the css
       function init_color_scheme_css($id, $mode) {

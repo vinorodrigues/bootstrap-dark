@@ -107,16 +107,16 @@
       </div><div class="row mt-5 collapse more-code" id="more">
         <div class="col-sm">
           <h2>Advanced Features</h2>
-          <p>You may also want to be notified when the browser changes the color scheme.  For example you may want to toggle a `<code>dark</code>` class in the body with this code:</p>
+          <p>You may also want to be notified when the browser changes the color scheme.  For example you may want to toggle a `<code>dark</code>` class in the `&lt;html&gt;` with this code:</p>
 
 <div class="code"><pre><code class="language-html language-js">&lt;script&gt;
   $(document).ready(function(){
     // dark mode update and listner
     function updateDarkColorScheme() {
       if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        $("body").removeClass('light').addClass("dark").attr( "data-color-scheme", "dark" );
+        $("html").removeClass('light').addClass("dark");
       } else {
-        $("body").addClass('light').removeClass("dark").attr( "data-color-scheme", "light" );
+        $("html").addClass('light').removeClass("dark");
       }
     }
     // Update on first load.
@@ -207,9 +207,9 @@
       // ----------------------------------------
       function updateDarkColorScheme() {
         if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          $("body").removeClass('light').addClass("dark").attr( "data-color-scheme", "dark" );
+          $("html").removeClass('light').addClass("dark");
         } else {
-          $("body").removeClass("dark").addClass('light').attr( "data-color-scheme", "light" );
+          $("html").addClass('light').removeClass("dark");
         }
       }
       // Update on first load.
