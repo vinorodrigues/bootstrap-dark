@@ -21,6 +21,8 @@
 }
 
 select.form-control {
+  -webkit-appearance: caret;
+
   &:focus::-ms-value {
     color: $input-color-alt;
     background-color: $input-bg-alt;

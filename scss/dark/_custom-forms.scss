@@ -121,7 +121,7 @@
 
 .custom-select {
   color: $custom-select-color-alt;
-  background: $custom-select-bg $custom-select-background-alt;
+  background: $custom-select-bg-alt $custom-select-background-alt;
   border: $custom-select-border-width solid $custom-select-border-color-alt;
   @include box-shadow($custom-select-box-shadow-alt);
 

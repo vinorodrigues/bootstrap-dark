@@ -1,9 +1,22 @@
 
-img {
-	opacity: .75;
-	transition: opacity .5s ease-in-out;
+$image-opacity-alt: .75 !default;
 
+img:not([src*=".svg"]) {
+	opacity: $image-opacity-alt;
+  transition: opacity .5s ease-in-out;
 	&:hover {
 		opacity: 1;
 	}
 }
+
+picture img {
+  opacity: 1;  // except for responsive images
+}
+
+// from https://moduscreate.com/blog/dark-mode-images/
+// img:not([src*=".svg"]) {
+//   filter: grayscale(50%);
+//   &:hover {
+//     filter: none;
+//   }
+// }
