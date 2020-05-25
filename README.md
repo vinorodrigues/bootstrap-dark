@@ -1,5 +1,5 @@
 # The Definitive&sup1; Guide to Dark Mode and Bootstrap 4
-A proof of concept / Longform whitepaper
+A proof of concept / Longform ~~whitepaper~~ {darkpaper}
 
 Jump to:
 
@@ -40,7 +40,7 @@ Sadly, I was not satisfied - I wanted a one CSS files solution - and promptly st
 *  [Bootstrap Dark Mode #28540](https://github.com/twbs/bootstrap/issues/28540)
 *  [Feature Request: Dark Mode #28754](https://github.com/twbs/bootstrap/issues/28754)
 *  and some work by [@Carl-Hugo][103]), in his project [ForEvolve/bootstrap-dark][17]. He has a working Bootstrap 4 dark theme, but that's stand-alone theme and did not meet my needs, i.e. support for user preferred dark-mode.
-*  I even found a blog entry on [@mdo][100])'s blog [*"CSS dark mode"*][36]
+*  I even found a blog entry on [@mdo][100])'s blog [*"CSS dark mode"*][37]
 
 But nowhere did I see an attempt at creating a true dark mode - in the core.  I did notice my old friend [#27514][7] was marked for V6.  V6!!! I can't wait that long&sup1;!
 
@@ -265,9 +265,9 @@ Of significant consideration here is that the dreaded **[FOUC][29]** is back - o
 
 As I was researching this, I came across a myriad of content describing the philosophy and how-to of getting a toggle switch going and it <u>seemed</u> to be the norm.  But the more I read the more I realized that these recommendations pre-date the advent of the `prefers-color-scheme` media query.  Even more recent content, like Chris Coyier's [*"Let's Say You Were Going to Write a Blog Post About Dark Mode"*][31] recommends that *"Dark Mode could (should?) be a choice on the website as well"* suggesting that even though one leverages the `prefers-color-scheme` because the user's browser specifically asked for it by specifically opting in to dark mode on his OS, or by browser theme (as Firefox has the option to) - that that user may want your site to be light.  Umm... I call [BS][33]&sup1; on that.  I just don't get&sup1; the philosophy of a user, at OS level, saying that they want everything they do on that platform to be dark - except on your website.  I don't even think it's a thing&sup1;, and unless I see a study showing how many users set dark mode preferences on OS level and then expect light on given websites - across many websites - I'm not buying into the toggle switch idea.  IMHO I think it's a legacy thought conjured up before `prefers-color-scheme` media query was adopted by the [W3C][2] - and that that thinking is no longer needed&sup1;.  (You don't see cars being pulled by horses anymore, do you?)  The only *"experts"* still peddling the toggle switch are yet to catch up with the feature set... I read one saying that he disagreed with Apple pushing its agenda on this (even though its standardized by the W3C, and adopted by Microsoft, Mozilla and Google), and another saying that his users demand it - then looked at his dark variant and wanted the light one too - only because that dark mode implementation could have been classified a sin&sup1;.  Developing dark mode websites needs specific thinking around supporting two color variants and there are several other considerations to account for other than CSS. (More on [that](#other-considerations) later.)
 
-If you look at sites that use the `prefers-color-scheme` media query correctly - like [StackOverflow][34] - there is no toggle switch.
+If you look at sites that use the `prefers-color-scheme` media query correctly - like [Twitter][34] and [StackOverflow][35] - there is no toggle switch.
 
-Nevertheless - I myself used a toggle switch in some of the test pages ... but that was because I wanted to toggle between the Night theme and the default Bootstrap theme to see if the colors worked.  I never intended to develop a persistence layer for it.  But in the case of NightShade I pondered persistence and how that would play out in a scenario where the user OS and the user interaction were not aligned and how to handle it as a logic experiment.  So I prototyped it and it's code is viewable in the [test-nightshade](https://vinorodrigues.github.io/bootstrap-dark/test-nightshade.html) example.
+Nevertheless - I myself used a toggle switch in some of the test pages ... but that was because I wanted to toggle between the Night theme and the default Bootstrap theme to see if the colors worked.  I never intended to develop a persistence layer for it.  But in the case of NightShade I pondered persistence and how that would play out in a scenario where the user OS and the user interaction were not aligned and how to handle it as a logic experiment.  So I prototyped it and it's code is viewable in the [test-nightshade][36] example.
 
 
 
@@ -323,7 +323,7 @@ img {
 }
 ```
 
-To understand the thinking behind this code read [@mdo][100]'s blog entry [*"CSS dark mode"*][36].
+To understand the thinking behind this code read [@mdo][100]'s blog entry [*"CSS dark mode"*][37].
 
 #### SCSS mixin's and variables
 
@@ -384,9 +384,11 @@ I mentioned all the [`*-alt` variables](#the--alt-scss-includes) earlier, but th
 [31]: https://css-tricks.com/lets-say-you-were-going-to-write-a-blog-post-about-dark-mode/
 [32]: https://en.wikipedia.org/wiki/Usage_share_of_web_browsers
 [33]: https://www.amazon.com/Bullshit-Harry-G-Frankfurt-ebook/dp/B001EQ4OJW
-[34]: https://stackoverflow.com/users/1575941/vino
-[35]: https://en.wikipedia.org/wiki/Information_overload
-[36]: https://markdotto.com/2018/11/05/css-dark-mode/
+[34]: https://twitter.com/mdo
+[35]: https://stackoverflow.com/users/1575941/vino
+[36]: https://vinorodrigues.github.io/bootstrap-dark/test-nightshade.html
+[37]: https://markdotto.com/2018/11/05/css-dark-mode/
+[xx]: https://en.wikipedia.org/wiki/Information_overload
 
 [90]: https://github.com/vinorodrigues/bootstrap-dark
 [91]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-night.scss
