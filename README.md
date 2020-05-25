@@ -85,7 +85,7 @@ So, I set out into the code to strip out only the color elements - but run into 
 The [specification][2] allows for three options: `no-preference`, `light` & `dark`.  Three options - but the choice is binary: either `light` or `dark` - so what's the other one (`no-preference`) all about then?  Well this one hands the preference over to the website author, allowing them to adopt their own preference.  Naturally this would be brand based or some other definition, whatever, the point is that the website author will have a default position of their own, also binary `light` or `dark`. This also applies to browsers that don't support color-scheme preference.
 
 
-| user wants &rarr;<i><br> vs. <br></i>website has &darr; | *(not supported)* | no-preference | light |dark |
+| user wants &rarr;<br>website has &darr; | *(not supported)* | no-preference | light |dark |
 |:--:|:--:|:--:|:--:|:--:|
 | __light__ | light | light | light | dark |
 | __dark__ | dark | dark | light | dark |
@@ -323,7 +323,7 @@ img {
 }
 ```
 
-To understand the thinking behind this code read [@mdo][100]'s blog [*"CSS dark mode"*][36]
+To understand the thinking behind this code read [@mdo][100]'s blog entry [*"CSS dark mode"*][36].
 
 #### SCSS mixin's and variables
 

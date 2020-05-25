@@ -26,15 +26,32 @@
     #content p {
       text-align: justify;
     }
+    #content li {
+      text-align: left;
+    }
     #content h1, #content h2 {
       border-bottom: 1px solid rgba(127,172,127,.5);
     }
-    #content h1, #content h2, #content h3, #content h4 {
+    #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
       padding-bottom: 1rem;
       margin-top: 2rem;
       margin-bottom: 1rem;
     }
     .anchorjs-link, .anchorjs-link:hover { text-decoration: none; }
+    .d-clipboard {
+      position: relative;
+      float: right;
+    }
+    .btn-clipboard {
+      position: absolute;
+      top: .25rem;
+      right: .25rem;
+      opacity: .25;
+    }
+    .btn-clipboard:hover,
+    .btn-clipboard:active {
+      opacity: 1;
+    }
   </style>
 
   <title>bootstrap-dark | README.md</title>
@@ -100,6 +117,13 @@
   <!-- Anchor.js -->
   <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
 
+  <!-- Clipboard.js for copy code -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
   <script>
     $(document).ready(function(){
       // only when jQuery is ready
@@ -130,10 +154,51 @@
           Prism.highlightAll();
           $anchors.add();
           $("table").addClass('table table-hover table-striped');
+          do_the_the_magic_on_the_code();
         },
         error: function(request, status, error) {
           $("#content").html( "Error: "+request.responseText );
         }
+      });
+
+      // ----- Clipboard ------------------------
+      function do_the_the_magic_on_the_code() {
+        $('pre').wrap(function() {
+          return "<div class=\"code\"></div>";
+        });
+        $('div.code').each(function () {
+          var btnHtml = '<div class="d-clipboard"><button type="button" class="btn btn-outline-info btn-sm btn-clipboard" title="Copy to clipboard">Copy</button></div>'
+          $(this).before(btnHtml)
+          $('.btn-clipboard')
+            .tooltip()
+            .on('mouseleave', function () {
+              $(this).tooltip('hide')
+            });
+        });
+      }
+      var clipboard = new ClipboardJS('.btn-clipboard', {
+        target: function (trigger) {
+          return trigger.parentNode.nextElementSibling
+        }
+      });
+      clipboard.on('success', function (e) {
+        $(e.trigger)
+          .attr('title', 'Copied!')
+          .tooltip('_fixTitle')
+          .tooltip('show')
+          .attr('title', 'Copy to clipboard')
+          .tooltip('_fixTitle')
+        e.clearSelection();
+      });
+      clipboard.on('error', function (e) {
+        var modifierKey = /mac/i.test(navigator.userAgent) ? '\u2318' : 'Ctrl-'
+        var fallbackMsg = 'Press ' + modifierKey + 'C to copy'
+        $(e.trigger)
+          .attr('title', fallbackMsg)
+          .tooltip('_fixTitle')
+          .tooltip('show')
+          .attr('title', 'Copy to clipboard')
+          .tooltip('_fixTitle');
       });
 
       // ----- Copyright ------------------------
@@ -145,9 +210,5 @@
       } );
     });
   </script>
-
-  <!-- Prism.js for syntax highlighting -->  <!-- Load after content update -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-core.min.js" data-manual></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>
