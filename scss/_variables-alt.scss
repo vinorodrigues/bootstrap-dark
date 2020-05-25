@@ -10,17 +10,20 @@
 // Set the secondary color scheme, can only be `light` or `dark`
 $color-scheme-alt: dark;
 
+// the below colors where borrowed from other sources
+// items marked //** from https://bootswatch.com/darkly/
+// items marked //~~ from https://uxdesign.cc/dark-mode-ui-design-the-definitive-guide-part-1-color-53dcfaea5129
 
 $white-alt:    #fafafa !default;  // #fff !default;
-$gray-100-alt: #f8f9fa !default;
-$gray-200-alt: #ebebeb !default;  // #e9ecef !default;
-$gray-300-alt: #dee2e6 !default;
-$gray-400-alt: #ced4da !default;
-$gray-500-alt: #adb5bd !default;
-$gray-600-alt: #888 !default;     // #6c757d !default;
-$gray-700-alt: #444 !default;     // #495057 !default;
-$gray-800-alt: #303030 !default;  // #343a40 !default;
-$gray-900-alt: #222 !default;     // #212529 !default;
+$gray-100-alt: #e1e1e1 !default;  //~~  // #f8f9fa !default;
+$gray-200-alt: #cfcfcf !default;  //~~  // #ebebeb !default;  // #e9ecef !default;
+$gray-300-alt: #b1b1b1 !default;  //~~  // #dee2e6 !default;
+$gray-400-alt: #9e9e9e !default;  //~~  // #ced4da !default;
+$gray-500-alt: #7e7e7e !default;  //~~  // #adb5bd !default;
+$gray-600-alt: #626262 !default;  //~~  // #888 !default;     // #6c757d !default;
+$gray-700-alt: #515151 !default;  //~~  // #444 !default;     // #495057 !default;
+$gray-800-alt: #3b3b3b !default;  //~~  // #303030 !default;  // #343a40 !default;
+$gray-900-alt: #222222 !default;  //~~  // #222 !default;     // #212529 !default;
 $black-alt:    #111 !default;     // #000 !default;
 
 $grays-alt: () !default;
@@ -44,12 +47,12 @@ $blue-alt:    #375a7f !default;  // #007bff !default;
 $indigo-alt:  #6610f2 !default;
 $purple-alt:  #6f42c1 !default;
 $pink-alt:    #e83e8c !default;
-$red-alt:     #e74c3c !default;  // #dc3545 !default;
+$red-alt:     #e74c3c !default;  //**  // #dc3545 !default;
 $orange-alt:  #fd7e14 !default;
-$yellow-alt:  #f39c12 !default;  // #ffc107 !default;
-$green-alt:   #00bc8c !default;  // #28a745 !default;
+$yellow-alt:  #f39c12 !default;  //**  // #ffc107 !default;
+$green-alt:   #00bc8c !default;  //**  // #28a745 !default;
 $teal-alt:    #20c997 !default;
-$cyan-alt:    #3498db !default;  // #17a2b8 !default;
+$cyan-alt:    #3498db !default;  //**  // #17a2b8 !default;
 
 $colors-alt: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -66,8 +69,8 @@ $colors-alt: map-merge(
     "teal":       $teal-alt,
     "cyan":       $cyan-alt,
     "white":      $white-alt,
-    "gray":       $gray-600-alt,
-    "gray-dark":  $gray-800-alt
+    "gray":       #7e7e7e,  //~~  // $gray-600-alt,
+    "gray-dark":  #121212,  //~~  // $gray-800-alt
   ),
   $colors-alt
 );
@@ -251,10 +254,10 @@ $custom-checkbox-indicator-indeterminate-border-color-alt: $custom-checkbox-indi
 $custom-radio-indicator-icon-checked-alt:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{$custom-control-indicator-checked-color-alt}'/></svg>") !default;
 
 $custom-select-color-alt:               $input-color-alt !default;
-$custom-select-disabled-color-alt:      $gray-600-alt !default;
+$custom-select-disabled-color-alt:      $gray-400-alt !default;
 $custom-select-bg-alt:                  $input-bg-alt !default;
-$custom-select-disabled-bg-alt:         $gray-200-alt !default;
-$custom-select-indicator-color-alt:     $gray-800-alt !default;
+$custom-select-disabled-bg-alt:         $gray-800-alt !default;
+$custom-select-indicator-color-alt:     $gray-200-alt !default;
 $custom-select-indicator-alt:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='#{$custom-select-indicator-color-alt}' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>") !default;
 $custom-select-background-alt:          escape-svg($custom-select-indicator-alt) no-repeat right $custom-select-padding-x center / $custom-select-bg-size !default; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
 

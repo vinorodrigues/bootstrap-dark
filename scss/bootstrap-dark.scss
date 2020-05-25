@@ -15,6 +15,7 @@
 @import "../node_modules/bootstrap/scss/mixins";
 @import "./dark/mixins";
 
+@import "./dark/utilities/color-schemes";
 @import "../node_modules/bootstrap/scss/root";
 @import "../node_modules/bootstrap/scss/reboot";
 @import "../node_modules/bootstrap/scss/type";
@@ -86,4 +87,4 @@
   @import "./dark/dark";
 }
 
-@import "./dark/utilities/color-schemes";
+@import "./dark/utilities/display-dark";
