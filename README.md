@@ -12,6 +12,7 @@ Jump to:
     -  [Bootstrap-Nightfall](#bootstrap-nightfall)
     -  [Bootstrap-Nightshade](#bootstrap-nightshade)
     -  [Bootstrap-Dark](#bootstrap-dark)
+*  [And the winner is ...](#and-the-winner-is)
 
 ## About me & The history that led here
 
@@ -39,7 +40,7 @@ Sadly, I was not satisfied - I wanted a one CSS files solution - and promptly st
 *  [Docs dark mode #28449](https://github.com/twbs/bootstrap/pull/28449) - (seems to be working, albeit only for dark mode on the docs.)
 *  [Bootstrap Dark Mode #28540](https://github.com/twbs/bootstrap/issues/28540)
 *  [Feature Request: Dark Mode #28754](https://github.com/twbs/bootstrap/issues/28754)
-*  and some work by [@Carl-Hugo][103]), in his project [ForEvolve/bootstrap-dark][17]. He has a working Bootstrap 4 dark theme, but that's stand-alone theme and did not meet my needs, i.e. support for user preferred dark-mode.
+*  and some work by [@Carl-Hugo][103], in his project [ForEvolve/bootstrap-dark][17]. He has a working Bootstrap 4 dark theme, but that's stand-alone theme and did not meet my needs, i.e. support for user preferred dark-mode.
 *  I even found a blog entry on [@mdo][100])'s blog [*"CSS dark mode"*][37]
 
 But nowhere did I see an attempt at creating a true dark mode - in the core.  I did notice my old friend [#27514][7] was marked for V6.  V6!!! I can't wait that long&sup1;!
@@ -66,6 +67,61 @@ In my opinion what's ideal is a single CSS Bootstrap variant&sup1; that does dar
 
 There is a bunch of conversation from the core authors around support for dark mode based on CSS variables and that their only concern was IE11 and that by the time they get to dark mode then they'd drop support for IE11.  All fine and dandy, but it's not only IE11 that does not support dark mode, as in the [prefers-color-scheme media query][23], and [CSS variables][24].  There is also a bunch of older mobile devices still in use that cannot be upgraded, for example older iPad that cannot upgrade further than iOS 12.4 and Safari 12.1.  One cannot forget that only 58% of used browsers (based on the sum of top 10 browsers supporting it, from [*"Browser & Platform Market Share April 2020"*][25]) support dark mode today - so it makes sense that the Authors want to wait on this.
 
+#### Origins
+
+The [specification][2] allows for three options: `no-preference`, `light` & `dark`.  However, one must not forget that not all browsers support the `prefers-color-scheme` media query, and that means there is a fourth option (or rather first option); where the browser does not (cannot) handle the media query.
+
+In essence the CSS code can be split up into four sections:
+
+```css
+/* [1] CSS of non-supported browsers here */
+
+@media (prefers-color-scheme: no-preference) {
+  /* [2] CSS for supported browsers where the user does not have a preference */
+}
+@media (prefers-color-scheme: light) {
+  /* [3] CSS for supported browsers where the user wants a light theme */
+}
+@media (prefers-color-scheme: dark) {
+  /* [4] CSS for supported browsers where the user wants a dark theme */
+}
+```
+
+The existence of `no-preference` is odd&sup1; to me.  Theoretically this one hands the preference over to the website author, allowing them to adopt their own preference.  (Also, theoretically, a website could produce 4 different UI – but logically … why?  I also could not get any of the 6 browsers I use to trigger the `no-preference` query.  Also - doesn't the website author have control anyway?)
+
+The logical choice, thus, is binary: either `light` or `dark`. Naturally this would be brand based or some other definition, whatever, the point is that the website author will have a default position of their own, also binary `light` or `dark`.
+
+| user wants &rarr;<br>website has &darr; | *(not supported)* | no-preference | light |dark |
+|:--:|:--:|:--:|:--:|:--:|
+| __light__ | light | light | light | dark |
+| __dark__ | dark | dark | light | dark |
+
+If you simplify the logic table above you get a binary option, for the website author, that can be refactored into one of two methods:
+1. Default render a light page, with a dark override, but only if the user browser preferences a dark color-scheme
+2. Default render a dark page, with a light override, but only if the user browser preferences a light color-scheme
+
+```css
+/* In this example the website author prefers a light theme, and places:
+  [1] CSS of non-supported browsers here,
+  [2] wich is also the CSS for supported browsers where the user does not have a preference,
+  [3] wich is also the CSS for supported browsers where the user wants a light theme
+*/
+@media (prefers-color-scheme: dark) {
+  /* [4] And then the CSS for supported browsers where the user wants a dark theme comes here */
+}
+```
+
+Obviously, if the website author prefers a dark theme he would use an inverse approach:
+
+```css
+/* [1] [2] [4] */
+@media (prefers-color-scheme: light) {
+  /* [3] */
+}
+```
+
+#### Refactoring
+
 Back to thinking about @[Carl-Hugo][103]'s work been adapted to work with dark mode - if one applies the coding practice that one should never write the same piece of code twice, there is a whole bunch CSS that gets repeated *(not that that code got written twice - but that principle applies both to writing and the consumption of memory when run)* ... comparing the two CSS files to each other there is a bunch of duplication except in elements of color.
 
 Generally speaking, if you look at CSS there are 3 core concepts:
@@ -76,33 +132,21 @@ Generally speaking, if you look at CSS there are 3 core concepts:
 
 Assuming we want to keep the Geography and the Type Faces unchanged, then all we really need is a deltas/differences package that can be used to offer a solution based on the concept of supplying the original CSS whole, and then toggle into dark with only the deltas.
 
-So, I set out into the code to strip out only the color elements - but run into three problems.
+#### Hypothesis
 
-1.  How would I compile it?  (Remember that I did not want to modify the core code.)  The answer was to create a `_variables-dark.scss`, with only the color items in it.
-2.  and, Initially I just took all the variables and added a `-dark` suffix ... until I got to `.table-dark` ... ummm ... `.table-dark-dark` ... nope.
-3.  ... also, was `-dark` appropriate?  What if, in third party theming, the primary color was dark, and that the prefers-color-scheme optioned to light. Ah... that brings me to another philosophy point.
+Given the [logic table](#origins) discussed prior, and the [refactoring methodology](#refactoring) also covered (that one only needs the deltas), and the fact that that the alternative color could be either `light` or `dark`, my hypothesis was that I could use all of the original Bootstrap code, but also needed to issolate the differences (specifically the color choices).
 
-The [specification][2] allows for three options: `no-preference`, `light` & `dark`.  Three options - but the choice is binary: either `light` or `dark` - so what's the other one (`no-preference`) all about then?  Well this one hands the preference over to the website author, allowing them to adopt their own preference.  Naturally this would be brand based or some other definition, whatever, the point is that the website author will have a default position of their own, also binary `light` or `dark`. This also applies to browsers that don't support color-scheme preference.
+So, I set out into the code to strip all but the color elements - but run into three problems.
 
+1.  How would I compile it?  (Remember that I did not want to modify the core code.)  The answer was to create a `_variables-dark.scss`, with only the color items in it;
+2.  and, initially I just took all the variables and added a `-dark` suffix ... until I got to `.table-dark` ... ummm ... `.table-dark-dark` ... nope; so there was a naming issue;
+3.  also, was `-dark` appropriate?  What if, in third party theming, the primary color was dark, and that the prefers-color-scheme optioned (or deltas) was light? In essence the *"alternative"* color.
 
-| user wants &rarr;<br>website has &darr; | *(not supported)* | no-preference | light |dark |
-|:--:|:--:|:--:|:--:|:--:|
-| __light__ | light | light | light | dark |
-| __dark__ | dark | dark | light | dark |
+And so ... this proof of concept would attempt to prove that light default (because Bootstrap 4's default is light) and dark deltas was possible.  And that a dark-then-light variant was simple to create with a selector, variable or mixin.  *(No attempt was made to offer a dark-then-light variant as the method would be evident in the PoC and that theme builders could just modify varables to achieve that.)*
 
-&nbsp;
+The question of compiling was easy enough to resolve; while I was extracting all the color variables, I needed to test the color combination - but all the Bootstrap code wasn't written for `*-alt` variables, so I had to map them back.  Another file, `_variables-map-back.scss`, thus maps back the `*-alt` to non-alt.  e.g. `$body-bg-alt: #000 !default;` and then `$body-bg: $body-bg-alt;`.   Unintentionally I'd created a whole dark theme.  I called it `bootstrap-night.scss`.  (More [on that](#bootstrap-night) later.)
 
-If you simplify the logic above table you get a binary option, for the website author.
-1. Default render a light page, with a dark delta override, but only if the user browser preferences a dark color-scheme
-2. Default render a dark page, with a light delta override, but only if the user browser preferences a light color-scheme
-
-Key takeaway is that the alternative color (or the deltas) could be light, and the main / default / fallback color black.
-
-This proof of concept would attempt to prove that light default (because Bootstrap 4's default is light) and dark deltas was possible.  No attempt was made to offer a dark main + light deltas as the proof would be evident in the PoC and this was/is not an attempt to offer a usable resource (more a learning one).
-
-The question of compiling was easy enough to resolve; while I was extracting all the color variables, I needed to test the color combination - but all the Bootstrap code wasn't written for `*-alt` variables, so I had to map them back.  Another file `_variables-map-back.scss` thus maps back the `*-alt` to non-alt.  e.g. `$body-bg-alt: #000 !default;` and then `$body-bg: $body-bg-alt;`.   Unintentionally I'd created a whole dark theme.  I called it `bootstrap-night.scss`.  (More [on that](#bootstrap-night) later.)
-
-The next phase was to look at how to use this new `*-alt` variables inside the core code... answer: I could not.
+The next phase was to look at how to use these new `*-alt` variables inside the core code... answer: I could not.
 
 
 ## The `*-alt` SCSS includes
@@ -123,7 +167,7 @@ I pondered these - and (in my mind) responded&sup1;:
 
 But [@ntkme][104] seeded an idea and this is where I excel at - taking other's seeds and growing them (thought-wise that is).
 
-And so, I set out to build 4 variants of "dark mode" support, namely:
+And so, I set out to build four variants of *(or methods to achieve)* "dark mode" support, namely:
 
 1.  **`bootstrap-night.scss`** - this one (as already mentioned) was created accidently in testing the color combination - but I also wanted to build a working prototype - this is after all a proof of concept.  So, I'd prove this works.  It also shows [@tomayac][102]'s work beeing applied to Bootstrap.
 2.  **`bootstrap-nightfall.scss`** - this one was seeded from [@ntkme][104]'s Option 3 ... but instead of doubling up on the CSS, the alternative add-on would only contain the deltas/differences.
@@ -140,6 +184,8 @@ The end result was that I now had a set of SCSS includes that when compiled offe
 ## The Variants
 
 ### Bootstrap-Night
+
+#### Method 1
 
 [`bootstrap-night`][91] is a stand-alone CSS that is essentially just a themed version of Bootstrap.  One can use it as stand-alone theme, similar to all the themes on [Bootswatch][27], but since it is in essence exactly the same as default Bootstrap (in terms of styling sans color) it can be used as an alternative light/dark combination with the original default theme.
 
@@ -177,6 +223,7 @@ The `<script>` bit adds a bit of JavaScript that will inject the default (light)
 
 ### Bootstrap-Nightfall
 
+#### Method 2
 
 The basic premise of [`bootstrap-nightfall`][92] is that it's built as a Bootstrap add-on.  (Where the principle of "[add-on](https://www.lexico.com/en/definition/add-on)" is an additional functionality requiring the original Bootstrap to be in use and then the add-on adds or modifies functionality and/or UI.)
 
@@ -208,6 +255,8 @@ There are techniques that can be used to remove the FOUC, but I personally don't
 
 
 ### Bootstrap-Nightshade
+
+#### Method 3
 
 Initially when I set out on this PoC I did not intend to create [`bootstrap-nightshade`][93].  The principle behind being that dark mode could be driven by the addition of a class in the content that would define light / dark UI and some underlying code to allow a user to toggle that preference. But then I felt I needed to address the toggle button question and this methodology seemed the best to illustrate that (more on [the toggle switch](#the-toggle-switch) later).
 
@@ -270,8 +319,9 @@ If you look at sites that use the `prefers-color-scheme` media query correctly -
 Nevertheless - I myself used a toggle switch in some of the test pages ... but that was because I wanted to toggle between the Night theme and the default Bootstrap theme to see if the colors worked.  I never intended to develop a persistence layer for it.  But in the case of NightShade I pondered persistence and how that would play out in a scenario where the user OS and the user interaction were not aligned and how to handle it as a logic experiment.  So I prototyped it and it's code is viewable in the [test-nightshade][36] example.
 
 
-
 ### Bootstrap-Dark
+
+#### Method 4
 
 [`bootstrap-dark`][94], is in my opinion the grail CSS&sup1;, the one I would use.  It can be used as a drop-in replacement for the original CSS.  No additional code, no additional add-ons, and works on all the supported browsers.
 
@@ -329,8 +379,8 @@ To understand the thinking behind this code read [@mdo][100]'s blog entry [*"CSS
 
 I mentioned all the [`*-alt` variables](#the--alt-scss-includes) earlier, but there are two more entities worth a mention:
 
-1.  The `$color-scheme-alt` variable in the `_variables-alt.scss` class sets the alternate color mode.  This can be one of `light` or `dark`.  If you're a theme builder and your theme is primarily dark, then set this to `light` and populate all the `*-alt` variables with your light color selections.
-2.  The `prefers-color-scheme` mixin.  This mixin creates the media filter based on your selection.  It’s only parameter is the color mode, which can be one of:  `no-preference`, `light` or `dark`.  If you're building custom elements or additional CSS you can use this in SCSS like this:
+1.  The `$color-scheme-alt` variable in the `_variables-alt.scss` class sets the alternate color mode.  This can be one of `light` or `dark`.  If you're a theme builder and your theme is primarily dark, then set this to "`light`" and populate all the `*-alt` variables with your light color selections.
+2.  The `prefers-color-scheme` mixin.  This mixin creates the media filter based on your selection.  It’s only parameter is the color mode, which can be one of:  "`no-preference`", "`light`" or "`dark`".  If you're building custom elements or additional CSS you can use this in SCSS like this:
 
 ```scss
 .my-mighty-widget {
@@ -344,6 +394,56 @@ I mentioned all the [`*-alt` variables](#the--alt-scss-includes) earlier, but th
 ```
 
 
+## And the winner is ...
+
+Sadly, there is no winner here (for Bootstrap 4).  Unless these concepts are brought into the core of Bootstrap there will always be the challenges of maintaining the code against current release (and I want to make it clear that I have ***no intention*** to update this body of work to keep up with Bootstrap).  The problem with [*Information overload*][38] means that this body of work will probably not be read by those who would benefit from it.
+
+Whether or not dark mode will be included in Bootstrap 4 or even 5 is unknown as I am not active in the core group – [Issue 27514][7] is marked *[V6]* so I assume the intent if not for *[V5]*. (Reading the existing work commited to the `v5-dev` branch it seems focused on removing the dependency of jQuery ... but it's early days).
+
+Nevertheless, a PoC will need an outcome:
+
+### The No’s
+
+* [Method 2](#method-2) (`bootstrap-nightfall`) will absolutely work, but seams superfluous given the benefits of [Method 1](#method-1).  It also suffers from a slight FOUC-like flash problem.
+
+* [Method 3](#method-3) (`bootstrap-nightshade`) although working is excessively complex in setting up, requiring significant effort in JavaScript to work.  It also suffers from a significant FOUC-like flash problem.
+
+### The Yes’
+
+* [Method 1](#method-1) Thomas Steiner's ([@tomayac][102]) [*"Hello Darkness"*][14] article and his approach that this method is based on is really brilliant&sup1;.  Not only does it work on all browsers *(except when the user uses an older browser with scripting disabled)*, but I also gives the website author the opportunity to use other more popular dark theme combinations.  Like [@thomaspark][101]’s [Bootswatch Flatly][12] and [Bootswatch Darkly][13]. Or original Bootstrap with [@Carl-Hugo][103]’s [bootstrap-dark][17].  One could even adapt this to default, light and dark variants of the website that look totally different – but I think that would be a serious infringement&sup1; of some UX law.
+
+* [Method 4](#method-4) is what works best.  One line replacement, no additional script and support for all browsers.  Plus some extras.
+
+# Can you use this?
+
+
+Hell yeah!  Go ahead – I made this for learning; mostly me, but also for others.  I would have released it as public domain if not for some of my references requiring share alike clauses.  So [MIT](https://github.com/vinorodrigues/bootstrap-dark/blob/master/LICENSE.md) it is.
+
+### Github
+
+If you’re a theme builder or want to use its principles in your own project you'll need to have [Git](https://help.github.com/articles/set-up-git), [Node](https://nodejs.org/) and [Gulp](https://gulpjs.com/) installed.
+
+1. Fork or download the repository: `git clone https://github.com/vinorodrigues/bootstrap-dark.git`
+2. Install Node dependencies: `npm install`
+3. Modify `_variables.scss ` and `_variables-alt.scss` in the `scss` sub-folder.
+4. Run `gulp dark` to build your theme.
+5. The compiled code will be in the `dist` folder.
+
+### CDN
+
+You can also hotlink the theme via CDN with [jsdelivr.com](https://www.jsdelivr.com).
+
+You can access the theme CSS file from the GitHub release:
+
+* [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.min.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.min.css)
+* [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.css)
+* [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css)
+* [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css)
+* ... and all [the others](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark/), but I don’t recommend them.
+
+### Feedback
+
+Drop me a "Issue" on the [GitHub Issues](https://github.com/vinorodrigues/bootstrap-dark/issues) page.
 
 
 ---
@@ -388,7 +488,7 @@ I mentioned all the [`*-alt` variables](#the--alt-scss-includes) earlier, but th
 [35]: https://stackoverflow.com/users/1575941/vino
 [36]: https://vinorodrigues.github.io/bootstrap-dark/test-nightshade.html
 [37]: https://markdotto.com/2018/11/05/css-dark-mode/
-[xx]: https://en.wikipedia.org/wiki/Information_overload
+[38]: https://en.wikipedia.org/wiki/Information_overload
 
 [90]: https://github.com/vinorodrigues/bootstrap-dark
 [91]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-night.scss

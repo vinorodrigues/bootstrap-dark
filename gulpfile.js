@@ -17,6 +17,7 @@ var paths = {
 		'./scss/**/*.scss',
 		'./scss/**/!_*.scss'
 		],
+  sassSrc2: './scss/bootstrap-dark.scss',
 	sassWatch: './scss/**/*.scss',
 	htmlWatch: '**/*.+(html|htm|md|js|less)',
 	sassIncludes: [ /* 'node_modules/bootstrap/scss' */ ],
@@ -27,9 +28,9 @@ var paths = {
 };
 
 
-function sassTask(name, min = false) {
+function sassTask(name, src, min = false) {
 	gulp.task( name, function(done) {
-		return gulp.src( paths.sassSrc )
+		return gulp.src( src )
 			.on( 'error', console.error.bind( console ))
 			.pipe( maps.init( { largeFile: true } ) )
 			.pipe( maps.identityMap() )
@@ -53,9 +54,13 @@ function sassTask(name, min = false) {
 	});
 }
 
-sassTask( 'sass:css', false );
-sassTask( 'sass:min', true );
+sassTask( 'sass:css', paths.sassSrc, false );
+sassTask( 'sass:min', paths.sassSrc, true );
 gulp.task( 'sass', gulp.parallel( 'sass:css' , 'sass:min' ) );
+
+sassTask( 'dark:css', paths.sassSrc2, false );
+sassTask( 'dark:min', paths.sassSrc2, true );
+gulp.task( 'dark', gulp.parallel( 'dark:css' , 'dark:min' ) );
 
 
 /* gulp.task('images', function(done) {
