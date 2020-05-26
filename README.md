@@ -12,6 +12,7 @@ Jump to:
     -  [Bootstrap-Nightfall](#bootstrap-nightfall)
     -  [Bootstrap-Nightshade](#bootstrap-nightshade)
     -  [Bootstrap-Dark](#bootstrap-dark)
+*  [Where's the proof?](#wheres-the-proof)
 *  [And the winner is ...](#and-the-winner-is)
 
 ## About me & The history that led here
@@ -87,7 +88,7 @@ In essence the CSS code can be split up into four sections:
 }
 ```
 
-The existence of `no-preference` is odd&sup1; to me.  Theoretically this one hands the preference over to the website author, allowing them to adopt their own preference.  (Also, theoretically, a website could produce 4 different UI – but logically … why?  I also could not get any of the 6 browsers I use to trigger the `no-preference` query.  Also - doesn't the website author have control anyway?)
+The existence of `no-preference` is odd&sup1; to me.  Theoretically this one hands the preference over to the website author, allowing them to adopt their own preference.  (Also, theoretically, a website could produce 4 different UI – but logically ... why?  I also could not get any of the 6 browsers I use to trigger the `no-preference` query.  Also - doesn't the website author have control anyway?)
 
 The logical choice, thus, is binary: either `light` or `dark`. Naturally this would be brand based or some other definition, whatever, the point is that the website author will have a default position of their own, also binary `light` or `dark`.
 
@@ -380,7 +381,7 @@ To understand the thinking behind this code read [@mdo][100]'s blog entry [*"CSS
 I mentioned all the [`*-alt` variables](#the--alt-scss-includes) earlier, but there are two more entities worth a mention:
 
 1.  The `$color-scheme-alt` variable in the `_variables-alt.scss` class sets the alternate color mode.  This can be one of `light` or `dark`.  If you're a theme builder and your theme is primarily dark, then set this to "`light`" and populate all the `*-alt` variables with your light color selections.
-2.  The `prefers-color-scheme` mixin.  This mixin creates the media filter based on your selection.  It’s only parameter is the color mode, which can be one of:  "`no-preference`", "`light`" or "`dark`".  If you're building custom elements or additional CSS you can use this in SCSS like this:
+2.  The `prefers-color-scheme` mixin.  This mixin creates the media filter based on your selection.  It's only parameter is the color mode, which can be one of:  "`no-preference`", "`light`" or "`dark`".  If you're building custom elements or additional CSS you can use this in SCSS like this:
 
 ```scss
 .my-mighty-widget {
@@ -394,6 +395,12 @@ I mentioned all the [`*-alt` variables](#the--alt-scss-includes) earlier, but th
 ```
 
 
+## Where's the proof?
+
+
+On the Github Pages page: [https://vinorodrigues.github.io/bootstrap-dark/](https://vinorodrigues.github.io/bootstrap-dark/)
+
+
 ## And the winner is ...
 
 Sadly, there is no winner here (for Bootstrap 4).  Unless these concepts are brought into the core of Bootstrap there will always be the challenges of maintaining the code against current release (and I want to make it clear that I have ***no intention*** to update this body of work to keep up with Bootstrap).  The problem with [*Information overload*][38] means that this body of work will probably not be read by those who would benefit from it.
@@ -402,26 +409,26 @@ Whether or not dark mode will be included in Bootstrap 4 or even 5 is unknown as
 
 Nevertheless, a PoC will need an outcome:
 
-### The No’s
+### The No's
 
 * [Method 2](#method-2) (`bootstrap-nightfall`) will absolutely work, but seams superfluous given the benefits of [Method 1](#method-1).  It also suffers from a slight FOUC-like flash problem.
 
 * [Method 3](#method-3) (`bootstrap-nightshade`) although working is excessively complex in setting up, requiring significant effort in JavaScript to work.  It also suffers from a significant FOUC-like flash problem.
 
-### The Yes’
+### The Yes'
 
-* [Method 1](#method-1) Thomas Steiner's ([@tomayac][102]) [*"Hello Darkness"*][14] article and his approach that this method is based on is really brilliant&sup1;.  Not only does it work on all browsers *(except when the user uses an older browser with scripting disabled)*, but I also gives the website author the opportunity to use other more popular dark theme combinations.  Like [@thomaspark][101]’s [Bootswatch Flatly][12] and [Bootswatch Darkly][13]. Or original Bootstrap with [@Carl-Hugo][103]’s [bootstrap-dark][17].  One could even adapt this to default, light and dark variants of the website that look totally different – but I think that would be a serious infringement&sup1; of some UX law.
+* [Method 1](#method-1) Thomas Steiner's ([@tomayac][102]) [*"Hello Darkness"*][14] article and his approach that this method is based on is really brilliant&sup1;.  Not only does it work on all browsers *(except when the user uses an older browser with scripting disabled)*, but I also gives the website author the opportunity to use other more popular dark theme combinations.  Like [@thomaspark][101]'s [Bootswatch Flatly][12] and [Bootswatch Darkly][13]. Or original Bootstrap with [@Carl-Hugo][103]'s [bootstrap-dark][17].  One could even adapt this to default, light and dark variants of the website that look totally different – but I think that would be a serious infringement&sup1; of some UX law.
 
 * [Method 4](#method-4) is what works best.  One line replacement, no additional script and support for all browsers.  Plus some extras.
 
 # Can you use this?
 
 
-Hell yeah!  Go ahead – I made this for learning; mostly me, but also for others.  I would have released it as public domain if not for some of my references requiring share alike clauses.  So [MIT](https://github.com/vinorodrigues/bootstrap-dark/blob/master/LICENSE.md) it is.
+Hell yeah!  Go ahead – I made this for learning; mostly me, but also for others.  I would have released it as public domain if not for some of my references requiring share alike clauses.  So [MIT][40] it is.
 
 ### Github
 
-If you’re a theme builder or want to use its principles in your own project you'll need to have [Git](https://help.github.com/articles/set-up-git), [Node](https://nodejs.org/) and [Gulp](https://gulpjs.com/) installed.
+If you're a theme builder or want to use its principles in your own project you'll need to have [Git][41], [Node][42] and [Gulp][43] installed.
 
 1. Fork or download the repository: `git clone https://github.com/vinorodrigues/bootstrap-dark.git`
 2. Install Node dependencies: `npm install`
@@ -431,7 +438,7 @@ If you’re a theme builder or want to use its principles in your own project yo
 
 ### CDN
 
-You can also hotlink the theme via CDN with [jsdelivr.com](https://www.jsdelivr.com).
+You can also hotlink the theme via CDN with [jsdelivr.com][39].
 
 You can access the theme CSS file from the GitHub release:
 
@@ -439,11 +446,11 @@ You can access the theme CSS file from the GitHub release:
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.css)
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css)
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css)
-* ... and all [the others](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark/), but I don’t recommend them.
+* ... and all [the others](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark/), but I don't recommend them.
 
 ### Feedback
 
-Drop me a "Issue" on the [GitHub Issues](https://github.com/vinorodrigues/bootstrap-dark/issues) page.
+Drop me a "Issue" on the [GitHub Issues][44] page.
 
 
 ---
@@ -489,6 +496,12 @@ Drop me a "Issue" on the [GitHub Issues](https://github.com/vinorodrigues/bootst
 [36]: https://vinorodrigues.github.io/bootstrap-dark/test-nightshade.html
 [37]: https://markdotto.com/2018/11/05/css-dark-mode/
 [38]: https://en.wikipedia.org/wiki/Information_overload
+[39]: https://www.jsdelivr.com
+[40]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/LICENSE.md
+[41]: https://help.github.com/articles/set-up-git
+[42]: https://nodejs.org/
+[43]: https://gulpjs.com/
+[44]: https://github.com/vinorodrigues/bootstrap-dark/issues
 
 [90]: https://github.com/vinorodrigues/bootstrap-dark
 [91]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-night.scss
