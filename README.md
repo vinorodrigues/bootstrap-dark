@@ -3,17 +3,19 @@ A proof of concept / Longform ~~whitepaper~~ {darkpaper}
 
 Jump to:
 
-*  [About me & The history that led here](#about-me--the-history-that-led-here)
-*  [The Philosophy of Dark Mode](#the-general-philosophysup1-of-dark-mode)
-*  [The Philosophy of this Proof of Concept](#the-philosophy-of-this-proof-of-concept)
-*  [The `*-alt` SCSS includes](#the--alt-scss-includes)
-*  [The Variants](#the-variants)
-    -  [Bootstrap-Night](#bootstrap-night)
-    -  [Bootstrap-Nightfall](#bootstrap-nightfall)
-    -  [Bootstrap-Nightshade](#bootstrap-nightshade)
-    -  [Bootstrap-Dark](#bootstrap-dark)
-*  [Where's the proof?](#wheres-the-proof)
-*  [And the winner is ...](#and-the-winner-is)
+* [About me & The history that led here](#about-me--the-history-that-led-here)
+* [The Philosophy of Dark Mode](#the-general-philosophysup1-of-dark-mode)
+* [The Philosophy of this Proof of Concept](#the-philosophy-of-this-proof-of-concept)
+* [The `*-alt` SCSS includes](#the--alt-scss-includes)
+* [The Variants](#the-variants)
+    - [Bootstrap-Night](#bootstrap-night)
+    - [Bootstrap-Nightfall](#bootstrap-nightfall)
+    - [Bootstrap-Nightshade](#bootstrap-nightshade)
+    - [Bootstrap-Dark](#bootstrap-dark)
+* [Where's the proof?](#wheres-the-proof)
+* [And the winner is ...](#and-the-winner-is-)
+* [Can you use this?](#can-you-use-this)
+
 
 ## About me & The history that led here
 
@@ -421,7 +423,7 @@ Nevertheless, a PoC will need an outcome:
 
 * [Method 4](#method-4) is what works best.  One line replacement, no additional script and support for all browsers.  Plus some extras.
 
-# Can you use this?
+## Can you use this?
 
 
 Hell yeah!  Go ahead – I made this for learning; mostly me, but also for others.  I would have released it as public domain if not for some of my references requiring share alike clauses.  So [MIT][40] it is.
@@ -437,6 +439,8 @@ If you're a theme builder or want to use its principles in your own project you'
 5. The compiled code will be in the `dist` folder.
 
 ### CDN
+
+[![](https://data.jsdelivr.com/v1/package/gh/vinorodrigues/bootstrap-dark/badge?style=rounded)](https://www.jsdelivr.com/package/gh/vinorodrigues/bootstrap-dark)
 
 You can also hotlink the theme via CDN with [jsdelivr.com][39].
 
