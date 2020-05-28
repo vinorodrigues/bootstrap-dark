@@ -7,7 +7,7 @@ const prfx = require( 'gulp-autoprefixer' );
 const tidy = require( 'gulp-prettier' );
 const mini = require( 'gulp-clean-css' );
 const renm = require( 'gulp-rename' );
-/* const imgs = require( 'gulp-imagemin' ); */
+const imgs = require( 'gulp-imagemin' );
 const _log = require( 'fancy-log' );
 const __if = require( 'gulp-if' );
 const sync = require( 'browser-sync' ).create();
@@ -19,12 +19,13 @@ var paths = {
 		],
   sassSrc2: './scss/bootstrap-dark.scss',
 	sassWatch: './scss/**/*.scss',
-	htmlWatch: '**/*.+(html|htm|md|js|less)',
+  htmlWatch: '**/*.+(html|htm|md|js|less)',
 	sassIncludes: [ /* 'node_modules/bootstrap/scss' */ ],
 	cssOut: './dist',
   htDocs: './',
-  /* imgSrc: './img/src/*.+(png|jpg|gif|svg)',
-  imgOut: './img/', */
+  imgSrc: './img/src/*.+(png|jpg|gif|svg)',
+  imgOut: './img/',
+  imgWatch: './img/*.+(png|jpg|gif|svg)',
 };
 
 
@@ -63,7 +64,7 @@ sassTask( 'dark:min', paths.sassSrc2, true );
 gulp.task( 'dark', gulp.parallel( 'dark:css' , 'dark:min' ) );
 
 
-/* gulp.task('images', function(done) {
+gulp.task('images', function(done) {
   return gulp.src( paths.imgSrc )
     .on( 'error', console.error.bind( console ))
     .pipe( imgs( [
@@ -94,12 +95,12 @@ gulp.task( 'dark', gulp.parallel( 'dark:css' , 'dark:min' ) );
           // keep scripts
           {removeScriptElement: false},
           // keep id's
-          {cleanupIDs: false}
+          {cleanupIDs: false}  // NB!!!
           ]
         })
       ]) )
     .pipe( gulp.dest( paths.imgOut ) );
-}); */
+});
 
 
 gulp.task('server', function(done) {
@@ -110,16 +111,19 @@ gulp.task('server', function(done) {
 		server: { baseDir: paths.htDocs }
 	});
 	gulp.watch( paths.sassWatch, gulp.series( 'sass' ) );
-	gulp.watch( paths.htmlWatch ).on( 'change', sync.reload );
+  gulp.watch( paths.imgSrc, gulp.series( 'images' ) );
+  gulp.watch( paths.htmlWatch ).on( 'change', sync.reload );
+  gulp.watch( paths.imgWatch ).on( 'change', sync.reload );
 	return done();
 });
 
 
 gulp.task( 'watch', function(done) {
 	_log( 'Watching ... \x1b[94m(Press Control-C to end.)\x1b[0m' );
-	gulp.watch( paths.sassWatch, gulp.series( 'sass' ) );
+  gulp.watch( paths.sassWatch, gulp.series( 'sass' ) );
+  gulp.watch( paths.imgSrc, gulp.series( 'images' ) );
 	return done();
 } );
 
 
-gulp.task( 'default', gulp.series( 'sass' /* , 'images' */ ) );
+gulp.task( 'default', gulp.series( 'sass' , 'images' ) );

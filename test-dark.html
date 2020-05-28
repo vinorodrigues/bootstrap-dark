@@ -6,6 +6,7 @@
 
   <!-- The page supports both dark and light color schemes, and the page author prefers dark. -->
   <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="./dist/bootstrap-dark.css">
@@ -53,22 +54,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="./">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Tests
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
-                <a class="dropdown-item" href="test-nightfall.html">bootstrap-nightfall</a>
-                <a class="dropdown-item" href="test-nightshade.html">bootstrap-nightshade</a>
-                <a class="dropdown-item active" href="test-dark.html">bootstrap-dark</a>
-              </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="https://github.com/vinorodrigues/bootstrap-dark">GitHub</a></li>
-          </ul>
+          <ul class="navbar-nav mr-auto" id="nav-links"></ul>
         </div>
       </div>
     </nav>
@@ -95,6 +81,7 @@
 <div class="code"><pre><code class="language-html language-js">&lt;!-- Inform the browser that this page supports both dark
   and light color schemes, and the page author prefers light. --&gt;
 &lt;meta name="color-scheme" content="light dark"&gt;
+&lt;meta name="supported-color-schemes" content="light dark"&gt;
 &lt;!-- Bootstrap CSS --&gt;
 &lt;link rel="stylesheet" href="bootstrap-dark.css"&gt;
 </code></pre></div>
@@ -162,6 +149,9 @@
   <!-- Clipboard.js for copy code -->
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
+  <!-- js.cookie for ... cookies -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script>
+
   <script>
     $(document).ready(function(){
       // only when jQuery is ready
@@ -224,7 +214,30 @@
       // and every time it changes
       if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( updateDarkColorScheme );
 
-      // ----- Copyright ------------------------
+      // dark mode cookie to send to server
+      // ----------------------------------------
+      var $prefers_color_scheme = Cookies.get("prefers_color_scheme");
+      function get_prefers_color_scheme() {
+        return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      function update_prefers_color_scheme() {
+        Cookies.set("prefers_color_scheme", get_prefers_color_scheme());
+      }
+      // read & compare cookie `color-scheme`
+      if ((typeof $prefers_color_scheme === "undefined") || (get_prefers_color_scheme() != $prefers_color_scheme))
+        update_prefers_color_scheme();
+      // detect changes and change the cookie
+      if (window.matchMedia)
+        window.matchMedia("(prefers-color-scheme: dark)").addListener( update_prefers_color_scheme );
+
+      // ----- Nav & Copyright ------------------
+      $.ajax( {
+        url: './navbar.htm', type: 'get',
+        success: function(content) {
+          $("#nav-links").html( content );
+          $("#nav-tests,#nav-nightfall").addClass("active");
+        }
+      } );
       $.ajax( {
         url: './copyright.htm', type: 'get',
         success: function(content) {

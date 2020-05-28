@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+
   <link rel="stylesheet" href="./dist/bootstrap-dark.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css">
@@ -21,22 +24,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><a class="nav-link" href="./">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Tests
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
-                <a class="dropdown-item" href="test-nightfall.html">bootstrap-nightfall</a>
-                <a class="dropdown-item" href="test-nightshade.html">bootstrap-nightshade</a>
-                <a class="dropdown-item" href="test-dark.html">bootstrap-dark</a>
-              </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="https://github.com/vinorodrigues/bootstrap-dark">GitHub</a></li>
-          </ul>
+          <ul class="navbar-nav mr-auto" id="nav-links"></ul>
         </div>
       </div>
     </nav>
@@ -104,6 +92,14 @@
         </ul>
         <hr>
 
+        <!--
+        <h2>Learn some more..</h2>
+        <ul>
+          <li><a href="test-images.html">..about dark mode images</a></li>
+        </ul>
+        <hr>
+        -->
+
       </div></div>
     </div>
   </main>
@@ -154,7 +150,14 @@
       injectBrowserSupportsInfo();  // Update on first load.
       if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( injectBrowserSupportsInfo );  // and every time it changes
 
-      // ----- Copyright ------------------------
+      // ----- Nav & Copyright ------------------
+      $.ajax( {
+        url: './navbar.htm', type: 'get',
+        success: function(content) {
+          $("#nav-links").html( content );
+          $("#nav-home").addClass("active");
+        }
+      } );
       $.ajax( {
         url: './copyright.htm', type: 'get',
         success: function(content) {

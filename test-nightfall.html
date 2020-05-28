@@ -6,6 +6,7 @@
 
   <!-- The page supports both dark and light color schemes, and the page author prefers dark. -->
   <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
 
   <!-- Bootstrap CSS -->
   <link id="css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -45,22 +46,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="./">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="./readme.html">README.md</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Tests
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="test-night.html">bootstrap-night</a>
-                <a class="dropdown-item active" href="test-nightfall.html">bootstrap-nightfall</a>
-                <a class="dropdown-item" href="test-nightshade.html">bootstrap-nightshade</a>
-                <a class="dropdown-item" href="test-dark.html">bootstrap-dark</a>
-              </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="https://github.com/vinorodrigues/bootstrap-dark">GitHub</a></li>
-          </ul>
+          <ul class="navbar-nav mr-auto" id="nav-links"></ul>
           <form class="form-inline">
             <div class="custom-control custom-switch" title="Toggle Dark Mode" data-toggle="tooltip" data-placement="left">
               <input type="checkbox" class="custom-control-input" id="css-toggle-btn">
@@ -97,6 +83,7 @@
 &lt;!-- Inform modern browsers that this page supports both dark and light color schemes,
   and the page author prefers light. --&gt;
 &lt;meta name="color-scheme" content="light dark"&gt;
+&lt;meta name="supported-color-schemes" content="light dark"&gt;
 &lt;!-- Load the primary CSS first ... --&gt;
 &lt;link <span class="collapse more-code" id="code-css-light">id="css-light" </span>rel="stylesheet" href="bootstrap.css"&gt;
 &lt;!-- ... and then the alternate CSS first as a snap-on for dark color scheme preference --&gt;
@@ -322,7 +309,14 @@
       })
       $("#css-toggle-btn").parent().attr({"data-original-title": $("#css-toggle-btn").parent().attr("data-original-title") + "<small><br>or press [D] hot-key</small>"});
 
-      // ----- Copyright ------------------------
+      // ----- Nav & Copyright ------------------
+      $.ajax( {
+        url: './navbar.htm', type: 'get',
+        success: function(content) {
+          $("#nav-links").html( content );
+          $("#nav-tests,#nav-nightfall").addClass("active");
+        }
+      } );
       $.ajax( {
         url: './copyright.htm', type: 'get',
         success: function(content) {
