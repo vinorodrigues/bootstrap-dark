@@ -14378,18 +14378,14 @@ html.dark .text-white-50 {
   color: rgba(250, 250, 250, 0.5) !important;
 }
 
-html.dark img:not([src*=".svg"]) {
-  opacity: 0.75;
-  -webkit-transition: opacity 0.5s ease-in-out;
-  transition: opacity 0.5s ease-in-out;
+html.dark ::-moz-selection {
+  color: #cfcfcf;
+  background: rgba(23, 162, 184, 0.5);
 }
 
-html.dark img:not([src*=".svg"]):hover {
-  opacity: 1;
-}
-
-html.dark picture img {
-  opacity: 1;
+html.dark ::selection {
+  color: #cfcfcf;
+  background: rgba(23, 162, 184, 0.5);
 }
 
 /*# sourceMappingURL=bootstrap-nightshade.css.map */

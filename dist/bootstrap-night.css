@@ -11771,18 +11771,14 @@ a.text-dark:focus {
   }
 }
 
-img:not([src*=".svg"]) {
-  opacity: 0.75;
-  -webkit-transition: opacity 0.5s ease-in-out;
-  transition: opacity 0.5s ease-in-out;
+::-moz-selection {
+  color: #cfcfcf;
+  background: rgba(23, 162, 184, 0.5);
 }
 
-img:not([src*=".svg"]):hover {
-  opacity: 1;
-}
-
-picture img {
-  opacity: 1;
+::selection {
+  color: #cfcfcf;
+  background: rgba(23, 162, 184, 0.5);
 }
 
 /*# sourceMappingURL=bootstrap-night.css.map */

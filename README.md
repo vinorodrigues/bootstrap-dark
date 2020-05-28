@@ -201,6 +201,7 @@ To do this use the following code:
 <!-- Inform modern browsers that this page supports both dark and light color schemes,
   and the page author prefers light. -->
 <meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
 <script>
   // If `prefers-color-scheme` is not supported, but @media query is, fall back to light mode.
   // i.e. In this case, inject the `light` CSS before the others, with
@@ -219,7 +220,7 @@ To do this use the following code:
 <link rel="stylesheet" href="bootstrap.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
 ```
 
-The first `<meta name="color-scheme" ...>` assists the browser in rendering the page background with the desired color scheme immediately. Thomas Steiner ([@tomayac][102]) discusses this in his article [*"Improved dark mode default styling with the color-scheme CSS property and the corresponding meta tag"*][28].
+The first `<meta name= ...>` assists the browser in rendering the page background with the desired color scheme immediately. Thomas Steiner ([@tomayac][102]) discusses this in his article [*"Improved dark mode default styling with the color-scheme CSS property and the corresponding meta tag"*][28].
 
 The `<script>` bit adds a bit of JavaScript that will inject the default (light) CSS into the html header with no media filter before the other two stylesheet declarations.  This will force the browser to load the default CSS at the highest priority.  Read Thomas Steiner's ([@tomayac][102]) [*"Hello Darkness"*][14] article on that.
 
@@ -246,6 +247,7 @@ But, knowing what we do about the `media="(prefers-color-scheme: dark)"` filter 
 <!-- Inform modern browsers that this page supports both dark and light color schemes,
   and the page author prefers light. -->
 <meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
 <!-- Load the primary CSS first ... -->
 <link rel="stylesheet" href="bootstrap.css">
 <!-- ... and then the alternate CSS first as a snap-on for dark color scheme preference -->
@@ -336,6 +338,7 @@ To use it, simply replace the Bootstrap CSS stylesheet:
 <!-- Inform the browser that this page supports both dark and light color schemes,
   and the page author prefers light. -->
 <meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="bootstrap-dark.css">
 ```
@@ -362,21 +365,9 @@ You can also use these to display when not on certain color-scheme modes, like t
 <span class="d-no-preference-none d-dark-none d-light-none">Your browser is old!</span>
 ```
 
-##### Images
+##### Selection
 
-This variant also contains an additional import file `_dark.scss` that adds the following:
-
-```scss
-img {
-  opacity: .75;
-  transition: opacity .5s ease-in-out;
-  &:hover {
-    opacity: 1;
-  }
-}
-```
-
-To understand the thinking behind this code read [@mdo][100]'s blog entry [*"CSS dark mode"*][37].
+The `::selection` CSS pseudo-element applies styles to the part of a document that has been highlighted by the user (such as clicking and dragging the mouse across text).  This variant also contains an additional import file `_dark.scss` that adds styling for this pseudo-element.
 
 #### SCSS mixin's and variables
 

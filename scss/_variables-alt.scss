@@ -578,4 +578,8 @@ $kbd-bg-alt:                            $gray-800-alt !default;
 $pre-color-alt:                         $gray-100-alt !default;
 
 
+// Selection
 // ---------------------------------------
+
+$selection-color:                       $gray-200-alt;
+$selection-bg:                          rgba($cyan-alt, 0.5);

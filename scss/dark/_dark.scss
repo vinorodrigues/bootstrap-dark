@@ -1,22 +1,29 @@
 
-$image-opacity-alt: .75 !default;
+/// from https://markdotto.com/2018/11/05/css-dark-mode/
+// $image-opacity-alt: .75 !default;
 
-img:not([src*=".svg"]) {
-	opacity: $image-opacity-alt;
-  transition: opacity .5s ease-in-out;
-	&:hover {
-		opacity: 1;
-	}
-}
+// img:not([src*=".svg"]) {
+// 	opacity: $image-opacity-alt;
+//   transition: opacity .5s ease-in-out;
+// 	&:hover {
+// 		opacity: 1;
+// 	}
+// }
 
-picture img {
-  opacity: 1;  // except for responsive images
-}
+/// except responsive images
+// picture img {
+//   opacity: 1;  // except for responsive images
+// }
 
-// from https://moduscreate.com/blog/dark-mode-images/
+/// from https://moduscreate.com/blog/dark-mode-images/
 // img:not([src*=".svg"]) {
 //   filter: grayscale(50%);
 //   &:hover {
 //     filter: none;
 //   }
 // }
+
+body::selection {
+  color: $selection-color;
+  background: $selection-bg;
+}
