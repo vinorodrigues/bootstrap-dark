@@ -11771,12 +11771,12 @@ a.text-dark:focus {
   }
 }
 
-::-moz-selection {
+body::-moz-selection {
   color: #cfcfcf;
   background: rgba(23, 162, 184, 0.5);
 }
 
-::selection {
+body::selection {
   color: #cfcfcf;
   background: rgba(23, 162, 184, 0.5);
 }

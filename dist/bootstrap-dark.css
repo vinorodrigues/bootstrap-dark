@@ -13932,11 +13932,11 @@ a.text-dark:focus {
   .text-white-50 {
     color: rgba(250, 250, 250, 0.5) !important;
   }
-  ::-moz-selection {
+  body::-moz-selection {
     color: #cfcfcf;
     background: rgba(23, 162, 184, 0.5);
   }
-  ::selection {
+  body::selection {
     color: #cfcfcf;
     background: rgba(23, 162, 184, 0.5);
   }

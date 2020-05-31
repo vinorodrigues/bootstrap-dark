@@ -14378,12 +14378,12 @@ html.dark .text-white-50 {
   color: rgba(250, 250, 250, 0.5) !important;
 }
 
-html.dark ::-moz-selection {
+html.dark body::-moz-selection {
   color: #cfcfcf;
   background: rgba(23, 162, 184, 0.5);
 }
 
-html.dark ::selection {
+html.dark body::selection {
   color: #cfcfcf;
   background: rgba(23, 162, 184, 0.5);
 }
