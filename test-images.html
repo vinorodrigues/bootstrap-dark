@@ -62,7 +62,6 @@
 
         <p class="text-center">
           <img class="special img-thumbnail" src="./img/a-bug.jpg" width="320" height="240">
-
           <small><br>Image:
             "<a href="https://vlad.studio/wallpaper/bug">A Bug</a>"
             &copy; Vlad Gerasimov - <a href="https://vlad.studio/">http://vlad.studio</a></small>
@@ -70,16 +69,12 @@
 
         <p>
           <div class="card-deck">
-            <style>
-              @media (prefers-color-scheme: light) {
-                .op-img-eg.card { background-color: #111; border-color: #dfdfdf; }
-                .op-img-eg .card-body { background-color: #fff; }
-              }
-            </style>
             <div class="card mx-auto op-img-eg" style="max-width:320px">
-              <img src="./img/a-bug.jpg" width="100%" height="240" style="opacity:0.75 !important; filter: none">
+              <div class="display-block" style="background:#000">
+                <img src="./img/a-bug.jpg" width="100%" height="240" style="opacity:0.75 !important; filter: none">
+              </div>
               <div class="card-body">
-                <p class="card-text text-center"><code>opacity: 0.75;</code></p>
+                <p class="card-text text-center"><code>opacity: 0.75;</code><small><br>(On black background)</small></p>
               </div>
             </div>
             <div class="card mx-auto" style="max-width:320px">
@@ -123,7 +118,11 @@
                 <picture>
                   <source srcset="./img/when-the-day-comes.jpg" media="(prefers-color-scheme: dark)">
                   <img src="./img/when-the-night-comes.jpg" class="img-fluid" style="width:100%">
-                </picture>
+                </picture><!--
+                <small><br>Image:
+                  <span class="d-dark-none">"<a href="https://vlad.studio/wallpaper/when_the_night_comes">When The Night Comes</a>"</span>
+                  <span class="d-none d-dark-inline">"<a href="https://vlad.studio/wallpaper/when_the_day_comes">When The Day Comes</a>"</span>
+                  &copy; Vlad Gerasimov - <a href="https://vlad.studio/">http://vlad.studio</a></small> -->
               </div>
             </div>
           </div>
