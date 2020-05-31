@@ -15,15 +15,18 @@ const sync = require( 'browser-sync' ).create();
 var paths = {
 	sassSrc: [
 		'./scss/**/*.scss',
-		'./scss/**/!_*.scss'
+		'!./scss/**/_*.scss'
 		],
   sassSrc2: './scss/bootstrap-dark.scss',
 	sassWatch: './scss/**/*.scss',
   htmlWatch: '**/*.+(html|htm|md|js|less)',
-	sassIncludes: [ /* 'node_modules/bootstrap/scss' */ ],
+	sassIncludes: [ /* 'node_modules/bootstrap/scss' */ ],  // not used
 	cssOut: './dist',
   htDocs: './',
-  imgSrc: './img/src/*.+(png|jpg|gif|svg)',
+  imgSrc: [
+    './img/src/*.+(png|jpg|gif|svg)',
+    '!./img/src/_*.+(png|jpg|gif|svg)',
+    ],
   imgOut: './img/',
   imgWatch: './img/*.+(png|jpg|gif|svg)',
 };
@@ -99,7 +102,8 @@ gulp.task('images', function(done) {
           ]
         })
       ]) )
-    .pipe( gulp.dest( paths.imgOut ) );
+    .pipe( gulp.dest( paths.imgOut ) )
+    .pipe( sync.stream() );
 });
 
 

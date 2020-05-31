@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="shortcut icon" href="img/favicon.ico">
+
   <!-- The page supports both dark and light color schemes, and the page author prefers dark. -->
   <meta name="color-scheme" content="light dark">
   <meta name="supported-color-schemes" content="light dark">
@@ -24,11 +28,8 @@
   <link id="prism-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
 
   <style>
-    #content p {
-      text-align: justify;
-    }
-    #content li {
-      text-align: left;
+    #content table {
+      width: unset;
     }
     #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
       padding-bottom: 1rem;
@@ -52,6 +53,20 @@
     }
     .btn-clipboard:hover,
     .btn-clipboard:active {
+      opacity: 1;
+    }
+    .badge {
+      font-style: normal;
+    }
+    blockquote {
+      padding-left: 1rem;
+      border-left: 5px solid rgba(128, 128, 128, .5);
+      font-style: oblique;
+    }
+    footer {
+      opacity: .33;
+    }
+    footer:hover {
       opacity: 1;
     }
   </style>
@@ -89,7 +104,7 @@
     </div>
   </main>
 
-  <footer id="copyright" class="text-center" style="opacity:.5">
+  <footer id="copyright" class="text-center">
     <small class="text-muted">&copy; 2020</small>
   </footer>
 
@@ -142,6 +157,11 @@
           $anchors.add();
           $("table").addClass('table table-hover table-striped');
           do_the_the_magic_on_the_code();
+          if ($hash = window.location.hash) {  // single =, not ==
+            $('html, body').animate({
+              scrollTop: $($hash).offset().top
+              }, 0);
+          }
         },
         error: function(request, status, error) {
           $("#content").html( "Error: "+request.responseText );
