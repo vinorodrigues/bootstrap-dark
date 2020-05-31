@@ -29,6 +29,8 @@ var paths = {
     ],
   imgOut: './img/',
   imgWatch: './img/*.+(png|jpg|gif|svg)',
+  copySrc: './img/src/*.ico',
+  copyOut: './img/',
 };
 
 
@@ -107,6 +109,13 @@ gulp.task('images', function(done) {
 });
 
 
+gulp.task( 'copy', function(done) {
+  return gulp.src( paths.copySrc )
+    .on( 'error', console.error.bind( console ))
+    .pipe( gulp.dest( paths.copyOut ) );
+});
+
+
 gulp.task('server', function(done) {
 	_log( 'Serving ... \x1b[91m(Press Control-C to end.)\x1b[0m' );
 	sync.init( {
@@ -130,4 +139,4 @@ gulp.task( 'watch', function(done) {
 } );
 
 
-gulp.task( 'default', gulp.series( 'sass' , 'images' ) );
+gulp.task( 'default', gulp.series( 'sass' , 'images', 'copy' ) );
