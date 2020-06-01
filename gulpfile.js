@@ -54,7 +54,11 @@ function sassTask(name, src, min = false) {
 				} ) ) )
 			.pipe( __if( min, mini( { compatibility: 'ie9' } ) ) )
 			.pipe( __if( min, renm( { suffix: '.min' } ) ) )
-	 		.pipe( maps.write( '.', { includeContent: false } ) )
+      .pipe( maps.mapSources( function(msrc, file) {
+        msrc = msrc.replace('node_modules/bootstrap/', '');  // fake map to core files
+        return msrc;
+        } ) )
+	 		.pipe( maps.write( '.', { includeContent: true } ) )
 			.pipe( gulp.dest( paths.cssOut ) )
 			.pipe( sync.stream( { match: '**/*.css' } ) );
 	});
@@ -116,7 +120,7 @@ gulp.task( 'copy', function(done) {
 });
 
 
-gulp.task('server', function(done) {
+function serveHttp(done) {
 	_log( 'Serving ... \x1b[91m(Press Control-C to end.)\x1b[0m' );
 	sync.init( {
 		port: 80,
@@ -128,7 +132,9 @@ gulp.task('server', function(done) {
   gulp.watch( paths.htmlWatch ).on( 'change', sync.reload );
   gulp.watch( paths.imgWatch ).on( 'change', sync.reload );
 	return done();
-});
+}
+gulp.task('server', serveHttp);
+gulp.task('start', serveHttp);
 
 
 gulp.task( 'watch', function(done) {
