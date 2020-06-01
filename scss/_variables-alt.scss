@@ -127,9 +127,9 @@ $emphasized-link-hover-darken-percentage-alt: 15% !default;
 
 $border-color-alt:                $gray-700 !default;
 
-$box-shadow-sm-alt:               0 .125rem .25rem rgba($white-alt, .075) !default;
-$box-shadow-alt:                  0 .5rem 1rem rgba($white-alt, .15) !default;
-$box-shadow-lg-alt:               0 1rem 3rem rgba($white-alt, .175) !default;
+$box-shadow-sm-alt:               0 .125rem .25rem rgba($black-alt, .075) !default;
+$box-shadow-alt:                  0 .5rem 1rem rgba($black-alt, .15) !default;
+$box-shadow-lg-alt:               0 1rem 3rem rgba($black-alt, .175) !default;
 
 $component-active-color-alt:      $white-alt !default;
 $component-active-bg-alt:         theme-color-alt("primary") !default;
