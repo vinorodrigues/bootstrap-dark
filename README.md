@@ -404,6 +404,7 @@ On the Github Pages page: [https://vinorodrigues.github.io/bootstrap-dark/](http
 * Test __Method 2__: [`Bootstrap-Nightfall`](https://vinorodrigues.github.io/bootstrap-dark/test-nightfall.html).
 * Test __Method 3__: [`Bootstrap-Nightshade`](https://vinorodrigues.github.io/bootstrap-dark/test-nightshade.html).
 * Test __Method 4__: [`Bootstrap-Dark`](https://vinorodrigues.github.io/bootstrap-dark/test-dark.html).
+* Test the image recommendations in the [Images section](#images) below.
 
 
 ## And the winner is ...
@@ -474,9 +475,9 @@ Drop me a "Issue" on the [GitHub Issues][44] page.
 ## But that's not enough
 
 
-> [The proof of concept pertaining to Bootstrap ends above - but I felt remiss if I did not cover that fact the Bootstrap can only do so much - that there are other considerations to get Bootstrap (or any other UI/UX) to work in dark mode.]
+> *[The proof of concept pertaining to Bootstrap ends above - but I felt remiss if I did not cover that fact the Bootstrap can only do so much - that there are other considerations to get Bootstrap (or any other UI/UX) to work in dark mode.]*
 
-Having a dark mode enabled stylesheet is not magically going to make your website *"dark mode enabled"*.  That fact is this that true dark mode does not stop at the CSS - there are other considerations.
+Having a dark mode enabled stylesheet is not magically going to make your website *"dark mode enabled"*.  The fact is this that true dark mode does not stop at the CSS - there are other considerations.
 
 If you pause for a moment and think about the underlying enabler for this - the CSS media query - its inception was as far back as 1994, was drafted into the W3C in 2001 and only ratified into formal specification in 2012.  *(See the "[Media queries][46]" Wikipedia page.)*  It took the browser vendors and the W3C 18 years to make this a standard.  Nevertheless, this gave birth to the wonderful philosophies of "[*Responsive Web Design*][47]" *("RWD")* and "*Mobile First*".  According to Wikipedia - the first demonstration of this technology was publicized by Cameron Adams on 21 September 2004 in his blog entry "[*Resolution dependent layout*][48]".  If you look back at my dissection of what CSS does for you&sup1; - Geometry, Type Face, & Color - RWD is thinking about and manipulating the web-page Geometry.  Another fascinating aspect is that mobile browsing surpassed desktop browsing back in [May 2016][49] (according to [StatCounter][50]) - but strangely it's hovered in the 50-55% range since then *(see "[Mobile Vs. Desktop Usage ..][51]")*.
 
@@ -485,7 +486,7 @@ The point is - even though RWD has been around since 2004, and mobile took over 
 * RWD is more than stylesheets and media queries - it takes a paradigm shift in thinking: from (just) content to content flow.
 * Mobile first is more than just making your website visible - it's a deep thinking of bandwidth and functionality.  With considerations for image compression, lightweight (JavaScript) libraries and possible state-less connectivity (as mobiles can go in and out of connectivity at random times).
 
-Even those who do adopt these philosophies find it does not work for them all the time - mostly because they forgot, or don't know, about that additional thinking required to make RWD work.  The other challenge is that RWD *(and it's after-thoughts)*  is relatively technical and requires both efficient coding and great design to implement correctly - either as teams or in the rare case, and if you can find them, a web developer that is both good and code and design.  It's not uncommon for a Marketing department to grab an SVG export straight out AI and publish it on a website *(for example, a logo file 785,189b in size)*, whereas a coder applying compression techniques would get the same file 0.24% of the original size! *(Yes, that's a "." (dot) in front of the "24", or 1,863b in size.)*  In the case of a single file this is neither here or there as mobile bandwidth can process 1Mb rather quickly - but if this is that same non-thinking&sup1; being applied to, say, 100 images on one page, makes for a very sluggish and slow mobile web experience.
+Even those who do adopt these philosophies find it does not work for them all the time - mostly because they forgot, or don't know, about that additional thinking required to make RWD work.  The other challenge is that RWD *(and it's after-thoughts)*  is relatively technical and requires both efficient coding and great design to implement correctly - either as teams or in the rare case, and if you can find them, a web developer that is both good and code and design.  It's not uncommon for a Marketing department to grab an SVG export straight out AI and publish it on a website *(for example, a logo file 785,189b in size)*, whereas a coder applying compression techniques would get the same file 0.24% of the original size! *(Yes, that's a "." (decimal) in front of the "24", or 1,863b in size.)*  In the case of a single file this is neither here or there as mobile bandwidth can process 1Mb rather quickly - but if this is that same non-thinking&sup1; being applied to, say, 100 images on one page, makes for a very sluggish and slow mobile web experience.
 
 Dark mode adds another layer to the coding / UX / design thinking: *how should the website look in alternative color combinations?*
 
@@ -500,7 +501,7 @@ Handling these two is specific to your content and varies from site to site - bu
 
 ### Images
 
-Images make up the bulk of your content (mostly) and so these need special attention - getting images to work in dark mode is complex and requires considerable attention - and image formats add an additional complexity / alleviation.  I can offer a rule of thumb that may simplify the selection:
+For most sites images make up the bulk of the content, and so these need special attention - getting images to work in dark mode is complex and requires considerable attention - and image formats can add, or alleviate, complexity.  I can offer a rule of thumb that may simplify the selection:
 
 * __JPEG__: Use JPG files for photographs, illustrations and (large) backgrounds, because JPG compress better than PNG.
 * __PNG__: Use PNG files for logos, diagrams and charts, as you can leverage transparency, alpha-blending and even animation.
@@ -557,6 +558,8 @@ The other way to approach images is to use the same techniques one employs to de
 </picture>
 ```
 
+All these techniques assume the image to show in its original state when hovered on.
+
 This last method provides you far more flexibility - in that you can have completely different images, remembering to keep the dimensions the same.  The downside is that you need to create *(and maintain)* twice as many images.
 
 
@@ -564,7 +567,7 @@ This last method provides you far more flexibility - in that you can have comple
 
 SVG's offer unprecedented advantages for web developers - and the overall topic of SVG is not in the scope of this paper.  But what I do want to show you is how to leverage SVG to define images with different outcomes based on the user `prefers-color-scheme` media query.
 
-> [Remember that the below techniques not only apply to color - but can also be used to manipulate color-like concepts like `opacity`, and even things like `visibility`.]
+> *[Remember that the below techniques not only apply to color - but can also be used to manipulate color-like concepts like `opacity`, and even things like `visibility`.]*
 
 #### In-line SVG
 
@@ -582,10 +585,9 @@ HTML 5 introduced in-line SVG - basically just drop in the compliant SVG code in
 <!-- Inline SVG -->
 <svg width="32" height="32" id="my-image"
   viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <g id="xyz" fill="#ff0000">
-    <path d="M50,100 C22,100 0,78 0,50 C0,22 22.5,0 50,0 C50,0 50,6 50,6 C26,6 6,26 6,50 C6,74 26,94 50,94 C50,94 50,100 50,100 Z"></path>
+  <g id="xyz" fill="#101010" fill-rule="nonzero">
+    <path d="M50,1.78e-15 C77.61,1.78e-15 100,22.39 100,50 C100,77.61 77.61,100 50,100 C22.39,100 0,77.61 0,50 C0,22.39 22.39,1.78e-15 50,1.78e-15 Z M50,6 C26,6 6,26 6,50 C6,74 26,94 50,94 L50,75 C64,75 75,64 75,50 C75,36 64,25 50,25 L50,6 Z"></path>
     <path d="M50,25 C50,25 50,75 50,75 C36,75 25,64 25,50 C25,36 36,25 50,25 Z"></path>
-    <path d="M50,-6e-12 C78,-6e-12 100,22 100,50 C100,78 78,100 50,100 L50,75 C64,75 75,64 75,50 C75,36 64,25 50,25 L50,-6e-12 Z"></path>
   </g>
 </svg>
 ```
@@ -606,10 +608,9 @@ Given that the browser renders the SVG we can assume that a browser that support
       }
     }
   </style>
-  <g fill="#101010">
-    <path d="M50,100 C22,100 0,78 0,50 C0,22 22.5,0 50,0 C50,0 50,6 50,6 C26,6 6,26 6,50 C6,74 26,94 50,94 C50,94 50,100 50,100 Z"></path>
+  <g fill="#101010" fill-rule="nonzero">
+    <path d="M50,1.78e-15 C77.61,1.78e-15 100,22.39 100,50 C100,77.61 77.61,100 50,100 C22.39,100 0,77.61 0,50 C0,22.39 22.39,1.78e-15 50,1.78e-15 Z M50,6 C26,6 6,26 6,50 C6,74 26,94 50,94 L50,75 C64,75 75,64 75,50 C75,36 64,25 50,25 L50,6 Z"></path>
     <path d="M50,25 C50,25 50,75 50,75 C36,75 25,64 25,50 C25,36 36,25 50,25 Z"></path>
-    <path d="M50,-6e-12 C78,-6e-12 100,22 100,50 C100,78 78,100 50,100 L50,75 C64,75 75,64 75,50 C75,36 64,25 50,25 L50,-6e-12 Z"></path>
   </g>
 </svg>
 ```
@@ -620,7 +621,7 @@ With the concepts of dark mode being so young - and the `prefers-color-scheme` m
 
 At of the time of writing this paper no browser supports `prefers-color-scheme` media query for the `favicon`.  This is slowly changing, and according to [Thomas Steiner][55] this will soon be supported in Chrome.
 
-Until then you'll need to design your `favicon` in a way that works for both light and dark browsers.  Some of the techniques include using colors that work in both modes or creating images with a frame or contrasting color stroke.
+Until then you'll need to design your `favicon` in a way that works for both light and dark browsers.  Some of the techniques include using colors that work in both modes or creating images with a frame or contrasting color outline / contour.
 
 
 
