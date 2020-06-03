@@ -18,7 +18,7 @@ Jump to:
 * [Can you use this?](#can-you-use-this)
 * [But that's not enough](#but-thats-not-enough)
     - [Images](#images)
-    - [SVG](#images)
+    - [SVG](#svg)
     - [Favicon](#favicon)
 * [Postface](#postface)
 
@@ -529,6 +529,7 @@ Grgur Grisogono suggests in *"[How to Set Up Dark Mode for Images][52]"* to appl
 @media (prefers-color-scheme: dark) {
   img:not([src*=".svg"]) {
     filter: grayscale(50%);
+    transition: all .5s ease-in-out;
     &:hover {
       filter: none;
     }
@@ -542,6 +543,7 @@ Grgur Grisogono suggests in *"[How to Set Up Dark Mode for Images][52]"* to appl
 @media (prefers-color-scheme: dark) {
   img:not([src*=".svg"]) {
     filter: brightness(.8) contrast(1.2);
+    transition: all .5s ease-in-out;
     &:hover {
       filter: none;
     }
@@ -614,6 +616,17 @@ Given that the browser renders the SVG we can assume that a browser that support
   </g>
 </svg>
 ```
+
+And embed in one of three ways:
+
+```html
+<embed height="32" width="32" type="image/svg+xml" src="image.svg" />
+<object height="32" width="32" type="image/svg+xml" data="image.svg"></object>
+<img height="32" width="32" src="image.svg">  <!-- `<img>`+`prefers-color-scheme` only works on Firefox and Opera -->
+```
+
+> *[Please note that `<img>` this does not work on all browsers yet, so is not a recommended approach.]*
+
 
 ### Favicon
 

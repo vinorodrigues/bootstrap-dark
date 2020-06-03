@@ -16,7 +16,7 @@
       img.special {
         opacity: .75;
         filter: brightness(.8) contrast(1.2);
-        transition: opacity .5s ease-in-out, filter .5s ease-in-out;
+        transition: all .5s ease-in-out, filter .5s ease-in-out;
       }
       img.special:hover {
         opacity: 1;
@@ -29,8 +29,16 @@
         /* opacity: 0; */
         visibility: hidden;
       }
+      #vino-avatar #beard {
+        opacity: 1;
+      }
     }
 
+    @media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+      .black-back {
+        background-color: #000;
+      }
+    }
   </style>
 
   <title>More about dark mode images</title>
@@ -70,7 +78,7 @@
         <p>
           <div class="card-deck">
             <div class="card mx-auto op-img-eg" style="max-width:320px">
-              <div class="display-block" style="background:#000">
+              <div class="display-block black-back">
                 <img src="./img/a-bug.jpg" width="100%" height="240" style="opacity:0.75 !important; filter: none">
               </div>
               <div class="card-body">
@@ -136,6 +144,24 @@
         <p>... as in-line DOM elements that can be styled with CSS</p>
 
         <p class="text-center">
+          <style>
+            @media (prefers-color-scheme: dark) {
+              #icon #darkmode {
+                fill: #efefef;
+              }
+            }
+          </style>
+          <svg width="240" height="240" id="icon"
+            viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="darkmode" fill="#101010" fill-rule="nonzero">
+              <path d="M50,1.78e-15 C77.61,1.78e-15 100,22.39 100,50 C100,77.61 77.61,100 50,100 C22.39,100 0,77.61 0,50 C0,22.39 22.39,1.78e-15 50,1.78e-15 Z M50,6 C26,6 6,26 6,50 C6,74 26,94 50,94 L50,75 C64,75 75,64 75,50 C75,36 64,25 50,25 L50,6 Z"></path>
+              <path d="M50,25 C50,25 50,75 50,75 C36,75 25,64 25,50 C25,36 36,25 50,25 Z"></path>
+            </g>
+          </svg>
+          <small class="text-info"><br>As in-line <code>&lt;svg&gt;</code><br></small>
+        </p>
+
+        <p class="text-center">
           <img id="vino-avatar" height="240" width="100%" src="./img/vino-avatar.svg">
           <small><br>*Uses <a href="https://github.com/iconic/SVGInjector">SVGInjector</a> &copy; Waybury to convert to in-line.</small>
         </p>
@@ -144,8 +170,19 @@
 
         <p>... with the dark mode media query internal to the SVG</p>
 
-        <p class="text-center" style="color:red;">
+        <p class="text-center">
           <img height="240" width="240" src="./img/dark-mode.svg">
+          <small class="text-info"><br>As <code>&lt;img&gt;</code><br><b><i>[*Only works on Firefox & Opera browsers]</i></b></small>
+        </p>
+
+        <p class="text-center">
+          <object height="240" width="240" type="image/svg+xml" data="./img/dark-mode.svg"></object>
+          <small class="text-info"><br>As <code>&lt;object&gt;</code></small>
+        </p>
+
+        <p class="text-center">
+          <embed height="240" width="240" type="image/svg+xml" src="./img/dark-mode.svg" />
+          <small class="text-info"><br>As <code>&lt;embed&gt;</code></small>
         </p>
 
       </div></div>
