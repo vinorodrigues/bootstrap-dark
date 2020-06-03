@@ -617,11 +617,12 @@ Given that the browser renders the SVG we can assume that a browser that support
 </svg>
 ```
 
-And embed in one of three ways:
+And embed in one of four ways:
 
 ```html
 <embed height="32" width="32" type="image/svg+xml" src="image.svg" />
 <object height="32" width="32" type="image/svg+xml" data="image.svg"></object>
+<iframe height="32" width="32" frameborder="0" src="image.svg"></iframe>
 <img height="32" width="32" src="image.svg">  <!-- `<img>`+`prefers-color-scheme` only works on Firefox and Opera -->
 ```
 
