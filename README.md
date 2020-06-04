@@ -208,7 +208,6 @@ To do this use the following code:
 <!-- Inform modern browsers that this page supports both dark and light color schemes,
   and the page author prefers light. -->
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark">
 <script>
   // If `prefers-color-scheme` is not supported, but @media query is, fall back to light mode.
   // i.e. In this case, inject the `light` CSS before the others, with
@@ -254,7 +253,6 @@ But, knowing what we do about the `media="(prefers-color-scheme: dark)"` filter 
 <!-- Inform modern browsers that this page supports both dark and light color schemes,
   and the page author prefers light. -->
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark">
 <!-- Load the primary CSS first ... -->
 <link rel="stylesheet" href="bootstrap.css">
 <!-- ... and then the alternate CSS first as a snap-on for dark color scheme preference -->
@@ -345,7 +343,6 @@ To use it, simply replace the Bootstrap CSS stylesheet:
 <!-- Inform the browser that this page supports both dark and light color schemes,
   and the page author prefers light. -->
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="bootstrap-dark.css">
 ```
