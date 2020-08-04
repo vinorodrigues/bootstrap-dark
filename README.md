@@ -548,6 +548,8 @@ Grgur Grisogono suggests in *"[How to Set Up Dark Mode for Images][52]"* to appl
 }
 ```
 
+All these techniques assume the image to show in its original state when hovered on.
+
 The other way to approach images is to use the same techniques one employs to deliver [responsive images][53] (as in different images for different content widths), but apply the media query to the `prefers-color-scheme` filter, HTML like so:
 
 ```html
@@ -556,8 +558,6 @@ The other way to approach images is to use the same techniques one employs to de
   <img src=" xyz-light.jpg" width="320" height="240">
 </picture>
 ```
-
-All these techniques assume the image to show in its original state when hovered on.
 
 This last method provides you far more flexibility - in that you can have completely different images, remembering to keep the dimensions the same.  The downside is that you need to create *(and maintain)* twice as many images.
 
