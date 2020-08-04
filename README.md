@@ -483,7 +483,7 @@ The point is - even though RWD has been around since 2004, and mobile took over 
 * RWD is more than stylesheets and media queries - it takes a paradigm shift in thinking: from (just) content to content flow.
 * Mobile first is more than just making your website visible - it's a deep thinking of bandwidth and functionality.  With considerations for image compression, lightweight (JavaScript) libraries and possible state-less connectivity (as mobiles can go in and out of connectivity at random times).
 
-Even those who do adopt these philosophies find it does not work for them all the time - mostly because they forgot, or don't know, about that additional thinking required to make RWD work.  The other challenge is that RWD *(and it's after-thoughts)*  is relatively technical and requires both efficient coding and great design to implement correctly - either as teams or in the rare case, and if you can find them, a web developer that is both good and code and design.  It's not uncommon for a Marketing department to grab an SVG export straight out AI and publish it on a website *(for example, a logo file 785,189b in size)*, whereas a coder applying compression techniques would get the same file 0.24% of the original size! *(Yes, that's a "." (decimal) in front of the "24", or 1,863b in size.)*  In the case of a single file this is neither here or there as mobile bandwidth can process 1Mb rather quickly - but if this is that same non-thinking&sup1; being applied to, say, 100 images on one page, makes for a very sluggish and slow mobile web experience.
+Even those who do adopt these philosophies find it does not work for them all the time - mostly because they forgot, or don't know, about that additional thinking required to make RWD work.  The other challenge is that RWD *(and it's after-thoughts)*  is relatively technical and requires both efficient coding and great design to implement correctly - either as teams or in the rare case, and if you can find them, a web developer that is both good at code and design.  It's not uncommon for a Marketing department to grab an SVG export straight out AI and publish it on a website *(for example, a logo file 785,189b in size)*, whereas a coder applying compression techniques would get the same file 0.24% of the original size! *(Yes, that's a "." (decimal) in front of the "24", or 1,863b in size.)*  In the case of a single file this is neither here or there as mobile bandwidth can process 1Mb rather quickly - but if this is that same non-thinking&sup1; being applied to, say, 100 images on one page, makes for a very sluggish and slow mobile web experience.
 
 Dark mode adds another layer to the coding / UX / design thinking: *how should the website look in alternative color combinations?*
 
@@ -501,8 +501,8 @@ Handling these two is specific to your content and varies from site to site - bu
 For most sites images make up the bulk of the content, and so these need special attention - getting images to work in dark mode is complex and requires considerable attention - and image formats can add, or alleviate, complexity.  I can offer a rule of thumb that may simplify the selection:
 
 * __JPEG__: Use JPG files for photographs, illustrations and (large) backgrounds, because JPG compress better than PNG.
-* __PNG__: Use PNG files for logos, diagrams and charts, as you can leverage transparency, alpha-blending and even animation.
-* __SVG__: Use SVG files for everything else, like indicators, icons, navigation (e.g. arrows).
+* __PNG__: Use PNG files for diagrams and charts, as you can leverage transparency, alpha-blending and even animation.
+* __SVG__: Use SVG files for everything else, like logos, indicators, icons, navigation (e.g. arrows).
 
 Generally, images that work in light mode may not work in dark.  Photos taken in bright conditions may appear overly bright in a dark environment.
 
