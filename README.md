@@ -391,6 +391,23 @@ I mentioned all the [`*-alt` variables](#the--alt-scss-includes) earlier, but th
 }
 ```
 
+#### Method 4b
+
+[`bootstrap-unlit`][95] produces exactly the same output as [`bootstrap-dark`][94] in supported browsers, but falls back to the darker theme on browsers that do not.
+
+To use it, simply replace the Bootstrap CSS stylesheet:
+
+```html
+<!-- Inform the browser that this page supports both dark and light color schemes,
+  and the page author prefers dark. -->
+<meta name="color-scheme" content="dark light">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="bootstrap-unlit.css">
+```
+
+Internally the CSS is composed by the same techniques as [Method 4](#method-4), but also leveraging the map-back techniques in [Method 1](#method-1) and described in the [Hypothesis](#hypothesis), or rather a more elaborate 3 step approach of saving the original color, mapping back the `-alt`'s to the original, and then reseting the `-alt`'s to the saved originals - thus swapping them around.  Not elegant, I know, but this is just a POC after-all.
+
+> *[Note this method is superfluous as it produces the same result as __`Bootstrap-Dark`__, but I felt remiss if I didn't prove that one could fallback to the dark theme.]*
 
 ## Where's the proof?
 
@@ -401,6 +418,7 @@ On the Github Pages page: [https://vinorodrigues.github.io/bootstrap-dark/](http
 * Test __Method 2__: [`Bootstrap-Nightfall`](https://vinorodrigues.github.io/bootstrap-dark/test-nightfall.html).
 * Test __Method 3__: [`Bootstrap-Nightshade`](https://vinorodrigues.github.io/bootstrap-dark/test-nightshade.html).
 * Test __Method 4__: [`Bootstrap-Dark`](https://vinorodrigues.github.io/bootstrap-dark/test-dark.html).
+* ... and also Method 4b: [`Bootstrap-Unlit`](https://vinorodrigues.github.io/bootstrap-dark/test-unlit.html).
 * Test the image recommendations in the [Images section](#images) below.
 
 
@@ -455,12 +473,12 @@ You can access the theme CSS file from the GitHub release:
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-dark.css)
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css)
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css)
-* ... and all [the others](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark/), but I don't recommend them.
+* ... and all [the others](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark/dist/), but I don't recommend them.
 
 
 ### Feedback
 
-Drop me a "Issue" on the [GitHub Issues][44] page.
+If you have [useful feedback][71] drop me an "Issue" on the [GitHub Issues][44] page.
 
 
 
@@ -745,6 +763,7 @@ The key to changing mindset is knowledge - the more we understand the concepts t
 [68]: https://uxdesign.cc/dark-mode-ui-design-the-definitive-guide-part-1-color-53dcfaea5129
 [69]: https://blog.prototypr.io/designing-a-dark-mode-for-your-ios-app-the-ultimate-guide-6b043303b941
 [70]: https://www.campaignmonitor.com/resources/guides/dark-mode-in-email/
+[71]: https://alearningaday.blog/2020/08/04/useful-feedback/
 
 
 [90]: https://github.com/vinorodrigues/bootstrap-dark
@@ -752,6 +771,7 @@ The key to changing mindset is knowledge - the more we understand the concepts t
 [92]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-nightfall.scss
 [93]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-nightshade.scss
 [94]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-dark.scss
+[95]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/scss/bootstrap-unlit.scss
 
 [100]: https://github.com/mdo
 [101]: https://github.com/thomaspark
