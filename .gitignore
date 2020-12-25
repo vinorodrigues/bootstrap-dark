@@ -1,0 +1,6 @@
+node_modules
+_*
+!scss/**/_*
+*.sublime-*
+package-lock.json
+.DS_store
