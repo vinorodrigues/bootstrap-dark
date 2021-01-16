@@ -1,6 +1,8 @@
 # The Definitive&sup1; Guide to Dark Mode and Bootstrap 4
 A proof of concept / Long-form ~~white paper~~ [dark paper]
 
+> This body of work pertains to [Bootstrap 4](https://getbootstrap.com/docs/4.5/).
+> If you're after the same work for [Bootstrap 5](https://getbootstrap.com/docs/5.0/) please visit the [vinorodrigues/bootstrap-dark-5](https://github.com/vinorodrigues/bootstrap-dark-5) repo.
 
 Jump to:
 
