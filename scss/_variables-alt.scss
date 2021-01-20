@@ -262,7 +262,7 @@ $custom-select-bg-alt:                  $input-bg-alt !default;
 $custom-select-disabled-bg-alt:         $gray-800-alt !default;
 $custom-select-indicator-color-alt:     $gray-200-alt !default;
 $custom-select-indicator-alt:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='#{$custom-select-indicator-color-alt}' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>") !default;
-$custom-select-background-alt:          escape-svg($custom-select-indicator-alt) no-repeat right $custom-select-padding-x center / $custom-select-bg-size !default; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
+$custom-select-background-alt:          escape-svg($custom-select-indicator-alt) right $custom-select-padding-x center / $custom-select-bg-size no-repeat !default; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
 
 $custom-select-border-color-alt:        $input-border-color-alt !default;
 $custom-select-box-shadow-alt:          inset 0 1px 2px rgba($white-alt, .075) !default;
@@ -370,12 +370,12 @@ $dropdown-box-shadow-alt:               0 .5rem 1rem rgba($white-alt, .175) !def
 
 $dropdown-link-color-alt:               $gray-100 !default;
 $dropdown-link-hover-color-alt:         lighten($gray-100, 5%) !default;
-$dropdown-link-hover-bg-alt:            $gray-900 !default;
+$dropdown-link-hover-bg-alt:            $gray-800 !default;
 
 $dropdown-link-active-color-alt:        $component-active-color-alt !default;
 $dropdown-link-active-bg-alt:           $component-active-bg-alt !default;
 
-$dropdown-link-disabled-color-alt:      $gray-400-alt !default;
+$dropdown-link-disabled-color-alt:      $gray-500-alt !default;
 
 $dropdown-header-color-alt:             $gray-400-alt !default;
 
