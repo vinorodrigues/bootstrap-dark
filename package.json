@@ -1,34 +1,53 @@
 {
   "name": "bootstrap-dark",
-  "version": "0.0.0",
-  "description": "no",
-  "main": "gulpfile.js",
+  "version": "0.0.9",
+  "description": "",
+  "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "build": "npm-run-all css images",
+    "start": "npm-run-all --parallel serve watch",
+    "serve": "browser-sync start --server --files \"dist/*.css\"",
+    "css": "npm-run-all css-compile css-prefix css-minify",
+    "css-compile": "sass --style expanded --source-map --embed-sources --no-error-css --load-path=node_modules/bootstrap/scss scss/:dist/",
+    "css-prefix": "postcss --config build/postcss.config.js --replace \"dist/*.css\" \"!dist/*.rtl*.css\" \"!dist/*.min.css\"",
+    "css-minify": "npm-run-all --parallel css-minify-*",
+    "css-minify-core": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap.min.css dist/bootstrap.css",
+    "css-minify-dark": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-dark.min.css dist/bootstrap-dark.css",
+    "css-minify-night": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-night.min.css dist/bootstrap-night.css",
+    "css-minify-nightfall": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-nightfall.min.css dist/bootstrap-nightfall.css",
+    "css-minify-nightshade": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-nightshade.min.css dist/bootstrap-nightshade.css",
+    "css-minify-unlit": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-unlit.min.css dist/bootstrap-unlit.css",
+    "images": "npm-run-all --parallel images-*",
+    "images-ico": "imagemin img/src/*.ico --out-dir=img",
+    "images-jpg": "imagemin img/src/*.jpg --out-dir=img --plugin.mozjpeg.quality=75 --plugin.mozjpeg.progressive=true",
+    "images-png": "imagemin img/src/*.png --out-dir=img --plugin.optipng.optimizationLevel=5",
+    "images-svg": "svgo -f img/src -o img --disable=removeStyleElement,cleanupIDs,inlineStyles,convertStyleToAttrs,removeScriptElement --enable=removeDoctype,removeXMLProcInst,removeComments,removeMetadata,removeTitle,removeDesc,removeEditorsNSData,removeEmptyAttrs,removeHiddenElems,removeEmptyText,removeEmptyContainers,removeViewBox,removeUselessStrokeAndFill,minifyStyles",
+    "watch": "npm-run-all --parallel watch-*",
+    "watch-scss": "nodemon --watch scss/ --ext scss --exec \"npm-run-all css-compile css-prefix css-minify\""
   },
-  "author": "twbs",
+  "author": "Vino Rodrigues",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinorodrigues/bootstrap.git"
+    "url": "git+https://github.com/vinorodrigues/bootstrap-dark.git"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.12",
-    "fancy-log": "^1.3.3",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-if": "^3.0.0",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-prettier": "^3.0.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "node-sass": "^4.14.1"
+    "autoprefixer": "^10.2.1",
+    "browser-sync": "^2.26.13",
+    "imagemin": "^7.0.1",
+    "imagemin-cli": "^6.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.2.4",
+    "postcss-cli": "^8.3.1",
+    "sass": "^1.32.4",
+    "svgo": "^1.3.2"
   },
   "dependencies": {
-    "bootstrap": "^4.5.3",
+    "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
-    "popper": "^1.0.1"
+    "popper.js": "^1.16.1"
   }
 }

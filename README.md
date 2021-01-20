@@ -454,12 +454,12 @@ Nevertheless, a PoC will need an outcome:
 
 ### Github
 
-If you're a theme builder or want to use its principles in your own project you'll need to have [Git][41], [Node][42] and [Gulp][43] installed.
+If you're a theme builder or want to use its principles in your own project you'll need to have [Git][41] and [Node][42] installed.
 
 1. Fork or download the repository: `git clone https://github.com/vinorodrigues/bootstrap-dark.git`
 2. Install Node dependencies: `npm install`
 3. Modify `_variables.scss ` and `_variables-alt.scss` in the `scss` sub-folder.
-4. Run `gulp dark` to build your theme.
+4. Run `npm run build` to build your theme. *(This uses [NPM Scripts][43] to build the `css` files. You may need to install some of the dependencies as "global".)*
 5. The compiled code will be in the `dist` folder.
 
 
@@ -737,7 +737,7 @@ The key to changing mindset is knowledge - the more we understand the concepts t
 [40]: https://github.com/vinorodrigues/bootstrap-dark/blob/master/LICENSE.md
 [41]: https://help.github.com/articles/set-up-git
 [42]: https://nodejs.org/
-[43]: https://gulpjs.com/
+[43]: https://docs.npmjs.com/cli/v6/commands/npm-run-script
 [44]: https://github.com/vinorodrigues/bootstrap-dark/issues
 [45]: https://sivers.org/hellyeah
 [46]: https://en.wikipedia.org/wiki/Media_queries
