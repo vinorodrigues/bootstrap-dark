@@ -6,23 +6,44 @@ A proof of concept / Long-form ~~white paper~~ [dark paper]
 
 Jump to:
 
-* [About me & The history that led here](#about-me--the-history-that-led-here)
-* [The Philosophy of Dark Mode](#the-general-philosophysup1-of-dark-mode)
-* [The Philosophy of this Proof of Concept](#the-philosophy-of-this-proof-of-concept)
-* [The `*-alt` SCSS includes](#the--alt-scss-includes)
-* [The Variants](#the-variants)
+- [The Definitive&sup1; Guide to Dark Mode and Bootstrap 4](#the-definitive-guide-to-dark-mode-and-bootstrap-4)
+  - [About me & The history that led here](#about-me--the-history-that-led-here)
+  - [The (General) Philosophy&sup1; of Dark Mode](#the-general-philosophy-of-dark-mode)
+  - [The Philosophy of this Proof of Concept](#the-philosophy-of-this-proof-of-concept)
+      - [Origins](#origins)
+      - [Refactoring](#refactoring)
+      - [Hypothesis](#hypothesis)
+  - [The `*-alt` SCSS includes](#the--alt-scss-includes)
+  - [The Variants](#the-variants)
     - [Bootstrap-Night](#bootstrap-night)
+      - [Method 1](#method-1)
     - [Bootstrap-Nightfall](#bootstrap-nightfall)
+      - [Method 2](#method-2)
     - [Bootstrap-Nightshade](#bootstrap-nightshade)
+      - [Method 3](#method-3)
+      - [The toggle switch](#the-toggle-switch)
     - [Bootstrap-Dark](#bootstrap-dark)
-* [Where's the proof?](#wheres-the-proof)
-* [And the winner is ...](#and-the-winner-is-)
-* [Can you use this?](#can-you-use-this)
-* [But that's not enough](#but-thats-not-enough)
+      - [Method 4](#method-4)
+      - [Utility classes](#utility-classes)
+        - [Display](#display)
+        - [Selection](#selection)
+      - [SCSS mixins and variables](#scss-mixins-and-variables)
+      - [Method 4b](#method-4b)
+  - [Where's the proof?](#wheres-the-proof)
+  - [And the winner is ...](#and-the-winner-is-)
+    - [The No's](#the-nos)
+    - [The Yes'](#the-yes)
+  - [Can you use this?](#can-you-use-this)
+    - [Github](#github)
+    - [CDN](#cdn)
+    - [Feedback](#feedback)
+  - [But that's not enough](#but-thats-not-enough)
     - [Images](#images)
     - [SVG](#svg)
+      - [In-line SVG](#in-line-svg)
+      - [Embedded SVG](#embedded-svg)
     - [Favicon](#favicon)
-* [Postface](#postface)
+  - [Postface](#postface)
 
 
 
@@ -492,7 +513,7 @@ If you have [useful feedback][71] drop me an "Issue" on the [GitHub Issues][44] 
 ## But that's not enough
 
 
-> *[The proof of concept pertaining to Bootstrap ends above - but I felt remiss if I did not cover that fact the Bootstrap can only do so much - that there are other considerations to get Bootstrap (or any other UI/UX) to work in dark mode.]*
+> *[The proof of concept pertaining to Bootstrap ends above - but I felt remiss if I did not cover the fact that Bootstrap can only do so much - that there are other considerations to get Bootstrap (or any other UI/UX) to work in dark mode.]*
 
 Having a dark mode enabled stylesheet is not magically going to make your website *"dark mode enabled"*.  The fact is this that true dark mode does not stop at the CSS - there are other considerations.
 
