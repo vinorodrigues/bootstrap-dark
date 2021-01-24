@@ -1,10 +1,10 @@
 {
-  "name": "bootstrap-dark",
+  "name": "bootstrap-dark-4",
   "version": "0.0.9",
-  "description": "",
+  "description": "The Definitive Guide to Dark Mode and Bootstrap 4 - A proof of concept",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "echo \"Info: no test specified\" && exit 0",
     "build": "npm-run-all css images",
     "start": "npm-run-all --parallel serve watch",
     "serve": "browser-sync start --server --files \"dist/*.css\"",
@@ -32,6 +32,27 @@
     "type": "git",
     "url": "git+https://github.com/vinorodrigues/bootstrap-dark.git"
   },
+  "bugs": {
+    "url": "https://github.com/vinorodrigues/bootstrap-dark/issues"
+  },
+  "style": "dist/bootstrap-dark.css",
+  "sass": "scss/bootstrap-dark.scss",
+  "files": [
+    "dist/*.{css,map}",
+    "scss/**/*.scss",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "keywords": [
+    "bootstrap",
+    "css",
+    "sass",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "web"
+  ],
   "devDependencies": {
     "autoprefixer": "^10.2.1",
     "browser-sync": "^2.26.13",
@@ -39,15 +60,15 @@
     "imagemin-cli": "^6.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
+    "jquery": "^3.5.1",
     "npm-run-all": "^4.1.5",
+    "popper.js": "^1.16.1",
     "postcss": "^8.2.4",
     "postcss-cli": "^8.3.1",
     "sass": "^1.32.4",
     "svgo": "^1.3.2"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0",
-    "jquery": "^3.5.1",
-    "popper.js": "^1.16.1"
+    "bootstrap": "^4.6.0"
   }
 }

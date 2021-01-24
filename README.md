@@ -36,6 +36,7 @@ Jump to:
   - [Can you use this?](#can-you-use-this)
     - [Github](#github)
     - [CDN](#cdn)
+    - [NPM](#npm)
     - [Feedback](#feedback)
   - [But that's not enough](#but-thats-not-enough)
     - [Images](#images)
@@ -497,6 +498,15 @@ You can access the theme CSS file from the GitHub release:
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.min.css)
 * [`https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css`](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark@0.0/dist/bootstrap-night.css)
 * ... and all [the others](https://cdn.jsdelivr.net/gh/vinorodrigues/bootstrap-dark/dist/), but I don't recommend them.
+
+
+### NPM
+
+[![](https://img.shields.io/npm/v/bootstrap-dark-4)](http://npmjs.com/package/bootstrap-dark-4)
+
+Developers can include the `scss` and `dist` folders into their own projects with:
+
+`npm install bootstrap-dark-4`
 
 
 ### Feedback
