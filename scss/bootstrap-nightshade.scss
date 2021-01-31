@@ -7,7 +7,8 @@
  * Bootstrap-Nightshade (https://vinorodrigues.github.io/bootstrap-dark/)
  * Copyright 2020 Vino Rodrigues
  * This version is a dual color theme, with the default light mode and the dark
- * elements optioned in by a `.dark` class in the body of the html.
+ * elements optioned in by a `.dark` class in `<html>` tag.
+ * Why `<html>`? See https://css-tricks.com/html-vs-body-in-css/#quirky-background-color
  */
 
 @import "../node_modules/bootstrap/scss/functions";
