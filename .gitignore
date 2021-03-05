@@ -3,5 +3,4 @@ _*
 ~*
 !scss/**/_*
 *.sublime-*
-package-lock.json
 .DS_store
