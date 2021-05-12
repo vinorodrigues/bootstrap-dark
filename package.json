@@ -12,12 +12,12 @@
     "css-compile": "sass --style expanded --source-map --embed-sources --no-error-css --load-path=node_modules/bootstrap/scss scss/:dist/",
     "css-prefix": "postcss --config build/postcss.config.js --replace \"dist/*.css\" \"!dist/*.rtl*.css\" \"!dist/*.min.css\"",
     "css-minify": "npm-run-all --parallel css-minify-*",
-    "css-minify-core": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap.min.css dist/bootstrap.css",
-    "css-minify-dark": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-dark.min.css dist/bootstrap-dark.css",
-    "css-minify-night": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-night.min.css dist/bootstrap-night.css",
-    "css-minify-nightfall": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-nightfall.min.css dist/bootstrap-nightfall.css",
-    "css-minify-nightshade": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-nightshade.min.css dist/bootstrap-nightshade.css",
-    "css-minify-unlit": "cleancss -O1 --format breakWith=lf --source-map --source-map-inline-sources --output dist/bootstrap-unlit.min.css dist/bootstrap-unlit.css",
+    "css-minify-core": "cleancss -O1 --format breakWith=lf --output dist/bootstrap.min.css dist/bootstrap.css",
+    "css-minify-dark": "cleancss -O1 --format breakWith=lf --output dist/bootstrap-dark.min.css dist/bootstrap-dark.css",
+    "css-minify-night": "cleancss -O1 --format breakWith=lf --output dist/bootstrap-night.min.css dist/bootstrap-night.css",
+    "css-minify-nightfall": "cleancss -O1 --format breakWith=lf --output dist/bootstrap-nightfall.min.css dist/bootstrap-nightfall.css",
+    "css-minify-nightshade": "cleancss -O1 --format breakWith=lf --output dist/bootstrap-nightshade.min.css dist/bootstrap-nightshade.css",
+    "css-minify-unlit": "cleancss -O1 --format breakWith=lf --output dist/bootstrap-unlit.min.css dist/bootstrap-unlit.css",
     "images": "npm-run-all --parallel images-*",
     "images-ico": "imagemin img/src/*.ico --out-dir=img",
     "images-jpg": "imagemin img/src/*.jpg --out-dir=img --plugin.mozjpeg.quality=75 --plugin.mozjpeg.progressive=true",
@@ -56,19 +56,21 @@
   "devDependencies": {
     "autoprefixer": "^10.2.5",
     "browser-sync": "^2.26.14",
-    "imagemin": "^7.0.1",
+    "imagemin": "^8.0.0",
     "imagemin-cli": "^6.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
-    "jquery": "^3.6.0",
     "npm-run-all": "^4.1.5",
-    "popper.js": "^1.16.1",
-    "postcss": "^8.2.7",
+    "postcss": "^8.2.15",
     "postcss-cli": "^8.3.1",
-    "sass": "^1.32.4",
-    "svgo": "^2.2.0"
+    "sass": "^1.32.13",
+    "svgo": "^2.3.0"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0"
+    "bootstrap": "4.6.0"
+  },
+  "peerDependencies": {
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1"
   }
 }
