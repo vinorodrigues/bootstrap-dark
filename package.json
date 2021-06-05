@@ -9,7 +9,7 @@
     "start": "npm-run-all --parallel serve watch",
     "serve": "browser-sync start --server --files \"dist/*.css\"",
     "css": "npm-run-all css-compile css-prefix css-minify",
-    "css-compile": "sass --style expanded --source-map --embed-sources --no-error-css --load-path=node_modules/bootstrap/scss scss/:dist/",
+    "css-compile": "sass --style expanded --source-map --embed-sources --no-error-css --load-path=node_modules/bootstrap/scss scss/:dist/ --quiet",
     "css-prefix": "postcss --config build/postcss.config.js --replace \"dist/*.css\" \"!dist/*.rtl*.css\" \"!dist/*.min.css\"",
     "css-minify": "npm-run-all --parallel css-minify-*",
     "css-minify-core": "cleancss -O1 --format breakWith=lf --output dist/bootstrap.min.css dist/bootstrap.css",
@@ -54,20 +54,20 @@
     "web"
   ],
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
+    "autoprefixer": "^10.2.6",
     "browser-sync": "^2.26.14",
     "imagemin": "^8.0.0",
     "imagemin-cli": "^6.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.2.15",
+    "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
-    "sass": "^1.32.13",
+    "sass": "^1.34.1",
     "svgo": "^2.3.0"
   },
   "dependencies": {
-    "bootstrap": "4.6.0"
+    "bootstrap": "4.*.*"
   },
   "peerDependencies": {
     "jquery": "^3.6.0",
